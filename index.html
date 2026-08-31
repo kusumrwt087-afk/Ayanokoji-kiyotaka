@@ -1,173 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>WHITE ROOM - ELITE PROTOCOL // WR-001</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WHITE ROOM PROTOCOL - FINAL MASTER</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}body{background:#07070a;color:#e9e0c4;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
+*{box-sizing:border-box}body{background:#07070a;color:#e9e0c4;font-family:'JetBrains Mono',monospace}
 .orbit{font-family:'Orbitron',sans-serif}
-.card{background:radial-gradient(120% 120% at 50% 0%, #1c1c28 0%, #111119 60%, #0a0a0f 100%);border:1px solid rgba(255,60,60,0.18);border-radius:24px;box-shadow:0 10px 50px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05)}
-.card-red{border-color:rgba(255,60,60,0.35)}
-.active{border-color:#ff3c3c!important;box-shadow:0 0 25px rgba(255,60,60,0.5)!important;background:linear-gradient(90deg,rgba(255,60,60,0.18),rgba(245,230,184,0.08))!important;opacity:1!important}
-.done{opacity:0.32;text-decoration:line-through;filter:grayscale(1)}
-.exp-track{height:9px;background:#1c1c25;border-radius:100px;overflow:hidden;border:1px solid rgba(255,255,255,0.05)}
-.exp-fill{height:100%;background:linear-gradient(90deg,#ff1a1a 0%,#ff5a36 30%,#f5e6b8 100%);transition:width 0.9s cubic-bezier(0.2,0.8,0.2,1)}
-.grid-lock{transition:all 0.3s}
-.glow-text{text-shadow:0 0 12px rgba(255,60,60,0.6)}
+.card{background:radial-gradient(140% 140% at 50% 0%, #1e1e2c 0%, #14141f 50%, #0d0d14 100%);border:1px solid rgba(255,60,60,0.18);border-radius:26px;box-shadow:0 15px 60px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.06)}
+.card-red{border-color:rgba(255,60,60,0.35);box-shadow:0 0 40px rgba(255,60,60,0.15),0 15px 60px rgba(0,0,0,0.8)}
+.active-day{border-color:#ff3c3c!important;box-shadow:0 0 25px rgba(255,60,60,0.6)!important;background:linear-gradient(90deg,rgba(255,60,60,0.25),rgba(245,230,184,0.12))!important;opacity:1!important;transform:scale(1.03)}
+.done{opacity:0.35;text-decoration:line-through;filter:grayscale(0.8)}
+.exp-track{height:9px;background:#1c1c27;border-radius:100px;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
+.exp-fill{height:100%;background:linear-gradient(90deg,#ff1a1a 0%,#ff5a36 35%,#f5e6b8 100%);transition:width 1s cubic-bezier(0.22,1,0.36,1)}
+.day-track{height:12px;background:#1c1c27;border-radius:100px;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
+.day-fill{height:100%;background:linear-gradient(90deg,#00ff88 0%,#00e5ff 40%,#f5e6b8 100%);transition:width 0.9s ease}
+.glow-red{text-shadow:0 0 15px rgba(255,60,60,0.8)}
 </style>
 </head>
-<body class="p-3 pb-10 max-w-[560px] mx-auto">
-<!-- TOP BAR -->
+<body class="p-3 pb-12 max-w-[580px] mx-auto">
 <div class="flex justify-between items-start">
-<div><p class="text-[9px] tracking-[0.35em] text-zinc-500">CLASSROOM OF THE ELITE</p><h1 class="orbit text-[15px] tracking-[0.15em] mt-1">WHITE ROOM <span class="text-red-500">PROTOCOL</span></h1><p class="text-[8px] tracking-[0.2em] text-zinc-600 mt-1.5">STATUS: <span class="text-red-400">ACTIVE</span> | ID: WR-001 | MODE: DISCIPLINE | EFFICIENCY: <span id="eff" class="text-white">0%</span></p><p class="text-[8px] tracking-[0.2em] text-zinc-500 mt-1">勝者は準備し、敗者は言い訳をする。 WINNERS PREPARE, LOSERS MAKE EXCUSES.</p></div>
-<div class="text-right"><p id="clock" class="text-[12px] font-bold"></p><p id="classTop" class="orbit text-[10px] text-red-400 mt-1 tracking-widest">CLASS D</p><p id="xpTop" class="text-[8px] text-zinc-500 mt-1">0 XP</p></div>
+<div><p class="text-[9px] tracking-[0.4em] text-zinc-500">CLASSROOM OF THE ELITE // EXPERIMENT 01</p><h1 class="orbit text-[16px] tracking-[0.18em] mt-1.5">WHITE ROOM <span class="text-red-500 glow-red">PROTOCOL</span></h1><p class="text-[8px] tracking-[0.22em] text-zinc-600 mt-2">STATUS: <span class="text-red-400">ACTIVE</span> | ID: WR-001 | MODE: DISCIPLINE | EFFICIENCY: <span id="eff" class="text-white">0%</span></p></div>
+<div class="text-right shrink-0 ml-3"><p id="clock" class="text-[12px] font-bold tracking-widest"></p><p id="classTop" class="orbit text-[11px] text-red-400 mt-1.5 tracking-[0.2em]">CLASS D</p><p id="xpTop" class="text-[9px] text-zinc-500 mt-1">0 XP</p></div>
 </div>
 
-<!-- MAIN CIRCLE -->
 <div class="card card-red p-6 mt-5 text-center relative overflow-hidden">
-<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-red-500/50 to-transparent"></div>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[75%] h-[1px] bg-gradient-to-r from-transparent via-red-500/60 to-transparent"></div>
 <div class="relative w-[220px] h-[220px] mx-auto">
-<svg width="220" height="220" class="rotate-[-90deg]"><circle cx="110" cy="110" r="94" stroke="#1e1e2a" stroke-width="14" fill="none"/><circle id="ring" cx="110" cy="110" r="94" stroke="#f5e6b8" stroke-width="14" fill="none" stroke-dasharray="590" stroke-dashoffset="590" stroke-linecap="round" style="transition:stroke-dashoffset 1s ease"/></svg>
-<div class="absolute inset-0 flex flex-col justify-center items-center"><p class="orbit text-[54px] font-black tracking-tighter" id="percent">0%</p><p class="text-[9px] tracking-[0.5em] text-zinc-500 -mt-1">COMPLETION</p><p class="orbit text-[13px] tracking-[0.2em] mt-3 glow-text" id="rank">CLASS D</p><p class="text-[9px] tracking-widest text-zinc-400 mt-1" id="xpNeed">0 / 1000 XP → CLASS C</p></div>
+<svg width="220" height="220" class="rotate-[-90deg]"><circle cx="110" cy="110" r="94" stroke="#1f1f2c" stroke-width="14" fill="none"/><circle id="ring" cx="110" cy="110" r="94" stroke="#f5e6b8" stroke-width="14" fill="none" stroke-dasharray="590" stroke-dashoffset="590" stroke-linecap="round" style="transition:stroke-dashoffset 1.2s cubic-bezier(0.22,1,0.36,1)"/></svg>
+<div class="absolute inset-0 flex flex-col justify-center items-center"><p class="orbit text-[56px] font-black tracking-tighter leading-none" id="pct">0%</p><p class="text-[9px] tracking-[0.5em] text-zinc-500 mt-1">30 DAY COMPLETION</p><p class="orbit text-[13px] tracking-[0.25em] mt-3 glow-red" id="rank">CLASS D</p><p class="text-[9px] tracking-widest text-zinc-400 mt-1.5" id="xpNeed">0 / 1000 XP → CLASS C</p></div>
 </div>
 <div class="exp-track mt-6"><div id="expBar" class="exp-fill" style="width:0%"></div></div>
 <div class="grid grid-cols-4 gap-2.5 mt-5">
-<div class="bg-[#17171f] rounded-[14px] p-3 border border-white/5"><p class="orbit font-bold text-[18px]" id="dDone">0</p><p class="text-[7px] tracking-widest text-zinc-500 mt-1">DAYS DONE</p></div>
-<div class="bg-[#17171f] rounded-[14px] p-3 border border-white/5"><p class="orbit font-bold text-[18px]" id="xpTotal">0</p><p class="text-[7px] tracking-widest text-zinc-500 mt-1">TOTAL XP</p></div>
-<div class="bg-[#17171f] rounded-[14px] p-3 border border-white/5"><p class="orbit font-bold text-[18px]" id="streak">0</p><p class="text-[7px] tracking-widest text-zinc-500 mt-1">STREAK</p></div>
-<div class="bg-[#1c1c28] rounded-[14px] p-3 border border-red-500/30"><p class="orbit font-bold text-[18px] text-red-300" id="nofap">0D</p><p class="text-[7px] tracking-widest text-zinc-500 mt-1">NOFAP</p></div>
+<div class="bg-[#171722] rounded-[15px] p-3 border border-white/5"><p class="orbit font-bold text-[19px]" id="dDone">0</p><p class="text-[7px] tracking-[0.2em] text-zinc-500 mt-1">DAYS DONE</p></div>
+<div class="bg-[#171722] rounded-[15px] p-3 border border-white/5"><p class="orbit font-bold text-[19px]" id="xpTotal">0</p><p class="text-[7px] tracking-[0.2em] text-zinc-500 mt-1">TOTAL XP</p></div>
+<div class="bg-[#171722] rounded-[15px] p-3 border border-white/5"><p class="orbit font-bold text-[19px]" id="streak">0</p><p class="text-[7px] tracking-[0.2em] text-zinc-500 mt-1">STREAK</p></div>
+<div class="bg-[#1e1e2c] rounded-[15px] p-3 border border-red-500/30"><p class="orbit font-bold text-[19px] text-red-300" id="nofap">0D</p><p class="text-[7px] tracking-[0.2em] text-zinc-500 mt-1">NOFAP CLEAN</p></div>
 </div>
 </div>
 
-<!-- MATRIX -->
-<div class="card p-4 mt-4"><div class="flex justify-between items-center"><p class="text-[10px] tracking-[0.3em]">30 DAY LOCK SYSTEM - <span class="text-red-400">ELITE CLEARANCE</span></p><p class="text-[10px]">DAY <span id="dayNum" class="text-white">1</span>/30</p></div><p class="text-[8px] tracking-widest bg-[#f5e6b8] text-black inline-block px-3 py-1 rounded-full mt-2">SUBJECT: AYANOKOJI KIYOTAKA</p><div id="matrix" class="grid grid-cols-5 gap-2 mt-4"></div></div>
+<div class="card p-5 mt-4 border-red-500/30 bg-gradient-to-br from-[#1a1a27] to-[#13131d]">
+<div class="flex justify-between items-center"><p class="orbit text-[11px] tracking-[0.3em]">TODAY'S LIVE PROGRESS // <span id="dayNameTop" class="text-white">MONDAY</span></p><p class="text-[9px] text-zinc-500" id="liveDate"></p></div>
+<div class="day-track mt-4"><div id="dayProgressBar" class="day-fill" style="width:0%"></div></div>
+<div class="grid grid-cols-3 gap-2.5 mt-4">
+<div class="bg-black/40 rounded-[14px] p-3.5 text-center border border-white/10"><p id="dayPercent" class="orbit text-[22px] font-black">0%</p><p class="text-[7px] tracking-[0.2em] text-zinc-500 mt-1">DAY COMPLETE</p><p class="text-[8px] text-zinc-600 mt-1" id="doneVsTotal">0/29</p></div>
+<div class="bg-black/40 rounded-[14px] p-3.5 text-center border border-white/10"><p id="todayXp" class="orbit text-[22px] font-black text-green-400">0</p><p class="text-[7px] tracking-[0.2em] text-zinc-500 mt-1">XP TODAY</p><p class="text-[8px] text-zinc-600 mt-1">+50 / +30 / +40</p></div>
+<div class="bg-black/40 rounded-[14px] p-3.5 text-center border border-white/10"><p id="perfection" class="orbit text-[11px] font-black tracking-widest">POOR</p><p class="text-[7px] tracking-[0.2em] text-zinc-500 mt-1">PERFECTION</p><p id="perfectionEmoji" class="text-[18px] mt-1">💀</p></div>
+</div>
+<div class="mt-4 bg-black/30 rounded-xl p-3 border border-white/5"><p id="liveStatus" class="text-[10px] leading-relaxed text-zinc-300">Aaj abhi tak kuch start nahi kiya...</p><div id="goodBad" class="mt-3 space-y-1.5 text-[9px] leading-relaxed"></div></div>
+</div>
 
-<!-- POSTER PROTOCOL -->
+
+<div class="card p-4 mt-4"><div class="flex justify-between items-center"><p class="text-[10px] tracking-[0.3em]">30 DAY LOCK SYSTEM // <span class="text-red-400">ELITE CLEARANCE</span></p><p class="text-[10px]">DAY <span id="dayNum" class="text-white font-bold">1</span>/30</p></div><p class="text-[8px] tracking-widest bg-[#f5e6b8] text-black inline-block px-3 py-1 rounded-full mt-3">SUBJECT: AYANOKOJI // WR-001</p><div id="matrix" class="grid grid-cols-5 gap-2 mt-4"></div></div>
 <div class="card p-5 mt-4">
-<p class="orbit text-center text-[14px] tracking-[0.25em]">5 HABITS <span class="text-zinc-600">|</span> 7 RULES <span class="text-zinc-600">|</span> 7 TACTICS</p><p class="text-center text-[8px] tracking-[0.3em] text-zinc-500 mt-1">DISCIPLINE • OBSERVE • EXECUTE • REPEAT</p>
-
-<div class="mt-7"><p class="text-[11px] tracking-[0.25em] text-red-400">01 // 5 HABITS [+50 XP EACH • ONE TIME]</p><div id="habits" class="mt-3 grid gap-2.5"></div></div>
-
-<div class="mt-7"><p class="text-[11px] tracking-[0.25em] text-red-400">02 // 7 RULES [+30 XP EACH • ONE TIME]</p><div id="rules" class="mt-3 space-y-2"></div></div>
-
-<div class="mt-7"><p class="text-[11px] tracking-[0.25em] text-red-400">03 // 7 TACTICS [+30 XP EACH • ONE TIME]</p><div id="tactics" class="mt-3 space-y-2"></div></div>
-
-<div class="mt-8 border-t border-white/10 pt-5"><div class="flex justify-between items-center"><p class="text-[11px] tracking-[0.2em]">DAY SCHEDULE - <span id="dayName" class="text-white">MONDAY</span> <span class="text-[8px] text-zinc-500">(AUTO DETECT)</span></p><p class="text-[9px] text-zinc-500" id="liveMins"></p></div><div id="sched" class="mt-3 space-y-2"></div></div>
-
-<div class="mt-8 border-t border-white/10 pt-5">
-<p class="text-[10px] tracking-widest">LOGS [PRIVATE]</p>
-<input id="n1" placeholder="Sabh kux - Aaj kya sikha? (auto save)" class="w-full bg-[#14141d] rounded-[14px] p-4 mt-3 text-[11px] outline-none border border-white/10 focus:border-red-500/50">
-<input id="n2" placeholder="Bahut tadgi chij - Mistake log (auto save)" class="w-full bg-[#14141d] rounded-[14px] p-4 mt-2.5 text-[11px] outline-none border border-white/10 focus:border-red-500/50">
-<div class="grid grid-cols-2 gap-2 mt-4"><button onclick="lockDay()" class="bg-[#f5e6b8] text-black rounded-[14px] py-4 font-bold tracking-[0.15em] text-[11px] orbit">LOCK TODAY →</button><button onclick="penalty()" class="bg-[#1a0f0f] text-red-400 rounded-[14px] py-4 text-[10px] border border-red-900/50">CHEAT -200 XP</button></div>
-<p class="text-[7px] tracking-widest text-zinc-600 text-center mt-3">I DON'T FOLLOW THE SYSTEM. I OBSERVE IT. I UNDERSTAND IT. THEN I CONTROL IT. - THAT IS FREEDOM.</p>
+<p class="orbit text-center text-[13px] tracking-[0.3em]">WHITE ROOM PROTOCOL <span class="text-red-500">[ ELITE POSTER ]</span></p>
+<div class="mt-7"><p class="text-[11px] tracking-[0.3em] text-red-400">01 // 5 HABITS [+50 XP EACH • ONE CLICK ONLY]</p><div id="habits" class="mt-3.5 grid gap-3"></div></div>
+<div class="mt-8"><p class="text-[11px] tracking-[0.3em] text-red-400">02 // 7 RULES [+30 XP EACH]</p><div id="rules" class="mt-3.5 space-y-2.5"></div></div>
+<div class="mt-8"><p class="text-[11px] tracking-[0.3em] text-red-400">03 // 7 TACTICS [+30 XP EACH]</p><div id="tactics" class="mt-3.5 space-y-2.5"></div></div>
+<div class="mt-9 border-t border-white/10 pt-6"><div class="flex justify-between items-center"><p class="text-[11px] tracking-[0.25em]">DAY SCHEDULE - <span id="dayName" class="text-white">MONDAY</span> <span class="text-[8px] text-zinc-500">(AUTO • +40 XP)</span></p><p class="text-[9px] text-zinc-500" id="liveMins"></p></div><div id="sched" class="mt-4 space-y-2.5"></div></div>
+<div class="mt-9 border-t border-white/10 pt-6">
+<p class="text-[10px] tracking-[0.25em]">PRIVATE LOGS [AUTO SAVE]</p>
+<input id="n1" placeholder="Aaj kya sikha?" class="w-full bg-[#161621] rounded-[14px] p-4 mt-4 text-[11px] outline-none border border-white/10">
+<input id="n2" placeholder="Mistake Log" class="w-full bg-[#161621] rounded-[14px] p-4 mt-3 text-[11px] outline-none border border-white/10">
+<div class="grid grid-cols-2 gap-2.5 mt-5"><button onclick="lockDay()" class="bg-[#f5e6b8] text-black rounded-[14px] py-4 font-black tracking-[0.18em] text-[11px] orbit">LOCK TODAY → NEXT DAY</button><button onclick="penalty()" class="bg-[#1a0f0f] text-red-400 rounded-[14px] py-4 text-[10px] border border-red-900/50">CHEAT -200 XP</button></div>
 </div>
 </div>
-
 <script>
-const H=[
-{no:"01",t:"NO SUGAR",d:"Eliminate refined sugar. Maintain clear mind & stable energy.",xp:50},
-{no:"02",t:"NO JUNK FOOD",d:"Consume only whole, controlled nutrition. No processed foods.",xp:50},
-{no:"03",t:"NO BAD HABITS",d:"Cut procrastination, distractions, negative routines.",xp:50},
-{no:"04",t:"DRINK MORE WATER",d:"Hydrate consistently. Minimum 2-3L daily for optimal function.",xp:50},
-{no:"05",t:"DAILY 20 MIN READING",d:"Build knowledge daily. Input > Output. Discipline the mind.",xp:50},
-];
+const H=[{no:"01",t:"NO SUGAR",d:"No refined sugar. Clear mind.",xp:50},{no:"02",t:"NO JUNK FOOD",d:"No processed foods.",xp:50},{no:"03",t:"NO BAD HABITS",d:"Cut procrastination.",xp:50},{no:"04",t:"DRINK MORE WATER",d:"2-3L daily minimum.",xp:50},{no:"05",t:"DAILY 20 MIN READING",d:"Input > Output. Discipline mind.",xp:50},];
 const R=["01. No Phone","02. Always Calm","03. No Excuse","04. Schedule is Law","05. Detached but Respectful","06. Kam Bolna, Zyada Sunna","07. Everything Secret"];
 const T=["T1 • 1-3-7-15 Revision Paper System","T2 • 25-5 Focus System","T3 • Khud Ko Samjhao (Feynman)","T4 • Workout Control","T5 • Code By Building Projects","T6 • Mistake Log Daily","T7 • Sleep Lock 10 PM"];
-const daily=[
-{ti:"05:20 AM",t:"UTHNA",s:320,e:320,q:"Winners don't wait for sunrise."},
-{ti:"05:20-06:30",t:"MORNING REVISION",s:320,e:390,q:"While they dream, you sharpen."},
-{ti:"06:30-01:10",t:"SCHOOL",s:390,e:790,q:"Don't attend. Dominate."},
-{ti:"01:10-02:00",t:"POWER NAP + LUNCH",s:790,e:840,q:"Rest is strategy."},
-{ti:"02:00-04:50",t:"DEEP STUDY",s:840,e:1010,q:"Distraction is a choice."},
-{ti:"04:50-06:15",t:"WORKOUT",s:1010,e:1095,q:"Pain is just data."},
-{ti:"06:15-07:30",t:"CODING & CHESS",s:1095,e:1170,q:"The world is a chessboard."},
-{ti:"07:30-08:00",t:"FRESH RESET",s:1170,e:1200,q:"Wash emotions away."},
-{ti:"08:00-10:00",t:"HOMEWORK & DINNER",s:1200,e:1320,q:"Leave nothing for tomorrow."},
-{ti:"10:00 PM",t:"SLEEP",s:1320,e:1439,q:"Preparation for war."}
-];
-const sunday=[
-{ti:"05:20 AM",t:"UTHNA",s:320,e:320,q:"Discipline starts when motivation ends."},
-{ti:"05:20-06:30",t:"MORNING REVISION",s:320,e:390,q:"First hour decides whole day."},
-{ti:"06:30-08:30",t:"STUDY BLOCK 1: HARD",s:390,e:510,q:"Attack weakness."},
-{ti:"08:30-09:00",t:"BREAKFAST",s:510,e:540,q:"Fuel body like ambition."},
-{ti:"09:00-11:30",t:"STUDY BLOCK 2",s:540,e:690,q:"Silence + Focus = Fear."},
-{ti:"11:30-12:30",t:"CODING / CHESS",s:690,e:750,q:"If you can't control game, you are pawn."},
-{ti:"12:30-01:00",t:"BREAK",s:750,e:780,q:"Pause, never lose momentum."},
-{ti:"01:00-01:30",t:"LUNCH",s:780,e:810,q:"Time is currency."},
-{ti:"01:30-02:00",t:"POWER NAP",s:810,e:840,q:"20 min sleep can save 2 hours failure."},
-{ti:"02:00-04:30",t:"STUDY BLOCK 3: WEEK REVISION",s:840,e:990,q:"Revision is dominating."},
-{ti:"04:30-06:00",t:"SPORTS GROUND",s:990,e:1080,q:"Strong mind in strong body."},
-{ti:"07:00-09:00",t:"NEXT WEEK PLANNING + EASY REVISION",s:1140,e:1260,q:"Future belongs to planners."},
-{ti:"09:00-09:30",t:"DINNER",s:1260,e:1290,q:"End day without debt."},
-{ti:"09:30-10:00",t:"DIARY MISTAKE LOG",s:1290,e:1320,q:"Failures are real teachers."},
-{ti:"10:00 PM",t:"SLEEP",s:1320,e:1439,q:"Weapon being reloaded."}
-];
-const thresholds=[{n:"CLASS D",xp:0},{n:"CLASS C",xp:1000},{n:"CLASS B",xp:3000},{n:"CLASS A",xp:7000},{n:"CLASS S",xp:15000},{n:"WHITE ROOM MASTER",xp:25000}];
-
-let data=JSON.parse(localStorage.getItem('WR_FINAL_MASTER_V5')||'{"day":1,"doneDays":[],"xp":0,"today":{"h":[],"r":[],"ta":[],"sc":[]}}');
+const daily=[{ti:"05:20 AM",t:"UTHNA",s:320,e:320,q:"Winners don't wait."},{ti:"05:20-06:30",t:"MORNING REVISION",s:320,e:390,q:"While they dream, you sharpen."},{ti:"06:30-01:10",t:"SCHOOL",s:390,e:790,q:"Don't attend. Dominate."},{ti:"01:10-02:00",t:"POWER NAP + LUNCH",s:790,e:840,q:"Rest is strategy."},{ti:"02:00-04:50",t:"DEEP STUDY",s:840,e:1010,q:"Distraction is a choice."},{ti:"04:50-06:15",t:"WORKOUT",s:1010,e:1095,q:"Pain is just data."},{ti:"06:15-07:30",t:"CODING & CHESS",s:1095,e:1170,q:"World is chessboard."},{ti:"07:30-08:00",t:"FRESH RESET",s:1170,e:1200,q:"Wash emotions away."},{ti:"08:00-10:00",t:"HOMEWORK & DINNER",s:1200,e:1320,q:"Leave nothing for tomorrow."},{ti:"10:00 PM",t:"SLEEP",s:1320,e:1439,q:"Preparation for war."}];
+const sunday=[{ti:"05:20 AM",t:"UTHNA",s:320,e:320,q:"Discipline starts when motivation ends."},{ti:"05:20-06:30",t:"MORNING REVISION",s:320,e:390,q:"First hour decides day."},{ti:"06:30-08:30",t:"STUDY BLOCK 1: HARD",s:390,e:510,q:"Attack weakness."},{ti:"08:30-09:00",t:"BREAKFAST",s:510,e:540,q:"Fuel body like ambition."},{ti:"09:00-11:30",t:"STUDY BLOCK 2",s:540,e:690,q:"Silence+Focus=Fear."},{ti:"11:30-12:30",t:"CODING / CHESS",s:690,e:750,q:"Control game."},{ti:"12:30-01:00",t:"BREAK",s:750,e:780,q:"Pause, not lose."},{ti:"01:00-01:30",t:"LUNCH",s:780,e:810,q:"Time is currency."},{ti:"01:30-02:00",t:"POWER NAP",s:810,e:840,q:"20 min saves 2 hours."},{ti:"02:00-04:30",t:"STUDY BLOCK 3: WEEK REVISION",s:840,e:990,q:"Revision is domination."},{ti:"04:30-06:00",t:"SPORTS GROUND",s:990,e:1080,q:"Strong mind in strong body."},{ti:"07:00-09:00",t:"NEXT WEEK PLANNING",s:1140,e:1260,q:"Future belongs to planners."},{ti:"09:00-09:30",t:"DINNER",s:1260,e:1290,q:"End day without debt."},{ti:"09:30-10:00",t:"DIARY MISTAKE LOG",s:1290,e:1320,q:"Failures are teachers."},{ti:"10:00 PM",t:"SLEEP",s:1320,e:1439,q:"Weapon reloading."}];
+const ths=[{n:"CLASS D",xp:0},{n:"CLASS C",xp:1000},{n:"CLASS B",xp:3000},{n:"CLASS A",xp:7000},{n:"CLASS S",xp:15000},{n:"WHITE ROOM MASTER",xp:25000}];
+let data=JSON.parse(localStorage.getItem('WR_FINAL_MASTER_FULL_V6')||'{"day":1,"done":[],"xp":0,"today":{"h":[],"r":[],"ta":[],"sc":[]}}');
 let nf=localStorage.getItem('WR_NF')||new Date().toISOString();
-function save(){localStorage.setItem('WR_FINAL_MASTER_V5',JSON.stringify(data));localStorage.setItem('WR_NF',nf);localStorage.setItem('WR_N1',document.getElementById('n1').value);localStorage.setItem('WR_N2',document.getElementById('n2').value);}
-function getCls(xp){let c=thresholds[0];for(let th of thresholds)if(xp>=th.xp)c=th;return c;}
-function getNext(xp){for(let th of thresholds)if(xp<th.xp)return th;return {n:"MAXIMUM CLEARANCE",xp:25000};}
+function save(){localStorage.setItem('WR_FINAL_MASTER_FULL_V6',JSON.stringify(data));localStorage.setItem('WR_NF',nf);localStorage.setItem('WR_N1',document.getElementById('n1').value);localStorage.setItem('WR_N2',document.getElementById('n2').value);}
+function getCls(xp){let c=ths[0];for(let t of ths)if(xp>=t.xp)c=t;return c;}
+function getNext(xp){for(let t of ths)if(xp<t.xp)return t;return {n:"MAX",xp:25000};}
 function render(){
-let cls=getCls(data.xp);let nxt=getNext(data.xp);
-let totalPct=Math.round((data.doneDays.length/30)*100);
-document.getElementById('percent').innerText=totalPct+'%';
-document.getElementById('rank').innerText=cls.n;
-document.getElementById('classTop').innerText=cls.n;
-document.getElementById('xpTop').innerText=data.xp+' XP';
-document.getElementById('xpNeed').innerText=data.xp+' / '+nxt.xp+' XP → '+nxt.n;
-document.getElementById('eff').innerText=totalPct+'%';
-document.getElementById('dDone').innerText=data.doneDays.length;
-document.getElementById('xpTotal').innerText=data.xp;
-document.getElementById('streak').innerText=data.doneDays.length;
-document.getElementById('dayNum').innerText=data.day;
-let now=new Date();let mins=now.getHours()*60+now.getMinutes();
-document.getElementById('dayName').innerText=now.toLocaleDateString('en-US',{weekday:'long'}).toUpperCase();
-document.getElementById('liveMins').innerText=now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
+let cls=getCls(data.xp),nxt=getNext(data.xp),pct=Math.round(data.done.length/30*100);
+document.getElementById('pct').innerText=pct+'%';document.getElementById('rank').innerText=cls.n;document.getElementById('classTop').innerText=cls.n;document.getElementById('xpTop').innerText=data.xp+' XP';document.getElementById('xpNeed').innerText=data.xp+' / '+nxt.xp+' XP → '+nxt.n;document.getElementById('eff').innerText=pct+'%';document.getElementById('dDone').innerText=data.done.length;document.getElementById('xpTotal').innerText=data.xp;document.getElementById('streak').innerText=data.done.length;document.getElementById('dayNum').innerText=data.day;
+let now=new Date(),mins=now.getHours()*60+now.getMinutes(),dayName=now.toLocaleDateString('en-US',{weekday:'long'}).toUpperCase();
+document.getElementById('dayName').innerText=dayName;document.getElementById('dayNameTop').innerText=dayName;document.getElementById('liveDate').innerText=now.toLocaleDateString();document.getElementById('liveMins').innerText=now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
 let days=Math.floor((now-new Date(nf))/86400000);document.getElementById('nofap').innerText=days+'D';
-let ring=590-590*(Math.min(data.xp%1000,1000)/1000);if(data.xp>=25000)ring=0;document.getElementById('ring').style.strokeDashoffset=ring;
-document.getElementById('expBar').style.width=(data.xp%1000/1000*100)+'%';if(data.xp>=25000)document.getElementById('expBar').style.width='100%';
-let mx=document.getElementById('matrix');mx.innerHTML='';
-for(let i=1;i<=30;i++){let done=data.doneDays.includes(i);mx.innerHTML+=`<div class="grid-lock bg-[#16161f] rounded-[12px] p-3 text-center text-[10px] border border-white/5 ${i===data.day?'active':''} ${done?'bg-[#f5e6b8] text-black border-[#f5e6b8]':''}"><p class="orbit font-bold text-[14px]">${String(i).padStart(2,'0')}</p><p class="text-[7px] tracking-widest mt-1">${done?'DONE':i===data.day?'ACTIVE':'LOCKED'}</p></div>`;}
-let h=document.getElementById('habits');h.innerHTML='';
-H.forEach((hh,i)=>{let done=data.today.h.includes(i);h.innerHTML+=`<div onclick="tog('h',${i},${hh.xp})" class="flex gap-3 bg-[#16161f] border border-white/10 rounded-[14px] p-3.5 cursor-pointer hover:border-red-500/30 ${done?'done':''}"><div class="w-9 h-9 rounded-[10px] bg-black border border-red-900/40 flex items-center justify-center text-[10px] text-red-400 font-bold">${hh.no}</div><div class="flex-1"><p class="text-[11px] font-bold tracking-wide">${hh.t} <span class="text-[8px] text-zinc-500 font-normal">+${hh.xp} XP • ONE TIME</span></p><p class="text-[9px] text-zinc-500 mt-1 leading-relaxed">${hh.d}</p></div><div class="text-[13px] w-6 text-center">${done?'✅':''}</div></div>`;});
-let r=document.getElementById('rules');r.innerHTML='';
-R.forEach((rr,i)=>{let done=data.today.r.includes(i);r.innerHTML+=`<div onclick="tog('r',${i},30)" class="flex justify-between items-center bg-[#16161f] border border-white/10 rounded-[12px] p-3.5 cursor-pointer ${done?'done':''}"><span class="text-[11px]">${rr}</span><span class="text-[9px] tracking-widest ${done?'text-green-400':'text-zinc-500'}">${done?'✅ +30 XP CLAIMED':'+30 XP'}</span></div>`;});
-let ta=document.getElementById('tactics');ta.innerHTML='';
-T.forEach((tt,i)=>{let done=data.today.ta.includes(i);ta.innerHTML+=`<div onclick="tog('ta',${i},30)" class="flex justify-between items-center bg-[#16161f] border border-white/10 rounded-[12px] p-3.5 cursor-pointer ${done?'done':''}"><span class="text-[11px]">${tt}</span><span class="text-[9px] tracking-widest ${done?'text-green-400':'text-zinc-500'}">${done?'✅ +30 XP CLAIMED':'+30 XP'}</span></div>`;});
-let proto=now.getDay()===0?sunday:daily;
-let sc=document.getElementById('sched');sc.innerHTML='';
-proto.forEach((p,i)=>{let done=data.today.sc.includes(i);let isActive=mins>=p.s&&mins<=p.e&&!done;sc.innerHTML+=`<div onclick="tog('sc',${i},40)" class="flex justify-between items-center bg-[#16161f] border border-white/10 rounded-[12px] p-3.5 cursor-pointer ${done?'done':''} ${isActive?'active':''}"><div><p class="text-[10px] text-red-400">${p.ti}</p><p class="text-[11px] font-bold mt-1">${p.t}</p><p class="text-[8px] text-zinc-500 italic mt-1">${p.q}</p></div><span class="text-[9px] ml-2">${done?'✅':'+40 XP'}</span></div>`;});
+document.getElementById('ring').style.strokeDashoffset=590-590*(Math.min(data.xp%1000,1000)/1000);if(data.xp>=25000)document.getElementById('ring').style.strokeDashoffset=0;
+document.getElementById('expBar').style.width=(data.xp%1000/10)+'%';if(data.xp>=25000)document.getElementById('expBar').style.width='100%';
+let proto=now.getDay()===0?sunday:daily,total=H.length+R.length+T.length+proto.length,done=data.today.h.length+data.today.r.length+data.today.ta.length+data.today.sc.length,dayPer=Math.round(done/total*100),txp=data.today.h.length*50+data.today.r.length*30+data.today.ta.length*30+data.today.sc.length*40;
+document.getElementById('dayPercent').innerText=dayPer+'%';document.getElementById('todayXp').innerText=txp;document.getElementById('doneVsTotal').innerText=done+'/'+total;document.getElementById('dayProgressBar').style.width=dayPer+'%';
+let perf="POOR",em="💀",col="text-red-400";if(dayPer>=20){perf="WEAK";em="😓";col="text-orange-400";}if(dayPer>=40){perf="AVG";em="😐";col="text-yellow-400";}if(dayPer>=60){perf="GOOD";em="🔥";col="text-green-400";}if(dayPer>=80){perf="ELITE";em="⚡";col="text-green-300";}if(dayPer>=100){perf="PERFECT";em="👑";col="text-[#f5e6b8]";}
+let pe=document.getElementById('perfection');pe.innerText=perf;pe.className="orbit text-[11px] font-black tracking-widest "+col;document.getElementById('perfectionEmoji').innerText=em;
+document.getElementById('liveStatus').innerText=`Aaj ${dayPer}% complete | ${txp} XP today | ${total-done} baki | Perfection: ${perf}`;
+document.getElementById('goodBad').innerHTML=`<p class="text-green-300">✅ Sahi: ${done} = ${data.today.h.length}H+${data.today.r.length}R+${data.today.ta.length}T+${data.today.sc.length}S</p><p class="text-red-400">❌ Pending: ${total-done} = ${H.length-data.today.h.length}H+${R.length-data.today.r.length}R+${T.length-data.today.ta.length}T+${proto.length-data.today.sc.length}S</p>`;
+let mx=document.getElementById('matrix');mx.innerHTML='';for(let i=1;i<=30;i++){let dn=data.done.includes(i);mx.innerHTML+=`<div class="bg-[#161622] rounded-[13px] p-3 text-center text-[10px] border border-white/5 ${i===data.day?'active-day':''} ${dn?'bg-[#f5e6b8] text-black':''}"><p class="orbit font-bold text-[15px]">${String(i).padStart(2,'0')}</p><p class="text-[7px]">${dn?'DONE':i===data.day?'ACTIVE':'LOCKED'}</p></div>`;}
+let hh=document.getElementById('habits');hh.innerHTML='';H.forEach((x,i)=>{let ok=data.today.h.includes(i);hh.innerHTML+=`<div onclick="tog('h',${i},${x.xp})" class="flex gap-3.5 bg-[#161622] border border-white/10 rounded-[15px] p-4 ${ok?'done':''}"><div class="w-10 h-10 rounded-[11px] bg-black border border-red-900/40 flex items-center justify-center text-[11px] text-red-400 font-bold">${x.no}</div><div class="flex-1"><p class="text-[11px] font-bold">${x.t} <span class="text-[8px] text-zinc-500">+${x.xp} XP</span></p><p class="text-[9px] text-zinc-500 mt-1">${x.d}</p></div><div>${ok?'✅':''}</div></div>`;});
+let rr=document.getElementById('rules');rr.innerHTML='';R.forEach((x,i)=>{let ok=data.today.r.includes(i);rr.innerHTML+=`<div onclick="tog('r',${i},30)" class="flex justify-between bg-[#161622] border border-white/10 rounded-[13px] p-4 ${ok?'done':''}"><span class="text-[11px]">${x}</span><span class="text-[9px]">${ok?'✅':'+30 XP'}</span></div>`;});
+let tt=document.getElementById('tactics');tt.innerHTML='';T.forEach((x,i)=>{let ok=data.today.ta.includes(i);tt.innerHTML+=`<div onclick="tog('ta',${i},30)" class="flex justify-between bg-[#161622] border border-white/10 rounded-[13px] p-4 ${ok?'done':''}"><span class="text-[11px]">${x}</span><span class="text-[9px]">${ok?'✅':'+30 XP'}</span></div>`;});
+let sc=document.getElementById('sched');sc.innerHTML='';proto.forEach((p,i)=>{let ok=data.today.sc.includes(i);let act=mins>=p.s&&mins<=p.e&&!ok;sc.innerHTML+=`<div onclick="tog('sc',${i},40)" class="flex justify-between bg-[#161622] border border-white/10 rounded-[14px] p-4 ${ok?'done':''} ${act?'active-day':''}"><div><p class="text-[9px] text-red-400">${p.ti}</p><p class="text-[11px] font-bold mt-1">${p.t}</p><p class="text-[8px] text-zinc-500 italic mt-1">${p.q}</p></div><span class="text-[9px]">${ok?'✅':'+40 XP'}</span></div>`;});
 document.getElementById('n1').value=localStorage.getItem('WR_N1')||'';document.getElementById('n2').value=localStorage.getItem('WR_N2')||'';
 }
-function tog(type,i,xpAdd){
-if(data.today[type].includes(i)){return;}
-data.today[type].push(i);
-let oldCls=getCls(data.xp).n;
-data.xp+=xpAdd;
-let newCls=getCls(data.xp).n;
-if(oldCls!==newCls){setTimeout(()=>{alert('🔥 CLASS PROMOTION UNLOCKED!\n\n'+oldCls+' → '+newCls+'\n\nXP: '+data.xp+'\n\nTu ab aur khatarnak hai. Ayanokoji approves. Next: '+getNext(data.xp).n);},150);}
-save();render();
-}
-function lockDay(){
-let total=data.today.h.length+data.today.r.length+data.today.ta.length+data.today.sc.length;
-let max=5+7+7+(new Date().getDay()===0?15:10);
-let hon=Math.round(total/max*100);
-if(hon>=80){data.xp+=250;}
-if(hon>=100){data.xp+=500;alert('👑 100% PERFECT DAY! +500 BONUS XP + 250 HONESTY = +750 XP TOTAL');}
-else if(hon>=80){alert('⚡ 80%+ Honesty +250 Bonus XP');}
-data.doneDays.push(data.day);
-data.day=Math.min(30,data.day+1);
-data.today={h:[],r:[],ta:[],sc:[]};
-save();render();
-}
-function penalty(){data.xp=Math.max(0,data.xp-200);alert('-200 XP PENALTY | ANTI-CHEAT TRIGGERED\nAyanokoji never lies.');save();render();}
+function tog(tp,i,xp){if(data.today[tp].includes(i))return;let old=getCls(data.xp).n;data.today[tp].push(i);data.xp+=xp;let nw=getCls(data.xp).n;if(old!==nw)alert('🔥 PROMOTION '+old+' → '+nw);save();render();}
+function lockDay(){let proto=new Date().getDay()===0?sunday:daily,total=H.length+R.length+T.length+proto.length,done=data.today.h.length+data.today.r.length+data.today.ta.length+data.today.sc.length,per=Math.round(done/total*100);if(per>=80){data.xp+=250;alert('+250 BONUS');}if(per>=100){data.xp+=500;alert('+500 PERFECT BONUS');}data.done.push(data.day);data.day=Math.min(30,data.day+1);data.today={h:[],r:[],ta:[],sc:[]};save();render();}
+function penalty(){data.xp=Math.max(0,data.xp-200);save();render();}
 setInterval(()=>{document.getElementById('clock').innerText=new Date().toLocaleTimeString();},1000);
 document.getElementById('n1').addEventListener('input',save);document.getElementById('n2').addEventListener('input',save);
 render();
-</script>
-</body>
-</html>
+</script></body></html>
