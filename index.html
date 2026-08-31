@@ -1,79 +1,89 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>WHITE ROOM // KIYOTAKA PROTOCOL</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KIYOTAKA | White Room</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}:root{--bg:#07070b;--card:#11111a;--line:#1e1e2e;--gold:#f1e3b8;--gold2:#d4c195}
-body{background:var(--bg);color:#fff;font-family:'Space Grotesk',sans-serif;min-height:100vh;overflow-x:hidden}
+body{font-family:'Space Grotesk',sans-serif;background:#080808;color:#e5e5e5;overflow-x:hidden}
 .mono{font-family:'JetBrains Mono',monospace}
-.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(900px at 15% 0%,#19192a 0%,transparent 70%),radial-gradient(700px at 100% 100%,#1d1d2e 0%,transparent 60%),var(--bg)}
-.top{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(7,7,11,0.85);backdrop-filter:blur(24px);z-index:20}
-.hero{max-width:1240px;margin:0 auto;padding:48px 24px 20px}
-.hero h1{font-size:clamp(36px,10vw,120px);line-height:.85;letter-spacing:-5px;font-weight:700}
-.hero h1 i{font-weight:300;color:var(--gold);font-style:italic}
-.stats-row{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
-.pill{border:1px solid var(--line);padding:7px 14px;border-radius:999px;font-size:10px;letter-spacing:2px;background:rgba(255,255,255,0.02)}
-.main{max-width:1240px;margin:0 auto;padding:0 16px 120px;display:grid;grid-template-columns:1.4fr.9fr;gap:16px}
-@media(max-width:980px){.main{grid-template-columns:1fr}}
-.card{background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border:1px solid var(--line);border-radius:28px;padding:22px;position:relative;overflow:hidden}
-.card:before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5}
-.whitebox{height:240px;border-radius:20px;background:linear-gradient(180deg,#fefeff,#d8d8df);color:#000;position:relative;display:grid;place-items:center;overflow:hidden;border:1px solid #fff}
-.whitebox.gridline{position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.04) 1px,transparent 1px);background-size:40px 40px}
-.whitebox.scan{position:absolute;top:0;left:0;width:100%;height:2px;background:var(--gold);box-shadow:0 0 20px var(--gold);animation:scanY 3.5s linear infinite}
-@keyframes scanY{0%{top:0}100%{top:100%}}
-.progress{width:190px;height:190px;border-radius:50%;background:conic-gradient(var(--gold) var(--p,0%),#191927 0);display:grid;place-items:center;padding:10px;margin:0 auto}
-.progress-inner{width:100%;height:100%;border-radius:50%;background:var(--bg);display:grid;place-items:center}
-.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:10px;margin-top:16px}
-.day{aspect-ratio:1.05;border:1px solid var(--line);border-radius:18px;background:#0f0f17;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:all.35s cubic-bezier(.16,1,.3,1);position:relative}
-.day:hover{transform:translateY(-4px);border-color:#2e2e42}
-.day.done{background:var(--gold);color:#000;border-color:var(--gold);box-shadow:0 12px 30px rgba(241,227,184,0.3)}
-.day.lock{opacity:.25;pointer-events:none}
-.day.active{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
-.day b{font-size:20px;letter-spacing:-1px}.day i{font-size:8px;opacity:.6;font-style:normal;letter-spacing:1px}
-.taskrow{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid #171722}
-.tick{width:34px;height:34px;border-radius:10px;border:1px solid #2a2a40;display:grid;place-items:center;cursor:pointer;transition:.2s;font-size:14px}
-.tick.on{background:var(--gold);color:#000;border-color:var(--gold)}
-textarea{width:100%;background:#0d0d14;border:1px solid #1e1e30;border-radius:14px;padding:12px;color:#fff;font-family:'JetBrains Mono';font-size:13px;margin-top:8px;outline:none;resize:none}
-textarea:focus{border-color:var(--gold)}
-.btn{width:100%;padding:15px;border-radius:14px;border:none;background:#fff;color:#000;font-weight:800;letter-spacing:2px;cursor:pointer;transition:.2s}
-.btn:hover{background:var(--gold)}.btn:disabled{opacity:.4;pointer-events:none}
-.bar{height:8px;background:#15151f;border-radius:99px;overflow:hidden;margin-top:10px}
-.bar i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--gold),#fff);transition:width.7s}
-.quote{font-size:13px;line-height:1.5;opacity:.7;border-left:2px solid var(--gold);padding-left:12px;margin-top:14px}
-.ev{background:#0e0e16;border:1px solid #1c1c2b;border-left:2px solid var(--gold);padding:10px 12px;border-radius:12px;margin-bottom:8px}
-#cert{position:fixed;inset:0;background:rgba(0,0,0,0.92);display:none;z-index:99;align-items:center;justify-content:center;padding:20px}
-#cert.on{display:flex}
-</style></head><body><div class="bg"></div>
-<div class="top mono"><div>WHITE ROOM // PROTOCOL 30D</div><div id="clock">00:00:00</div></div>
-<div class="hero"><h1>EMOTION IS <br><i>NOISE.</i></h1><div class="stats-row mono"><div class="pill" id="pctPill">0% DONE</div><div class="pill">NO CHEATING TRACKED</div><div class="pill">30 DAY LOCK SYSTEM</div><div class="pill" style="border-color:var(--gold);color:var(--gold)">SUBJECT: AYANOKOJI</div></div></div>
-<div class="main"><div>
-<div class="card"><div class="whitebox"><div class="gridline"></div><div class="scan"></div><div style="z-index:2;text-align:center"><div class="mono" style="font-size:10px;letter-spacing:4px;opacity:.5">EXPERIMENT 01</div><div style="font-size:38px;font-weight:800;letter-spacing:-2px">WHITE ROOM</div><div class="mono" style="font-size:10px;margin-top:4px;opacity:.6">DAY <span id="heroDay">01</span> ACTIVE // MONITORING</div></div></div>
-<div style="display:flex;justify-content:space-between;margin-top:18px" class="mono"><div style="font-size:11px;letter-spacing:3px">PROTOCOL MATRIX [30]</div><div style="font-size:11px;opacity:.5">DAY <span id="curLabel">1</span>/30</div></div>
-<div class="days" id="days"></div><div class="bar"><i id="bar"></i></div><div class="quote" id="quote"></div>
+.glass{background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08)}
+.ayanokoji-bg{background:radial-gradient(circle at 50% 0%, #1a1a1a 0%, #080808 70%)}
+.click-card{transition:0.3s;cursor:pointer}
+.click-card:hover{transform:translateY(-4px) scale(1.02);border-color:#fff;box-shadow:0 10px 40px rgba(255,255,255,0.1)}
+.modal{display:none}.modal.active{display:flex}
+</style>
+</head>
+<body class="ayanokoji-bg">
+
+<nav class="flex justify-between items-center p-6 mono text-[11px] tracking-[0.3em] text-zinc-500">
+<div>WHITE ROOM // SUBJECT 001</div>
+<div class="flex gap-6"><span class="text-white">KIYOTAKA AYANOKOJI</span><span id="clock"></span></div>
+</nav>
+
+<section class="min-h-[85vh] flex flex-col justify-center items-center text-center px-6">
+<h1 class="text-[15vw] leading-[0.8] font-bold tracking-tighter opacity-10">AYANOKOJI</h1>
+<div class=" -mt-[8vw] relative">
+<img src="https://i.pinimg.com/736x/3a/23/88/3a2388a2f0a2e1a1e1c0f3a5a3e5e2a1a.jpg" onerror="this.src='https://wallpapercave.com/wp/wp11254318.jpg'" class="w-[300px] h-[400px] object-cover grayscale mx-auto rounded-[20px] border border-zinc-800">
+<div class="absolute inset-0 bg-gradient-to-t from-[#080808] to-transparent rounded-[20px]"></div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90%] glass rounded-2xl p-4">
+<p class="mono text-[10px] text-zinc-400">STATUS: FLAWLESS // WIN RATE: 100%</p>
+<h2 class="text-2xl mt-1">I don't care if I win or lose.<br><span class="text-zinc-500">I just want to win.</span></h2>
 </div>
-<div class="card" style="margin-top:16px"><div class="mono" style="font-size:11px;letter-spacing:3px">TODAY'S PROTOCOL // <span id="dayName">DAY 01</span></div><div id="tasks" style="margin-top:10px"></div>
-<div style="margin-top:16px"><textarea id="win" rows="2" placeholder="Bina emotion ke kya ukhada aaj?"></textarea><textarea id="obs" rows="2" placeholder="Kya observe kiya jo sab miss kar gaye?"></textarea>
-<button class="btn mono" onclick="save()">LOCK TODAY → UNLOCK TOMORROW</button></div></div>
 </div>
-<div><div class="card" style="text-align:center"><div class="progress" id="ring"><div class="progress-inner"><div><div style="font-size:48px;font-weight:800" id="pct">0%</div><div class="mono" style="font-size:8px;letter-spacing:3px;opacity:.5">COMPLETION</div><div class="mono" style="font-size:11px;color:var(--gold);margin-top:6px" id="rank">CLASS D</div></div></div></div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:18px" class="mono"><div style="background:#0e0e16;border:1px solid var(--line);border-radius:14px;padding:10px"><div style="font-size:18px" id="done">0</div><div style="font-size:7px;opacity:.5">DAYS DONE</div></div><div style="background:#0e0e16;border:1px solid var(--line);border-radius:14px;padding:10px"><div style="font-size:18px" id="honest">100%</div><div style="font-size:7px;opacity:.5">HONESTY</div></div><div style="background:#0e0e16;border:1px solid var(--line);border-radius:14px;padding:10px"><div style="font-size:18px" id="streak">0</div><div style="font-size:7px;opacity:.5">STREAK</div></div></div>
+<div class="flex gap-3 mt-10">
+<button onclick="openModal('mastermind')" class="bg-white text-black px-8 py-3 rounded-full mono text-xs tracking-widest hover:bg-zinc-200">MASTERMIND [CLICK]</button>
+<button onclick="openModal('quote')" class="glass px-8 py-3 rounded-full mono text-xs tracking-widest">QUOTES</button>
 </div>
-<div class="card" style="margin-top:16px"><div class="mono" style="font-size:11px;letter-spacing:3px">WHITE ROOM RULES [NON-NEGOTIABLE]</div>
-<div style="margin-top:14px;font-size:13px;line-height:1.6"><div style="padding:8px 0;border-bottom:1px dashed #1e1e2e"><b>01. 10-SEC RESET</b><div class="mono" style="font-size:11px;opacity:.6">Pen drop, eyes close, breathe.</div></div>
-<div style="padding:8px 0;border-bottom:1px dashed #1e1e2e"><b>02. NO REACTION</b><div class="mono" style="font-size:11px;opacity:.6">Gaali, taunt, daant = observe only.</div></div>
-<div style="padding:8px 0;border-bottom:1px dashed #1e1e2e"><b>03. 1 CALM WIN</b><div class="mono" style="font-size:11px;opacity:.6">Har din 1 kaam bina emotion ke.</div></div>
-<div style="padding:8px 0;border-bottom:1px dashed #1e1e2e"><b>04. OBSERVE LOG</b><div class="mono" style="font-size:11px;opacity:.6">1 observation jo dusro ne miss kiya.</div></div>
-<div style="padding:8px 0"><b>05. ANTI-CHEAT</b><div class="mono" style="font-size:11px;opacity:.6">3+ tick + proof bina save nahi.</div></div></div></div>
-<div class="card" style="margin-top:16px"><div class="mono" style="font-size:11px;letter-spacing:3px">EVIDENCE WALL</div><div id="wall" style="margin-top:12px"></div></div>
-</div></div>
-<div id="cert"><div style="background:#fdfdfd;color:#000;border-radius:28px;padding:32px;max-width:460px;width:100%;text-align:center"><div class="mono" style="font-size:10px;letter-spacing:4px">WHITE ROOM CERTIFIED</div><h2 style="font-size:32px;letter-spacing:-1px;margin-top:8px">AYANOKOJI MODE</h2><div style="font-size:56px;font-weight:800;margin:14px 0" id="certPct">100%</div><div class="mono" style="font-size:11px;opacity:.7">30 DAYS COMPLETED WITHOUT EMOTIONAL NOISE.</div><button class="btn mono" style="margin-top:18px;background:#000;color:#fff" onclick="document.getElementById('cert').classList.remove('on')">CLOSE</button></div></div>
+</section>
+
+<section class="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 max-w-6xl mx-auto">
+<div onclick="openModal('past')" class="click-card glass rounded-[24px] p-8 h-[220px] flex flex-col justify-between">
+<span class="mono text-[10px] text-zinc-500">01 / PAST</span>
+<h3 class="text-3xl">White Room<br>Origin</h3><p class="mono text-xs text-zinc-400">Click to decrypt →</p>
+</div>
+<div onclick="openModal('ability')" class="click-card glass rounded-[24px] p-8 h-[220px] flex flex-col justify-between border border-white/20">
+<span class="mono text-[10px] text-zinc-500">02 / ABILITY</span>
+<h3 class="text-3xl">IQ, EQ,<br>Everything</h3><p class="mono text-xs text-white">Click to analyze →</p>
+</div>
+<div onclick="openModal('philosophy')" class="click-card glass rounded-[24px] p-8 h-[220px] flex flex-col justify-between">
+<span class="mono text-[10px] text-zinc-500">03 / PHILOSOPHY</span>
+<h3 class="text-3xl">Human<br>Equality?</h3><p class="mono text-xs text-zinc-400">Click to view →</p>
+</div>
+</section>
+
+<!-- MODALS -->
+<div id="mastermind" class="modal fixed inset-0 bg-black/90 backdrop-blur-xl z-50 justify-center items-center p-6">
+<div class="glass max-w-2xl w-full rounded-[24px] p-10 relative"><button onclick="closeModal('mastermind')" class="absolute top-6 right-6 mono text-xs">CLOSE [X]</button>
+<h2 class="text-5xl font-bold">The Mastermind</h2><p class="mono text-sm text-zinc-400 mt-6 leading-relaxed">Main kabhi lead nahi karta. Main sabko lead karwata hu. Har kisi ko lagta hai wo apna game khel raha hai, par board mera hai. Class D se Class A tak, sab mere ishare pe.</p><div class="mt-8 grid grid-cols-3 gap-4 mono text-[11px]"><div class="glass p-4 rounded-xl">MANIPULATION: 100%</div><div class="glass p-4 rounded-xl">STRATEGY: 100%</div><div class="glass p-4 rounded-xl">DETECTION: 0%</div></div></div>
+</div>
+
+<div id="past" class="modal fixed inset-0 bg-black/90 backdrop-blur-xl z-50 justify-center items-center p-6">
+<div class="glass max-w-2xl w-full rounded-[24px] p-10 relative"><button onclick="closeModal('past')" class="absolute top-6 right-6 mono text-xs">CLOSE [X]</button>
+<h2 class="text-5xl font-bold">White Room</h2><p class="mono text-sm text-zinc-400 mt-6 leading-relaxed">Jahan bachpan khatam ho jata hai aur experiment shuru. 4 saal ki umar se sirf ek hi cheez sikhayi gayi - Perfect banna. Dard, pyaar, dosti, ye sab fail hue experiments hain.</p><img src="https://i.imgur.com/8Km9tLL.gif" class="mt-6 rounded-xl w-full h-48 object-cover grayscale opacity-50"></div>
+</div>
+
+<div id="ability" class="modal fixed inset-0 bg-black/90 backdrop-blur-xl z-50 justify-center items-center p-6">
+<div class="glass max-w-2xl w-full rounded-[24px] p-10 relative"><button onclick="closeModal('ability')" class="absolute top-6 right-6 mono text-xs">CLOSE [X]</button>
+<h2 class="text-5xl font-bold">Stats</h2><div class="mt-8 space-y-4 mono text-xs"><div><div class="flex justify-between"><span>INTELLIGENCE</span><span>100/100</span></div><div class="w-full h-1 bg-zinc-800 mt-2"><div class="h-1 bg-white w-full"></div></div></div><div><div class="flex justify-between"><span>PHYSICAL</span><span>98/100</span></div><div class="w-full h-1 bg-zinc-800 mt-2"><div class="h-1 bg-white w-[98%]"></div></div></div><div><div class="flex justify-between"><span>MANIPULATION</span><span>999/100</span></div><div class="w-full h-1 bg-zinc-800 mt-2"><div class="h-1 bg-white w-full"></div></div></div></div></div>
+</div>
+
+<div id="quote" class="modal fixed inset-0 bg-black/90 backdrop-blur-xl z-50 justify-center items-center p-6">
+<div class="glass max-w-2xl w-full rounded-[24px] p-10 relative"><button onclick="closeModal('quote')" class="absolute top-6 right-6 mono text-xs">CLOSE [X]</button>
+<h2 class="text-5xl font-bold">Quotes</h2><p class="text-2xl mt-8 italic">"All people are nothing but tools. It doesn't matter how you do it. It doesn't matter what you need to sacrifice. In this world, winning is everything."</p><p class="mono text-xs text-zinc-500 mt-6">- Click anywhere to get new quote</p></div>
+</div>
+
+<div id="philosophy" class="modal fixed inset-0 bg-black/90 backdrop-blur-xl z-50 justify-center items-center p-6">
+<div class="glass max-w-2xl w-full rounded-[24px] p-10 relative"><button onclick="closeModal('philosophy')" class="absolute top-6 right-6 mono text-xs">CLOSE [X]</button>
+<h2 class="text-5xl font-bold">Philosophy</h2><p class="mono text-sm text-zinc-400 mt-6 leading-relaxed">Sab log equal hain? Jhooth. Duniya me winner aur loser hote hain. Equal hona ek bahana hai jo losers ne banaya hai taaki unhe kam mehnat karni pade. Main is jhooth ko tod dunga.</p></div>
+</div>
+
 <script>
-const TASKS=["10 Sec Reset (pen drop + eyes closed)","Bina gusse ke 1 question solved","1 observation note in class","30 min deep work, phone away","Kisi se behes / reaction nahi kiya"];
-const QUOTES=["The only thing you can control is yourself.","To win, you must be willing to be hated.","Talent is just an excuse for not working hard.","Emotions are a liability in decision making.","Silence is more powerful than arguing.","Observe. Don't absorb.","Calm mind solves what anger cannot."];
-let cur=parseInt(localStorage.getItem('wr_cur')||'1');let db=JSON.parse(localStorage.getItem('wr_db')||'{}');
-function renderDays(){let c=document.getElementById('days');c.innerHTML='';for(let i=1;i<=30;i++){let d=document.createElement('div');d.className='day';if(db[i])d.classList.add('done');if(i==cur)d.classList.add('active');if(i>Object.keys(db).length+1 && i>cur)d.classList.add('lock');d.innerHTML=`<b>${String(i).padStart(2,'0')}</b><i>${db[i]?'LOCKED':(i==cur?'ACTIVE':'LOCKED')}</i>`;d.onclick=()=>{if(d.classList.contains('lock'))return;cur=i;localStorage.setItem('wr_cur',cur);renderAll();};c.appendChild(d);}}
-function renderTasks(){let box=document.getElementById('tasks');box.innerHTML='';let rec=db[cur]||{checks:[]};TASKS.forEach((t,idx)=>{let r=document.createElement('div');r.className='taskrow';r.innerHTML=`<div style="display:flex;gap:10px;align-items:center"><div class="tick ${rec.checks?.includes(idx)?'on':''}" data-i="${idx}">${rec.checks?.includes(idx)?'✓':''}</div><div style="font-size:13px">${t}</div></div>`;box.appendChild(r);});box.querySelectorAll('.tick').forEach(el=>{el.onclick=()=>{let i=parseInt(el.dataset.i);let r=db[cur]||{checks:[]};if(r.checks.includes(i))r.checks=r.checks.filter(x=>x!==i);else r.checks.push(i);db[cur]=r;localStorage.setItem('wr_db',JSON.stringify(db));renderAll();}});}
-function renderAll(){document.getElementById('curLabel').innerText=cur;document.getElementById('dayName').innerText='DAY '+String(cur).padStart(2,'0');document.getElementById('heroDay').innerText=String(cur).padStart(2,'0');document.getElementById('quote').innerText='“'+QUOTES[(cur-1)%QUOTES.length]+'”';let rec=db[cur]||{};document.getElementById('win').value=rec.win||'';document.getElementById('obs').value=rec.obs||'';let total=Object.keys(db).length;let checks=0;Object.values(db).forEach(v=>checks+=(v.checks?.length||0));let pct=Math.round((total/30)*100);let honest=total==0?100:Math.round((checks/(total*5))*100);document.getElementById('pct').innerText=pct+'%';document.getElementById('pctPill').innerText=pct+'% DONE';document.getElementById('done').innerText=total;document.getElementById('honest').innerText=honest+'%';document.getElementById('streak').innerText=total;document.getElementById('bar').style.width=pct+'%';document.getElementById('ring').style.setProperty('--p',pct+'%');let rank='CLASS D';if(pct>=35)rank='CLASS C';if(pct>=60)rank='CLASS B';if(pct>=85)rank='CLASS A';if(pct>=100)rank='AYANOKOJI';document.getElementById('rank').innerText=rank;if(pct>=100){document.getElementById('cert').classList.add('on');}renderDays();renderTasks();renderWall();}
-function renderWall(){let w=document.getElementById('wall');w.innerHTML='';let keys=Object.keys(db).sort((a,b)=>b-a);if(!keys.length){w.innerHTML='<div class="mono" style="font-size:11px;opacity:.3">No evidence. Start DAY 01.</div>';return}keys.forEach(k=>{let r=db[k];let div=document.createElement('div');div.className='ev';div.innerHTML=`<div class="mono" style="font-size:9px;opacity:.6">DAY ${k} // ${r.date||''} // ${r.checks?.length||0}/5</div><div style="font-size:12px;margin-top:3px"><b>WIN:</b> ${r.win||'-'}<br><b>OBS:</b> ${r.obs||'-'}</div>`;w.appendChild(div);});}
-function save(){let win=document.getElementById('win').value.trim();let checks=db[cur]?.checks||[];if(checks.length<3){alert('3+ niyam tick kar');return}if(!win){alert('CALM WIN likhna mandatory hai');return}db[cur]={...(db[cur]||{}),win,obs:document.getElementById('obs').value,date:new Date().toLocaleDateString(),checks};localStorage.setItem('wr_db',JSON.stringify(db));if(cur<30){cur++;localStorage.setItem('wr_cur',cur);}renderAll();window.scrollTo({top:0,behavior:'smooth'});}
-setInterval(()=>{document.getElementById('clock').innerText=new Date().toLocaleTimeString();},1000);renderAll();
-</script></body></html>
+function openModal(id){document.getElementById(id).classList.add('active')}
+function closeModal(id){document.getElementById(id).classList.remove('active')}
+setInterval(()=>{document.getElementById('clock').innerText=new Date().toLocaleTimeString()},1000)
+document.addEventListener('click',e=>{if(e.target.classList.contains('modal'))e.target.classList.remove('active')})
+</script>
+</body>
+</html>
