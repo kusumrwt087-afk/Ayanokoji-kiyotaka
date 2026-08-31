@@ -9,50 +9,50 @@
     <style>
         * { box-sizing: border-box }
         body { background: #07070a; color: #e9e0c4; font-family: 'JetBrains Mono', monospace }
-       .orbit { font-family: 'Orbitron', sans-serif }
-       .card {
+      .orbit { font-family: 'Orbitron', sans-serif }
+      .card {
             background: radial-gradient(140% 140% at 50% 0%, #1e1e2c 0%, #14141f 50%, #0d0d14 100%);
             border: 1px solid rgba(255,60,60,0.18);
             border-radius: 26px;
             box-shadow: 0 15px 60px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.06)
         }
-       .card-red {
+      .card-red {
             border-color: rgba(255,60,60,0.35);
             box-shadow: 0 0 40px rgba(255,60,60,0.15), 0 15px 60px rgba(0,0,0,0.8)
         }
-       .active-day {
+      .active-day {
             border-color: #ff3c3c!important;
             box-shadow: 0 0 25px rgba(255,60,60,0.6)!important;
             background: linear-gradient(90deg, rgba(255,60,60,0.25), rgba(245,230,184,0.12))!important;
             opacity: 1!important;
             transform: scale(1.03)
         }
-       .done { opacity: 0.35; text-decoration: line-through; filter: grayscale(0.8) }
-       .exp-track {
+      .done { opacity: 0.35; text-decoration: line-through; filter: grayscale(0.8) }
+      .exp-track {
             height: 9px;
             background: #1c1c27;
             border-radius: 100px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.06)
         }
-       .exp-fill {
+      .exp-fill {
             height: 100%;
             background: linear-gradient(90deg, #ff1a1a 0%, #ff5a36 35%, #f5e6b8 100%);
             transition: width 1s cubic-bezier(0.22,1,0.36,1)
         }
-       .day-track {
+      .day-track {
             height: 12px;
             background: #1c1c27;
             border-radius: 100px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.06)
         }
-       .day-fill {
+      .day-fill {
             height: 100%;
             background: linear-gradient(90deg, #00ff88 0%, #00e5ff 40%, #f5e6b8 100%);
             transition: width 0.9s ease
         }
-       .glow-red { text-shadow: 0 0 15px rgba(255,60,60,0.8) }
+      .glow-red { text-shadow: 0 0 15px rgba(255,60,60,0.8) }
     </style>
 </head>
 
@@ -191,6 +191,10 @@
             </p>
             <div id="goodBad" class="mt-3 space-y-1.5 text-[9px] leading-relaxed"></div>
         </div>
+        <!-- HOLIDAY BUTTON NEW -->
+        <button id="holidayBtn" onclick="toggleHoliday()" class="w-full mt-4 border border-dashed border-yellow-500/50 py-3 rounded-[12px] text-[9px] font-bold tracking-[0.25em] text-yellow-500 hover:bg-yellow-500 hover:text-black transition-all">
+            TODAY IS HOLIDAY : OFF
+        </button>
     </div>
 
     <!-- INFINITE LOCK SYSTEM -->
@@ -343,7 +347,8 @@
         { n:"WHITE ROOM MASTER", xp:300000 }
     ];
 
-    let data = JSON.parse(localStorage.getItem('WR_FINAL_MASTER_FULL_V6') || '{"day":1,"done":[],"xp":0,"today":{"h":[],"r":[],"ta":[],"sc":[]}}');
+    let data = JSON.parse(localStorage.getItem('WR_FINAL_MASTER_FULL_V6') || '{"day":1,"done":[],"xp":0,"today":{"h":[],"r":[],"ta":[],"sc":[]},"holidays":[]}');
+    if(!data.holidays) data.holidays = [];
     let nf = localStorage.getItem('WR_NF') || new Date().toISOString();
 
     function save() {
@@ -364,6 +369,21 @@
         return { n:"MAXIMUM", xp:300000 };
     }
 
+    function getTodayStr(){
+        let d = new Date();
+        return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    }
+
+    function toggleHoliday(){
+        let todayStr = getTodayStr();
+        if(data.holidays.includes(todayStr)){
+            data.holidays = data.holidays.filter(d=>d!=todayStr);
+        } else {
+            data.holidays.push(todayStr);
+        }
+        save(); render();
+    }
+
     function render() {
         let cls = getCls(data.xp);
         let nxt = getNext(data.xp);
@@ -382,11 +402,15 @@
 
         let now = new Date();
         let mins = now.getHours()*60 + now.getMinutes();
-        let dayName = now.toLocaleDateString('en-US',{weekday:'long'}).toUpperCase();
+        let todayStr = getTodayStr();
+        let isHoliday = data.holidays.includes(todayStr);
+        let dayIdx = now.getDay();
+        if(isHoliday) dayIdx = 0;
+        let dayName = isHoliday? "SUNDAY (HOLIDAY)" : now.toLocaleDateString('en-US',{weekday:'long'}).toUpperCase();
 
         document.getElementById('dayName').innerText = dayName;
         document.getElementById('dayNameTop').innerText = dayName;
-        document.getElementById('liveDate').innerText = now.toLocaleDateString();
+        document.getElementById('liveDate').innerText = now.toLocaleDateString() + (isHoliday? " [HOLIDAY]" : "");
         document.getElementById('liveMins').innerText = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
 
         let days = Math.floor((now - new Date(nf)) / 86400000);
@@ -394,13 +418,13 @@
 
         let curRange = nxt.xp - cls.xp;
         let curProg = data.xp - cls.xp;
-        let perc = Math.min(curProg / curRange * 100, 100);
+                let perc = Math.min(curProg / curRange * 100, 100);
         if (curRange === 0) perc = 100;
 
         document.getElementById('ring').style.strokeDashoffset = 590 - (590 * perc / 100);
         document.getElementById('expBar').style.width = perc + '%';
 
-        let proto = now.getDay() === 0? sunday : daily;
+        let proto = dayIdx === 0? sunday : daily;
         let total = H.length + R.length + T.length + proto.length;
         let done = data.today.h.length + data.today.r.length + data.today.ta.length + data.today.sc.length;
         let dayPer = Math.round(done / total * 100);
@@ -425,6 +449,22 @@
 
         document.getElementById('liveStatus').innerText = `Aaj ${dayPer}% | ${txp} XP | Total: ${data.xp} | Day ${data.day}/∞ | ${total-done} baki`;
         document.getElementById('goodBad').innerHTML = `<p class="text-green-300">✅ Sahi: ${done}</p><p class="text-red-400">❌ Pending: ${total-done}</p>`;
+
+        // HOLIDAY BUTTON UPDATE
+        let hBtn = document.getElementById('holidayBtn');
+        if(hBtn){
+            if(isHoliday){
+                hBtn.innerText = "HOLIDAY MODE : ON (SUNDAY PROTOCOL) - TAP TO OFF";
+                hBtn.style.background = "#eab308";
+                hBtn.style.color = "black";
+                hBtn.style.borderColor = "#eab308";
+            } else {
+                hBtn.innerText = "TODAY IS HOLIDAY : OFF - TAP FOR SUNDAY MODE";
+                hBtn.style.background = "transparent";
+                hBtn.style.color = "#eab308";
+                hBtn.style.borderColor = "rgba(234,179,8,0.5)";
+            }
+        }
 
         let mx = document.getElementById('matrix');
         mx.innerHTML = '';
@@ -479,7 +519,10 @@
     }
 
     function lockDay(){
-        let proto = new Date().getDay() === 0? sunday : daily;
+        let dayIdx = new Date().getDay();
+        let todayStr = getTodayStr();
+        if(data.holidays.includes(todayStr)) dayIdx = 0;
+        let proto = dayIdx === 0? sunday : daily;
         let total = H.length + R.length + T.length + proto.length;
         let done = data.today.h.length + data.today.r.length + data.today.ta.length + data.today.sc.length;
         let per = Math.round(done / total * 100);
