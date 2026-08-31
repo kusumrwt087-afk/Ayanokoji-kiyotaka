@@ -412,4 +412,128 @@
         document.getElementById('dayProgressBar').style.width = dayPer + '%';
 
         let perf = "POOR", em = "💀", col = "text-red-400";
-        if (dayPer >= 20) { perf = "WEAK"; em = "😓"; col = "text-orange-400"; 
+        if (dayPer >= 20) { perf = "WEAK"; em = "😓"; col = "text-orange-400"; }
+        if (dayPer >= 40) { perf = "AVG"; em = "😐"; col = "text-yellow-400"; }
+        if (dayPer >= 60) { perf = "GOOD"; em = "🔥"; col = "text-green-400"; }
+        if (dayPer >= 80) { perf = "ELITE"; em = "⚡"; col = "text-green-300"; }
+        if (dayPer >= 100) { perf = "PERFECT"; em = "👑"; col = "text-[#f5e6b8]"; }
+
+        let pe = document.getElementById('perfection');
+        pe.innerText = perf;
+        pe.className = "orbit text-[11px] font-black tracking-widest " + col;
+        document.getElementById('perfectionEmoji').innerText = em;
+
+        document.getElementById('liveStatus').innerText = `Aaj ${dayPer}% | ${txp} XP | Total: ${data.xp} | Day ${data.day}/∞ | ${total-done} baki`;
+        document.getElementById('goodBad').innerHTML = `<p class="text-green-300">✅ Sahi: ${done}</p><p class="text-red-400">❌ Pending: ${total-done}</p>`;
+
+        let mx = document.getElementById('matrix');
+        mx.innerHTML = '';
+        let totalToShow = Math.max(30, data.day + 15);
+        for (let i = 1; i <= totalToShow; i++) {
+            let dn = data.done.includes(i);
+            mx.innerHTML += `<div class="bg-[#161622] rounded-[13px] p-3 text-center text-[10px] border border-white/5 ${i===data.day?'active-day':''} ${dn?'bg-[#f5e6b8] text-black':''}"><p class="orbit font-bold text-[15px]">${String(i).padStart(2,'0')}</p><p class="text-[7px]">${dn?'DONE':i===data.day?'ACTIVE':i<data.day?'MISSED':'LOCKED'}</p></div>`;
+        }
+
+        let hh = document.getElementById('habits');
+        hh.innerHTML = '';
+        H.forEach((x,i)=>{
+            let ok = data.today.h.includes(i);
+            hh.innerHTML += `<div onclick="tog('h',${i},${x.xp})" class="flex gap-3.5 bg-[#161622] border border-white/10 rounded-[15px] p-4 ${ok?'done':''}"><div class="w-10 h-10 rounded-[11px] bg-black border border-red-900/40 flex items-center justify-center text-[11px] text-red-400 font-bold">${x.no}</div><div class="flex-1"><p class="text-[11px] font-bold">${x.t}</p></div><div>${ok?'✅':''}</div></div>`;
+        });
+
+        let rr = document.getElementById('rules');
+        rr.innerHTML = '';
+        R.forEach((x,i)=>{
+            let ok = data.today.r.includes(i);
+            rr.innerHTML += `<div onclick="tog('r',${i},10)" class="flex justify-between bg-[#161622] border border-white/10 rounded-[13px] p-4 ${ok?'done':''}"><span class="text-[11px]">${x}</span><span>${ok?'✅ DONE':'+10 XP'}</span></div>`;
+        });
+
+        let tt = document.getElementById('tactics');
+        tt.innerHTML = '';
+        T.forEach((x,i)=>{
+            let ok = data.today.ta.includes(i);
+            tt.innerHTML += `<div onclick="tog('ta',${i},10)" class="flex justify-between bg-[#161622] border border-white/10 rounded-[13px] p-4 ${ok?'done':''}"><span class="text-[11px]">${x}</span><span>${ok?'✅ DONE':'+10 XP'}</span></div>`;
+        });
+
+        let sc = document.getElementById('sched');
+        sc.innerHTML = '';
+        proto.forEach((p,i)=>{
+            let ok = data.today.sc.includes(i);
+            let act = mins >= p.s && mins <= p.e &&!ok;
+            sc.innerHTML += `<div onclick="tog('sc',${i},12)" class="flex justify-between bg-[#161622] border border-white/10 rounded-[14px] p-4 ${ok?'done':''} ${act?'active-day':''}"><div><p class="text-[9px] text-red-400">${p.ti}</p><p class="text-[11px] font-bold mt-1">${p.t}</p><p class="text-[8px] text-zinc-500 italic mt-1">${p.q}</p></div><span class="text-[9px]">${ok?'✅ DONE':'+12 XP'}</span></div>`;
+        });
+
+        document.getElementById('n1').value = localStorage.getItem('WR_N1') || '';
+        document.getElementById('n2').value = localStorage.getItem('WR_N2') || '';
+    }
+
+    function tog(tp,i,xp){
+        if(data.today[tp].includes(i)) return;
+        let old = getCls(data.xp).n;
+        data.today[tp].push(i);
+        data.xp += xp;
+        let nw = getCls(data.xp).n;
+        if(old!== nw) alert('🔥 PROMOTION ' + old + ' → ' + nw);
+        save();
+        render();
+    }
+
+    function lockDay(){
+        let proto = new Date().getDay() === 0? sunday : daily;
+        let total = H.length + R.length + T.length + proto.length;
+        let done = data.today.h.length + data.today.r.length + data.today.ta.length + data.today.sc.length;
+        let per = Math.round(done / total * 100);
+        if(per >= 80){ data.xp += 50; }
+        if(per >= 100){ data.xp += 100; alert('👑 PERFECT DAY +150 BONUS'); }
+        data.done.push(data.day);
+        data.day = data.day + 1;
+        data.today = { h:[], r:[], ta:[], sc:[] };
+        save();
+        render();
+    }
+
+    function penalty(){
+        data.xp = Math.max(0, data.xp - 200);
+        save();
+        render();
+    }
+
+    function startProtocol(){
+        let s = document.getElementById('startScreen');
+        s.style.display = 'none';
+        s.style.pointerEvents = 'none';
+        s.style.zIndex = '-1';
+        localStorage.setItem('WR_STARTED','true');
+        render();
+    }
+
+    function restartToday(){
+        if(confirm('Aaj ka din restart karna hai?')){
+            data.today = { h:[], r:[], ta:[], sc:[] };
+            save();
+            render();
+        }
+    }
+
+    function resetAll(){
+        if(confirm('PURA ZERO?')){
+            localStorage.clear();
+            location.reload();
+        }
+    }
+
+    setInterval(()=>{
+        document.getElementById('clock').innerText = new Date().toLocaleTimeString();
+    },1000);
+
+    document.getElementById('n1').addEventListener('input',save);
+    document.getElementById('n2').addEventListener('input',save);
+
+    if(localStorage.getItem('WR_STARTED') === 'true'){
+        document.getElementById('startScreen').style.display = 'none';
+    }
+
+    render();
+</script>
+</body>
+</html>
