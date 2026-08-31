@@ -2,149 +2,146 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AYANOKOJI PROTOCOL - PRIVATE</title>
+<title>WHITE ROOM 30D // PROTOCOL</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
 <style>
-body{background:#020a0f;color:#c0f0ff;font-family:'JetBrains Mono',monospace}
-.orbit{font-family:'Orbitron'}
-.glass{background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.2);backdrop-filter:blur(10px)}
-.active-block{background:rgba(0,229,255,0.15)!important;border-color:#00e5ff!important;box-shadow:0 0 20px rgba(0,229,255,0.4)}
-.done-block{opacity:0.4;text-decoration:line-through;background:rgba(255,255,255,0.05)!important}
+body{background:#0f0f14;color:#e7e0c8;font-family:'JetBrains Mono',monospace}
+.card{background:#1a1a23;border-radius:28px}
+.progress-ring{transform:rotate(-90deg)}
+.locked{opacity:0.3}
+.active-day{background:#f5e6b8!important;color:#000!important;opacity:1!important}
 </style>
 </head>
-<body class="p-3 md:p-6">
-<div class="max-w-5xl mx-auto">
-<div class="flex flex-wrap justify-between items-center gap-4 border border-cyan-500/30 p-4 rounded-xl mb-6">
-<div>
-<h1 class="orbit text-xl md:text-3xl text-cyan-300">AYANOKOJI <span class="text-white" id="dayTitle">DAILY PROTOCOL</span></h1>
-<p class="text-[10px] tracking-[0.3em] mt-1">STATUS: ACTIVE | MODE: DISCIPLINE | EFFICIENCY: 99.8%</p>
+<body class="p-4 max-w-[500px] mx-auto">
+<!-- HEADER -->
+<div class="flex justify-between items-center mb-4 tracking-widest text-[12px]">
+<p>WHITE ROOM // PROTOCOL<br>30D</p><p id="liveClock">00:00:00</p>
 </div>
-<div class="flex gap-3">
-<div class="glass px-4 py-2 rounded-lg text-center"><p class="text-[9px]">LVL</p><p class="text-xl font-bold" id="lvl">1</p></div>
-<div class="glass px-4 py-2 rounded-lg text-center"><p class="text-[9px]">XP</p><p class="text-xl font-bold" id="xp">0</p></div>
-<div class="glass px-4 py-2 rounded-lg text-center border-white/30"><p class="text-[9px]">NOFAP</p><p class="text-xl font-bold" id="nofap">0D</p></div>
+
+<!-- CIRCLE % -->
+<div class="card p-6 text-center">
+<div class="relative w-[220px] h-[220px] mx-auto">
+<svg class="progress-ring w-full h-full"><circle cx="110" cy="110" r="100" stroke="#23232e" stroke-width="14" fill="none"/><circle id="circleBar" cx="110" cy="110" r="100" stroke="#f5e6b8" stroke-width="14" fill="none" stroke-linecap="round" stroke-dasharray="628" stroke-dashoffset="628"/></svg>
+<div class="absolute inset-0 flex flex-col justify-center items-center"><p class="text-6xl font-bold" id="totalPercent">0%</p><p class="text-[10px] tracking-[0.4em] mt-2 text-zinc-500">COMPLETION</p><p class="text-[13px] tracking-widest mt-1" id="classRank">CLASS D</p></div>
+</div>
+<div class="grid grid-cols-3 gap-3 mt-6">
+<div class="bg-[#13131a] rounded-2xl p-3"><p class="text-xl font-bold" id="daysDone">0</p><p class="text-[9px] text-zinc-500">DAYS DONE</p></div>
+<div class="bg-[#13131a] rounded-2xl p-3"><p class="text-xl font-bold" id="honesty">0%</p><p class="text-[9px] text-zinc-500">HONESTY</p></div>
+<div class="bg-[#13131a] rounded-2xl p-3"><p class="text-xl font-bold" id="streak">0</p><p class="text-[9px] text-zinc-500">STREAK</p></div>
 </div>
 </div>
 
-<div class="grid md:grid-cols-3 gap-6">
-<div class="md:col-span-2">
-<div class="flex justify-between items-center mb-4">
-<h2 class="orbit text-cyan-400">DAILY PROTOCOL - <span id="todayName"></span></h2>
-<p class="text-[10px]" id="liveTime"></p>
-</div>
-<div id="scheduleList" class="space-y-2"></div>
-</div>
-
-<div class="space-y-4">
-<div class="glass rounded-xl p-5 border-cyan-400/50">
-<h3 class="orbit text-sm text-cyan-300">PRIVATE: NO MASTURBATION</h3>
-<p class="text-[10px] text-zinc-400 mt-2">Sirf tere browser me save hai, koi aur nahi dekh sakta.</p>
-<h2 class="text-5xl font-bold mt-3" id="nofapBig">0</h2><p class="text-[11px]">DAYS CLEAN</p>
-<div class="flex gap-2 mt-4">
-<button onclick="resetNoFap()" class="bg-cyan-400 text-black text-[10px] px-4 py-2 rounded-full font-bold">RELAPSE / RESET</button>
-<button onclick="addDay()" class="glass text-[10px] px-4 py-2 rounded-full">+1 DAY</button>
+<!-- 30 DAY MATRIX -->
+<div class="mt-6">
+<p class="text-[11px] tracking-[0.3em]">30 DAY LOCK SYSTEM</p><p class="mt-2 text-[10px] bg-[#f5e6b8] text-black inline-block px-4 py-1 rounded-full tracking-widest">SUBJECT: AYANOKOJI</p>
+<div class="card p-4 mt-4">
+<div class="bg-white rounded-[24px] p-6 text-center text-black"><p class="text-[10px] tracking-[0.4em]">EXPERIMENT 01</p><h1 class="text-4xl font-black tracking-tighter mt-1" style="font-family:'Space Grotesk'">WHITE ROOM</h1><p class="text-[11px] tracking-widest mt-2 text-zinc-500">DAY <span id="currentDayNum">01</span> ACTIVE // MONITORING</p></div>
+<div class="flex justify-between mt-5 text-[11px] tracking-widest"><p>PROTOCOL MATRIX [30]</p><p>DAY <span id="dayCount">1</span>/30</p></div>
+<div id="matrix" class="grid grid-cols-3 gap-3 mt-4"></div>
 </div>
 </div>
 
-<div class="glass rounded-xl p-5">
-<h3 class="orbit text-xs">ADAT TRACKER (Extra)</h3>
-<div id="habitExtra" class="mt-3 space-y-2"></div>
-<button onclick="addExtra()" class="text-[10px] text-zinc-500 mt-3">+ Add Aadat</button>
+<!-- TODAY PROTOCOL + SCHEDULE -->
+<div class="card p-5 mt-6">
+<h2 class="tracking-[0.3em] text-[11px]" id="todayTitle">TODAY'S PROTOCOL // DAY 01</h2>
+
+<!-- 5 Main Tasks (from your ss) -->
+<div id="todayTasks" class="mt-6 space-y-4"></div>
+
+<!-- Daily Time Schedule Auto -->
+<div class="mt-8 border-t border-zinc-800 pt-5">
+<p class="text-[11px] tracking-widest">DAY SCHEDULE - <span id="dayName"></span> <span class="text-[9px] text-zinc-500">(auto)</span></p>
+<div id="daySchedule" class="mt-3 space-y-2"></div>
 </div>
 
-<div class="glass rounded-xl p-4 text-[10px] text-zinc-500 leading-relaxed">
-REMINDER<br>CONSISTENCY IS THE COMPOUND INTEREST OF DISCIPLINE<br>STAY SILENT - STAY DISCIPLINED<br>EXECUTE TODAY
+<!-- Extra habits from White Room poster -->
+<div class="mt-8 border-t border-zinc-800 pt-5">
+<p class="text-[11px] tracking-widest">WHITE ROOM RULES [NON-NEGOTIABLE]</p>
+<div id="rules" class="mt-3 space-y-2 text-[11px]"></div>
 </div>
-</div>
-</div>
+
+<input id="note1" placeholder="Sabh kux (aaj kya sikha)" class="w-full bg-[#13131a] rounded-xl p-4 mt-6 text-[12px] outline-none">
+<input id="note2" placeholder="Bahut tadgi chij (mistake)" class="w-full bg-[#13131a] rounded-xl p-4 mt-3 text-[12px] outline-none">
+
+<button onclick="lockToday()" class="w-full bg-white text-black rounded-2xl py-4 mt-5 font-bold tracking-[0.2em] text-[13px]">LOCK TODAY → UNLOCK TOMORROW</button>
+<p class="text-[9px] text-zinc-600 mt-3 text-center">Private NoFap: <span id="nofapDays">0</span> Days Clean | <button onclick="resetNofap()" class="underline">Relapse Reset</button></p>
 </div>
 
 <script>
-const dailyProtocol=[
-{time:"05:20 AM",title:"UTHNA",quote:"Winners don't wait for sunrise. They become it.",start:320,end:320},
-{time:"05:20-06:30 AM",title:"MORNING REVISION",quote:"While they dream, you sharpen.",start:320,end:390},
-{time:"06:30 AM-01:10 PM",title:"SCHOOL",quote:"Don't attend the class. Dominate it.",start:390,end:790},
-{time:"01:10-02:00 PM",title:"POWER NAP + LUNCH",quote:"Even a machine needs recharge. Rest is strategy.",start:790,end:840},
-{time:"02:00-04:50 PM",title:"DEEP STUDY",quote:"Distraction is a choice. Excellence is also a choice.",start:840,end:1010},
-{time:"04:50-06:15 PM",title:"WORKOUT",quote:"Weak body, weak mind. Pain is just data.",start:1010,end:1095},
-{time:"06:15-07:30 PM",title:"CODING & CHESS",quote:"The world is a chessboard. Learn to move before they do.",start:1095,end:1170},
-{time:"07:30-08:00 PM",title:"FRESH RESET",quote:"Emotions cloud judgment. Wash them away.",start:1170,end:1200},
-{time:"08:00-10:00 PM",title:"HOMEWORK & DINNER",quote:"Leave nothing for tomorrow.",start:1200,end:1320},
-{time:"10:00 PM",title:"SLEEP",quote:"Sleep is not escape. It's preparation for war.",start:1320,end:1439},
+const mainTasks=[
+"10 Sec Reset (pen drop + eyes closed)",
+"Bina gusse ke 1 question solved",
+"1 observation note in class",
+"30 min deep work, phone away",
+"Kisi se behes / reaction nahi kiya"
+];
+const whiteRules=[
+"01. 10-SEC RESET - Pen drop, eyes close, breathe.",
+"02. NO REACTION - Gaali, taunt, daant = observe only.",
+"03. 1 CALM WIN - Har din 1 kaam bina emotion ke.",
+"04. OBSERVE LOG - 1 observation jo dusro ne miss kiya.",
+"05. ANTI-CHEAT - Jhooth bola to -1 day"
+];
+const daily=[
+{ti:"05:20 AM",t:"UTHNA"},{ti:"05:20-06:30",t:"MORNING REVISION"},{ti:"06:30-01:10",t:"SCHOOL"},{ti:"01:10-02:00",t:"POWER NAP + LUNCH"},{ti:"02:00-04:50",t:"DEEP STUDY"},{ti:"04:50-06:15",t:"WORKOUT"},{ti:"06:15-07:30",t:"CODING & CHESS"},{ti:"07:30-08:00",t:"FRESH RESET"},{ti:"08:00-10:00",t:"HOMEWORK & DINNER"},{ti:"10:00 PM",t:"SLEEP"}
+];
+const sunday=[
+{ti:"05:20 AM",t:"UTHNA"},{ti:"05:20-06:30",t:"MORNING REVISION"},{ti:"06:30-08:30",t:"STUDY BLOCK 1: HARD"},{ti:"08:30-09:00",t:"BREAKFAST"},{ti:"09:00-11:30",t:"STUDY BLOCK 2"},{ti:"11:30-12:30",t:"CODING / CHESS"},{ti:"12:30-01:00",t:"BREAK"},{ti:"01:00-01:30",t:"LUNCH"},{ti:"01:30-02:00",t:"POWER NAP"},{ti:"02:00-04:30",t:"STUDY BLOCK 3: WEEK REVISION"},{ti:"04:30-06:00",t:"SPORTS GROUND"},{ti:"07:00-09:00",t:"NEXT WEEK PLANNING"},{ti:"09:00-09:30",t:"DINNER"},{ti:"09:30-10:00",t:"DIARY LOG"},{ti:"10:00 PM",t:"SLEEP"}
 ];
 
-const sundayProtocol=[
-{time:"05:20 AM",title:"UTHNA",quote:"Discipline starts when motivation ends.",start:320,end:320},
-{time:"05:20-06:30 AM",title:"MORNING REVISION",quote:"First hour decides the whole day.",start:320,end:390},
-{time:"06:30-08:30 AM",title:"STUDY BLOCK 1: HARD SUBJECT",quote:"Attack your weakness before it attacks you.",start:390,end:510},
-{time:"08:30-09:00 AM",title:"BREAKFAST",quote:"Fuel your body like you fuel your ambition.",start:510,end:540},
-{time:"09:00-11:30 AM",title:"STUDY BLOCK 2",quote:"Silence + Focus = Fear for others.",start:540,end:690},
-{time:"11:30 AM-12:30 PM",title:"CODING / CHESS",quote:"If you can't control the game, you are the pawn.",start:690,end:750},
-{time:"12:30-01:00 PM",title:"BREAK",quote:"Pause, but never lose momentum.",start:750,end:780},
-{time:"01:00-01:30 PM",title:"LUNCH",quote:"Eat, don't waste. Time is currency.",start:780,end:810},
-{time:"01:30-02:00 PM",title:"POWER NAP",quote:"20 minutes of sleep can save 2 hours of failure.",start:810,end:840},
-{time:"02:00-04:30 PM",title:"STUDY BLOCK 3: WEEK REVISION",quote:"Revision is not repeating. It's dominating.",start:840,end:990},
-{time:"04:30-06:00 PM",title:"SPORTS GROUND",quote:"A strong mind lives in a strong body.",start:990,end:1080},
-{time:"07:00-09:00 PM",title:"NEXT WEEK PLANNING + EASY REVISION",quote:"The future belongs to those who plan it today.",start:1140,end:1260},
-{time:"09:00-09:30 PM",title:"DINNER",quote:"End the day without debt.",start:1260,end:1290},
-{time:"09:30-10:00 PM",title:"DIARY MISTAKE LOG",quote:"Note your failures. They are your real teachers.",start:1290,end:1320},
-{time:"10:00 PM",title:"SLEEP",quote:"Sleep like a weapon is being reloaded.",start:1320,end:1439},
-];
-
-let xp=parseInt(localStorage.getItem('ak_xp')||'0');
-let lvl=parseInt(localStorage.getItem('ak_lvl')||'1');
-let nofapStart=localStorage.getItem('ak_nofap')||new Date().toISOString();
-let extraHabits=JSON.parse(localStorage.getItem('ak_extra')||'[{"name":"Meditation","done":false},{"name":"No Junk","done":false}]');
-let todayKey=new Date().toDateString();
-let completed=JSON.parse(localStorage.getItem('ak_done_'+todayKey)||'[]');
-
-function getProtocol(){
-let d=new Date().getDay();
-return d===0?sundayProtocol:dailyProtocol;
-}
-
-function save(){localStorage.setItem('ak_xp',xp);localStorage.setItem('ak_lvl',lvl);localStorage.setItem('ak_nofap',nofapStart);localStorage.setItem('ak_extra',JSON.stringify(extraHabits));localStorage.setItem('ak_done_'+todayKey,JSON.stringify(completed));}
+let data=JSON.parse(localStorage.getItem('WR30')||'{"day":1,"doneDays":[],"today":{"tasks":[],"schedule":[]},"notes":{"n1":"","n2":""}}');
+let nofap=localStorage.getItem('WR_NF')||new Date().toISOString();
+function save(){localStorage.setItem('WR30',JSON.stringify(data));localStorage.setItem('WR_NF',nofap);localStorage.setItem('WR30_n1',document.getElementById('note1').value);localStorage.setItem('WR30_n2',document.getElementById('note2').value);}
 
 function render(){
-let proto=getProtocol();
-let now=new Date();let mins=now.getHours()*60+now.getMinutes();
-document.getElementById('todayName').innerText=now.toLocaleDateString('en-US',{weekday:'long'}).toUpperCase();
-document.getElementById('dayTitle').innerText=now.getDay()===0?'SUNDAY PROTOCOL':'DAILY PROTOCOL';
-document.getElementById('liveTime').innerText=now.toLocaleTimeString();
-document.getElementById('xp').innerText=xp;
-document.getElementById('lvl').innerText=lvl;
-let days=Math.floor((now-new Date(nofapStart))/(1000*60*60*24));
-document.getElementById('nofap').innerText=days+'D';
-document.getElementById('nofapBig').innerText=days;
+let total=30;let done=data.doneDays.length;let pct=Math.round((done/total)*100);
+document.getElementById('totalPercent').innerText=pct+'%';
+document.getElementById('circleBar').style.strokeDashoffset=628-(628*pct/100);
+document.getElementById('daysDone').innerText=done;
+document.getElementById('honesty').innerText=done===0?0+'%':Math.round((data.today.tasks.length/5)*100)+'%';
+document.getElementById('streak').innerText=done;
+document.getElementById('currentDayNum').innerText=String(data.day).padStart(2,'0');
+document.getElementById('dayCount').innerText=data.day;
+let rank=pct<25?'CLASS D':pct<50?'CLASS C':pct<75?'CLASS B':pct<95?'CLASS A':'CLASS S';
+document.getElementById('classRank').innerText=rank;
 
-let list=document.getElementById('scheduleList');list.innerHTML='';
+let m=document.getElementById('matrix');m.innerHTML='';
+for(let i=1;i<=30;i++){
+let locked=i>data.day;let doneD=data.doneDays.includes(i);
+m.innerHTML+=`<div class="bg-[#13131a] rounded-[20px] p-5 text-center ${locked?'locked':''} ${i===data.day?'active-day':''} ${doneD?'bg-[#f5e6b8] text-black opacity-100':''}"><p class="text-2xl font-bold">${String(i).padStart(2,'0')}</p><p class="text-[10px] tracking-widest">${doneD?'DONE':'LOCKED'}</p></div>`;
+}
+
+let t=document.getElementById('todayTasks');t.innerHTML='';
+mainTasks.forEach((task,i)=>{
+let checked=data.today.tasks.includes(i);
+t.innerHTML+=`<div onclick="toggleTask(${i})" class="flex gap-3 items-center cursor-pointer"><div class="w-10 h-10 rounded-xl flex justify-center items-center ${checked?'bg-[#f5e6b8] text-black':'bg-[#13131a]'}">${checked?'✓':''}</div><p class="text-[13px]">${task}</p></div>`;
+});
+
+let proto=new Date().getDay()===0?sunday:daily;
+document.getElementById('dayName').innerText=new Date().toLocaleDateString('en-US',{weekday:'long'}).toUpperCase();
+let ds=document.getElementById('daySchedule');ds.innerHTML='';
 proto.forEach((p,i)=>{
-let isDone=completed.includes(i);
-let isActive=mins>=p.start && mins<=p.end &&!isDone;
-let cls=`glass rounded-xl p-4 flex justify-between items-center cursor-pointer transition ${isDone?'done-block':''} ${isActive?'active-block':''}`;
-list.innerHTML+=`<div class="${cls}" onclick="toggle(${i})"><div><p class="text-[11px] text-cyan-300">${p.time}</p><p class="font-bold text-sm mt-1">${p.title}</p><p class="text-[10px] text-zinc-400 italic">${p.quote}</p></div><div class="text-[10px]">${isDone?'✅ DONE':'+25 XP'}</div></div>`;
+let checked=data.today.schedule.includes(i);
+ds.innerHTML+=`<div onclick="toggleSched(${i})" class="flex justify-between bg-[#13131a] rounded-xl p-3 text-[11px] cursor-pointer ${checked?'opacity-40 line-through':''}"><span>${p.ti} - ${p.t}</span><span>${checked?'✅':'+5%'}</span></div>`;
 });
 
-let eh=document.getElementById('habitExtra');eh.innerHTML='';
-extraHabits.forEach((h,i)=>{
-eh.innerHTML+=`<div onclick="toggleExtra(${i})" class="flex justify-between glass p-3 rounded-lg cursor-pointer ${h.done?'done-block':''}"><span class="text-xs">${h.name}</span><span class="text-[10px]">${h.done?'✅':'+15 XP'}</span></div>`;
-});
-}
+let r=document.getElementById('rules');r.innerHTML='';
+whiteRules.forEach(rr=>{r.innerHTML+=`<p class="text-zinc-400">${rr}</p>`});
 
-function toggle(i){
-if(completed.includes(i)){completed=completed.filter(x=>x!==i);xp=Math.max(0,xp-25);}else{completed.push(i);xp+=25;if(xp>=100){lvl++;xp=0;alert('LEVEL UP! LVL '+lvl+' - White Room approves.');}}
-save();render();
+let days=Math.floor((new Date()-new Date(nofap))/(1000*60*60*24));
+document.getElementById('nofapDays').innerText=days;
+document.getElementById('note1').value=localStorage.getItem('WR30_n1')||'';document.getElementById('note2').value=localStorage.getItem('WR30_n2')||'';
 }
-function toggleExtra(i){
-if(!extraHabits[i].done){extraHabits[i].done=true;xp+=15;}else{extraHabits[i].done=false;xp=Math.max(0,xp-15);}
-if(xp>=100){lvl++;xp=0;}
-save();render();
+function toggleTask(i){if(data.today.tasks.includes(i))data.today.tasks=data.today.tasks.filter(x=>x!==i);else data.today.tasks.push(i);save();render();}
+function toggleSched(i){if(data.today.schedule.includes(i))data.today.schedule=data.today.schedule.filter(x=>x!==i);else data.today.schedule.push(i);save();render();}
+function lockToday(){
+if(data.today.tasks.length<5){if(!confirm('5/5 tasks pura nahi hai, phir bhi lock karna hai?'))return;}
+data.doneDays.push(data.day);data.day=Math.min(30,data.day+1);data.today={tasks:[],schedule:[]};save();render();alert('Day Locked! Kal ka protocol unlock ho gaya - Ayanokoji mode ON');
 }
-function addExtra(){let n=prompt('Aadat ka naam:');if(n){extraHabits.push({name:n,done:false});save();render();}}
-function resetNoFap(){if(confirm('Reset NoFap?')){nofapStart=new Date().toISOString();save();render();}}
-function addDay(){let d=new Date(nofapStart);d.setDate(d.getDate()-1);nofapStart=d.toISOString();save();render();}
-setInterval(render,1000);
+function resetNofap(){if(confirm('NoFap reset?')){nofap=new Date().toISOString();save();render();}}
+setInterval(()=>{document.getElementById('liveClock').innerText=new Date().toLocaleTimeString();},1000);
+document.getElementById('note1').addEventListener('input',save);document.getElementById('note2').addEventListener('input',save);
 render();
 </script>
 </body>
