@@ -2,88 +2,150 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KIYOTAKA | White Room</title>
+<title>AYANOKOJI PROTOCOL - PRIVATE</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 <style>
-body{font-family:'Space Grotesk',sans-serif;background:#080808;color:#e5e5e5;overflow-x:hidden}
-.mono{font-family:'JetBrains Mono',monospace}
-.glass{background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08)}
-.ayanokoji-bg{background:radial-gradient(circle at 50% 0%, #1a1a1a 0%, #080808 70%)}
-.click-card{transition:0.3s;cursor:pointer}
-.click-card:hover{transform:translateY(-4px) scale(1.02);border-color:#fff;box-shadow:0 10px 40px rgba(255,255,255,0.1)}
-.modal{display:none}.modal.active{display:flex}
+body{background:#020a0f;color:#c0f0ff;font-family:'JetBrains Mono',monospace}
+.orbit{font-family:'Orbitron'}
+.glass{background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.2);backdrop-filter:blur(10px)}
+.active-block{background:rgba(0,229,255,0.15)!important;border-color:#00e5ff!important;box-shadow:0 0 20px rgba(0,229,255,0.4)}
+.done-block{opacity:0.4;text-decoration:line-through;background:rgba(255,255,255,0.05)!important}
 </style>
 </head>
-<body class="ayanokoji-bg">
-
-<nav class="flex justify-between items-center p-6 mono text-[11px] tracking-[0.3em] text-zinc-500">
-<div>WHITE ROOM // SUBJECT 001</div>
-<div class="flex gap-6"><span class="text-white">KIYOTAKA AYANOKOJI</span><span id="clock"></span></div>
-</nav>
-
-<section class="min-h-[85vh] flex flex-col justify-center items-center text-center px-6">
-<h1 class="text-[15vw] leading-[0.8] font-bold tracking-tighter opacity-10">AYANOKOJI</h1>
-<div class=" -mt-[8vw] relative">
-<img src="https://i.pinimg.com/736x/3a/23/88/3a2388a2f0a2e1a1e1c0f3a5a3e5e2a1a.jpg" onerror="this.src='https://wallpapercave.com/wp/wp11254318.jpg'" class="w-[300px] h-[400px] object-cover grayscale mx-auto rounded-[20px] border border-zinc-800">
-<div class="absolute inset-0 bg-gradient-to-t from-[#080808] to-transparent rounded-[20px]"></div>
-<div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90%] glass rounded-2xl p-4">
-<p class="mono text-[10px] text-zinc-400">STATUS: FLAWLESS // WIN RATE: 100%</p>
-<h2 class="text-2xl mt-1">I don't care if I win or lose.<br><span class="text-zinc-500">I just want to win.</span></h2>
+<body class="p-3 md:p-6">
+<div class="max-w-5xl mx-auto">
+<div class="flex flex-wrap justify-between items-center gap-4 border border-cyan-500/30 p-4 rounded-xl mb-6">
+<div>
+<h1 class="orbit text-xl md:text-3xl text-cyan-300">AYANOKOJI <span class="text-white" id="dayTitle">DAILY PROTOCOL</span></h1>
+<p class="text-[10px] tracking-[0.3em] mt-1">STATUS: ACTIVE | MODE: DISCIPLINE | EFFICIENCY: 99.8%</p>
 </div>
+<div class="flex gap-3">
+<div class="glass px-4 py-2 rounded-lg text-center"><p class="text-[9px]">LVL</p><p class="text-xl font-bold" id="lvl">1</p></div>
+<div class="glass px-4 py-2 rounded-lg text-center"><p class="text-[9px]">XP</p><p class="text-xl font-bold" id="xp">0</p></div>
+<div class="glass px-4 py-2 rounded-lg text-center border-white/30"><p class="text-[9px]">NOFAP</p><p class="text-xl font-bold" id="nofap">0D</p></div>
 </div>
-<div class="flex gap-3 mt-10">
-<button onclick="openModal('mastermind')" class="bg-white text-black px-8 py-3 rounded-full mono text-xs tracking-widest hover:bg-zinc-200">MASTERMIND [CLICK]</button>
-<button onclick="openModal('quote')" class="glass px-8 py-3 rounded-full mono text-xs tracking-widest">QUOTES</button>
-</div>
-</section>
-
-<section class="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 max-w-6xl mx-auto">
-<div onclick="openModal('past')" class="click-card glass rounded-[24px] p-8 h-[220px] flex flex-col justify-between">
-<span class="mono text-[10px] text-zinc-500">01 / PAST</span>
-<h3 class="text-3xl">White Room<br>Origin</h3><p class="mono text-xs text-zinc-400">Click to decrypt →</p>
-</div>
-<div onclick="openModal('ability')" class="click-card glass rounded-[24px] p-8 h-[220px] flex flex-col justify-between border border-white/20">
-<span class="mono text-[10px] text-zinc-500">02 / ABILITY</span>
-<h3 class="text-3xl">IQ, EQ,<br>Everything</h3><p class="mono text-xs text-white">Click to analyze →</p>
-</div>
-<div onclick="openModal('philosophy')" class="click-card glass rounded-[24px] p-8 h-[220px] flex flex-col justify-between">
-<span class="mono text-[10px] text-zinc-500">03 / PHILOSOPHY</span>
-<h3 class="text-3xl">Human<br>Equality?</h3><p class="mono text-xs text-zinc-400">Click to view →</p>
-</div>
-</section>
-
-<!-- MODALS -->
-<div id="mastermind" class="modal fixed inset-0 bg-black/90 backdrop-blur-xl z-50 justify-center items-center p-6">
-<div class="glass max-w-2xl w-full rounded-[24px] p-10 relative"><button onclick="closeModal('mastermind')" class="absolute top-6 right-6 mono text-xs">CLOSE [X]</button>
-<h2 class="text-5xl font-bold">The Mastermind</h2><p class="mono text-sm text-zinc-400 mt-6 leading-relaxed">Main kabhi lead nahi karta. Main sabko lead karwata hu. Har kisi ko lagta hai wo apna game khel raha hai, par board mera hai. Class D se Class A tak, sab mere ishare pe.</p><div class="mt-8 grid grid-cols-3 gap-4 mono text-[11px]"><div class="glass p-4 rounded-xl">MANIPULATION: 100%</div><div class="glass p-4 rounded-xl">STRATEGY: 100%</div><div class="glass p-4 rounded-xl">DETECTION: 0%</div></div></div>
 </div>
 
-<div id="past" class="modal fixed inset-0 bg-black/90 backdrop-blur-xl z-50 justify-center items-center p-6">
-<div class="glass max-w-2xl w-full rounded-[24px] p-10 relative"><button onclick="closeModal('past')" class="absolute top-6 right-6 mono text-xs">CLOSE [X]</button>
-<h2 class="text-5xl font-bold">White Room</h2><p class="mono text-sm text-zinc-400 mt-6 leading-relaxed">Jahan bachpan khatam ho jata hai aur experiment shuru. 4 saal ki umar se sirf ek hi cheez sikhayi gayi - Perfect banna. Dard, pyaar, dosti, ye sab fail hue experiments hain.</p><img src="https://i.imgur.com/8Km9tLL.gif" class="mt-6 rounded-xl w-full h-48 object-cover grayscale opacity-50"></div>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="md:col-span-2">
+<div class="flex justify-between items-center mb-4">
+<h2 class="orbit text-cyan-400">DAILY PROTOCOL - <span id="todayName"></span></h2>
+<p class="text-[10px]" id="liveTime"></p>
+</div>
+<div id="scheduleList" class="space-y-2"></div>
 </div>
 
-<div id="ability" class="modal fixed inset-0 bg-black/90 backdrop-blur-xl z-50 justify-center items-center p-6">
-<div class="glass max-w-2xl w-full rounded-[24px] p-10 relative"><button onclick="closeModal('ability')" class="absolute top-6 right-6 mono text-xs">CLOSE [X]</button>
-<h2 class="text-5xl font-bold">Stats</h2><div class="mt-8 space-y-4 mono text-xs"><div><div class="flex justify-between"><span>INTELLIGENCE</span><span>100/100</span></div><div class="w-full h-1 bg-zinc-800 mt-2"><div class="h-1 bg-white w-full"></div></div></div><div><div class="flex justify-between"><span>PHYSICAL</span><span>98/100</span></div><div class="w-full h-1 bg-zinc-800 mt-2"><div class="h-1 bg-white w-[98%]"></div></div></div><div><div class="flex justify-between"><span>MANIPULATION</span><span>999/100</span></div><div class="w-full h-1 bg-zinc-800 mt-2"><div class="h-1 bg-white w-full"></div></div></div></div></div>
+<div class="space-y-4">
+<div class="glass rounded-xl p-5 border-cyan-400/50">
+<h3 class="orbit text-sm text-cyan-300">PRIVATE: NO MASTURBATION</h3>
+<p class="text-[10px] text-zinc-400 mt-2">Sirf tere browser me save hai, koi aur nahi dekh sakta.</p>
+<h2 class="text-5xl font-bold mt-3" id="nofapBig">0</h2><p class="text-[11px]">DAYS CLEAN</p>
+<div class="flex gap-2 mt-4">
+<button onclick="resetNoFap()" class="bg-cyan-400 text-black text-[10px] px-4 py-2 rounded-full font-bold">RELAPSE / RESET</button>
+<button onclick="addDay()" class="glass text-[10px] px-4 py-2 rounded-full">+1 DAY</button>
+</div>
 </div>
 
-<div id="quote" class="modal fixed inset-0 bg-black/90 backdrop-blur-xl z-50 justify-center items-center p-6">
-<div class="glass max-w-2xl w-full rounded-[24px] p-10 relative"><button onclick="closeModal('quote')" class="absolute top-6 right-6 mono text-xs">CLOSE [X]</button>
-<h2 class="text-5xl font-bold">Quotes</h2><p class="text-2xl mt-8 italic">"All people are nothing but tools. It doesn't matter how you do it. It doesn't matter what you need to sacrifice. In this world, winning is everything."</p><p class="mono text-xs text-zinc-500 mt-6">- Click anywhere to get new quote</p></div>
+<div class="glass rounded-xl p-5">
+<h3 class="orbit text-xs">ADAT TRACKER (Extra)</h3>
+<div id="habitExtra" class="mt-3 space-y-2"></div>
+<button onclick="addExtra()" class="text-[10px] text-zinc-500 mt-3">+ Add Aadat</button>
 </div>
 
-<div id="philosophy" class="modal fixed inset-0 bg-black/90 backdrop-blur-xl z-50 justify-center items-center p-6">
-<div class="glass max-w-2xl w-full rounded-[24px] p-10 relative"><button onclick="closeModal('philosophy')" class="absolute top-6 right-6 mono text-xs">CLOSE [X]</button>
-<h2 class="text-5xl font-bold">Philosophy</h2><p class="mono text-sm text-zinc-400 mt-6 leading-relaxed">Sab log equal hain? Jhooth. Duniya me winner aur loser hote hain. Equal hona ek bahana hai jo losers ne banaya hai taaki unhe kam mehnat karni pade. Main is jhooth ko tod dunga.</p></div>
+<div class="glass rounded-xl p-4 text-[10px] text-zinc-500 leading-relaxed">
+REMINDER<br>CONSISTENCY IS THE COMPOUND INTEREST OF DISCIPLINE<br>STAY SILENT - STAY DISCIPLINED<br>EXECUTE TODAY
+</div>
+</div>
+</div>
 </div>
 
 <script>
-function openModal(id){document.getElementById(id).classList.add('active')}
-function closeModal(id){document.getElementById(id).classList.remove('active')}
-setInterval(()=>{document.getElementById('clock').innerText=new Date().toLocaleTimeString()},1000)
-document.addEventListener('click',e=>{if(e.target.classList.contains('modal'))e.target.classList.remove('active')})
+const dailyProtocol=[
+{time:"05:20 AM",title:"UTHNA",quote:"Winners don't wait for sunrise. They become it.",start:320,end:320},
+{time:"05:20-06:30 AM",title:"MORNING REVISION",quote:"While they dream, you sharpen.",start:320,end:390},
+{time:"06:30 AM-01:10 PM",title:"SCHOOL",quote:"Don't attend the class. Dominate it.",start:390,end:790},
+{time:"01:10-02:00 PM",title:"POWER NAP + LUNCH",quote:"Even a machine needs recharge. Rest is strategy.",start:790,end:840},
+{time:"02:00-04:50 PM",title:"DEEP STUDY",quote:"Distraction is a choice. Excellence is also a choice.",start:840,end:1010},
+{time:"04:50-06:15 PM",title:"WORKOUT",quote:"Weak body, weak mind. Pain is just data.",start:1010,end:1095},
+{time:"06:15-07:30 PM",title:"CODING & CHESS",quote:"The world is a chessboard. Learn to move before they do.",start:1095,end:1170},
+{time:"07:30-08:00 PM",title:"FRESH RESET",quote:"Emotions cloud judgment. Wash them away.",start:1170,end:1200},
+{time:"08:00-10:00 PM",title:"HOMEWORK & DINNER",quote:"Leave nothing for tomorrow.",start:1200,end:1320},
+{time:"10:00 PM",title:"SLEEP",quote:"Sleep is not escape. It's preparation for war.",start:1320,end:1439},
+];
+
+const sundayProtocol=[
+{time:"05:20 AM",title:"UTHNA",quote:"Discipline starts when motivation ends.",start:320,end:320},
+{time:"05:20-06:30 AM",title:"MORNING REVISION",quote:"First hour decides the whole day.",start:320,end:390},
+{time:"06:30-08:30 AM",title:"STUDY BLOCK 1: HARD SUBJECT",quote:"Attack your weakness before it attacks you.",start:390,end:510},
+{time:"08:30-09:00 AM",title:"BREAKFAST",quote:"Fuel your body like you fuel your ambition.",start:510,end:540},
+{time:"09:00-11:30 AM",title:"STUDY BLOCK 2",quote:"Silence + Focus = Fear for others.",start:540,end:690},
+{time:"11:30 AM-12:30 PM",title:"CODING / CHESS",quote:"If you can't control the game, you are the pawn.",start:690,end:750},
+{time:"12:30-01:00 PM",title:"BREAK",quote:"Pause, but never lose momentum.",start:750,end:780},
+{time:"01:00-01:30 PM",title:"LUNCH",quote:"Eat, don't waste. Time is currency.",start:780,end:810},
+{time:"01:30-02:00 PM",title:"POWER NAP",quote:"20 minutes of sleep can save 2 hours of failure.",start:810,end:840},
+{time:"02:00-04:30 PM",title:"STUDY BLOCK 3: WEEK REVISION",quote:"Revision is not repeating. It's dominating.",start:840,end:990},
+{time:"04:30-06:00 PM",title:"SPORTS GROUND",quote:"A strong mind lives in a strong body.",start:990,end:1080},
+{time:"07:00-09:00 PM",title:"NEXT WEEK PLANNING + EASY REVISION",quote:"The future belongs to those who plan it today.",start:1140,end:1260},
+{time:"09:00-09:30 PM",title:"DINNER",quote:"End the day without debt.",start:1260,end:1290},
+{time:"09:30-10:00 PM",title:"DIARY MISTAKE LOG",quote:"Note your failures. They are your real teachers.",start:1290,end:1320},
+{time:"10:00 PM",title:"SLEEP",quote:"Sleep like a weapon is being reloaded.",start:1320,end:1439},
+];
+
+let xp=parseInt(localStorage.getItem('ak_xp')||'0');
+let lvl=parseInt(localStorage.getItem('ak_lvl')||'1');
+let nofapStart=localStorage.getItem('ak_nofap')||new Date().toISOString();
+let extraHabits=JSON.parse(localStorage.getItem('ak_extra')||'[{"name":"Meditation","done":false},{"name":"No Junk","done":false}]');
+let todayKey=new Date().toDateString();
+let completed=JSON.parse(localStorage.getItem('ak_done_'+todayKey)||'[]');
+
+function getProtocol(){
+let d=new Date().getDay();
+return d===0?sundayProtocol:dailyProtocol;
+}
+
+function save(){localStorage.setItem('ak_xp',xp);localStorage.setItem('ak_lvl',lvl);localStorage.setItem('ak_nofap',nofapStart);localStorage.setItem('ak_extra',JSON.stringify(extraHabits));localStorage.setItem('ak_done_'+todayKey,JSON.stringify(completed));}
+
+function render(){
+let proto=getProtocol();
+let now=new Date();let mins=now.getHours()*60+now.getMinutes();
+document.getElementById('todayName').innerText=now.toLocaleDateString('en-US',{weekday:'long'}).toUpperCase();
+document.getElementById('dayTitle').innerText=now.getDay()===0?'SUNDAY PROTOCOL':'DAILY PROTOCOL';
+document.getElementById('liveTime').innerText=now.toLocaleTimeString();
+document.getElementById('xp').innerText=xp;
+document.getElementById('lvl').innerText=lvl;
+let days=Math.floor((now-new Date(nofapStart))/(1000*60*60*24));
+document.getElementById('nofap').innerText=days+'D';
+document.getElementById('nofapBig').innerText=days;
+
+let list=document.getElementById('scheduleList');list.innerHTML='';
+proto.forEach((p,i)=>{
+let isDone=completed.includes(i);
+let isActive=mins>=p.start && mins<=p.end &&!isDone;
+let cls=`glass rounded-xl p-4 flex justify-between items-center cursor-pointer transition ${isDone?'done-block':''} ${isActive?'active-block':''}`;
+list.innerHTML+=`<div class="${cls}" onclick="toggle(${i})"><div><p class="text-[11px] text-cyan-300">${p.time}</p><p class="font-bold text-sm mt-1">${p.title}</p><p class="text-[10px] text-zinc-400 italic">${p.quote}</p></div><div class="text-[10px]">${isDone?'✅ DONE':'+25 XP'}</div></div>`;
+});
+
+let eh=document.getElementById('habitExtra');eh.innerHTML='';
+extraHabits.forEach((h,i)=>{
+eh.innerHTML+=`<div onclick="toggleExtra(${i})" class="flex justify-between glass p-3 rounded-lg cursor-pointer ${h.done?'done-block':''}"><span class="text-xs">${h.name}</span><span class="text-[10px]">${h.done?'✅':'+15 XP'}</span></div>`;
+});
+}
+
+function toggle(i){
+if(completed.includes(i)){completed=completed.filter(x=>x!==i);xp=Math.max(0,xp-25);}else{completed.push(i);xp+=25;if(xp>=100){lvl++;xp=0;alert('LEVEL UP! LVL '+lvl+' - White Room approves.');}}
+save();render();
+}
+function toggleExtra(i){
+if(!extraHabits[i].done){extraHabits[i].done=true;xp+=15;}else{extraHabits[i].done=false;xp=Math.max(0,xp-15);}
+if(xp>=100){lvl++;xp=0;}
+save();render();
+}
+function addExtra(){let n=prompt('Aadat ka naam:');if(n){extraHabits.push({name:n,done:false});save();render();}}
+function resetNoFap(){if(confirm('Reset NoFap?')){nofapStart=new Date().toISOString();save();render();}}
+function addDay(){let d=new Date(nofapStart);d.setDate(d.getDate()-1);nofapStart=d.toISOString();save();render();}
+setInterval(render,1000);
+render();
 </script>
 </body>
 </html>
