@@ -21,7 +21,16 @@
 </style>
 </head>
 <body class="p-3 pb-12 max-w-[580px] mx-auto">
-
+<div id="startScreen" class="fixed inset-0 bg-[#07070a] z-[999] flex flex-col justify-center items-center p-6 text-center">
+<p class="text-[10px] tracking-[0.5em] text-zinc-500">WHITE ROOM PROTOCOL // WR-001</p>
+<h1 class="orbit text-[28px] tracking-[0.2em] mt-4">WHITE ROOM<br><span class="text-red-500">PROTOCOL</span></h1>
+<p class="text-[11px] text-zinc-400 mt-6 max-w-[320px] leading-relaxed">30 Days. No Excuses. Discipline is Law.<br>Tu Class D hai. Class S tak jaana hai.</p>
+<div class="mt-10 w-full max-w-[340px] space-y-3">
+<button onclick="startProtocol()" class="w-full bg-[#f5e6b8] text-black rounded-[16px] py-5 font-black tracking-[0.2em] text-[14px] orbit">START PROTOCOL → DAY 01</button>
+<button onclick="resetAll()" class="w-full bg-zinc-900 text-zinc-500 rounded-[14px] py-3 text-[10px]">RESET ALL PROGRESS</button>
+</div>
+<p class="text-[8px] text-zinc-600 mt-8">SUBJECT: AYANOKOJI // EFFICIENCY: 0%</p>
+</div>
 <div class="flex justify-between items-start">
 <div>
 <p class="text-[9px] tracking-[0.4em] text-zinc-500">CLASSROOM OF THE ELITE // EXPERIMENT 01</p>
@@ -345,6 +354,23 @@ document.getElementById('n1').addEventListener('input',save);
 document.getElementById('n2').addEventListener('input',save);
 
 render();
+function startProtocol(){
+  document.getElementById('startScreen').style.display='none';
+  localStorage.setItem('WR_STARTED','true');
+  render();
+}
+
+function resetAll(){
+  if(confirm('Pura restart karna hai?')){
+    localStorage.clear();
+    location.reload();
+  }
+}
+
+// Agar pehle se start kiya hai to START SCREEN mat dikha
+if(localStorage.getItem('WR_STARTED') === 'true'){
+  document.getElementById('startScreen').style.display='none';
+}
 </script>
 </body>
 </html>
