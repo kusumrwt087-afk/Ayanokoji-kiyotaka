@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WHITE ROOM - 30 Days Protocol</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--white:#fafafb;--black:#07070b;--gold:#e8d5a3;--line:#1c1c26}
+body{background:var(--black);color:var(--white);font-family:'Space Grotesk',sans-serif;overflow-x:hidden}
+.mono{font-family:'JetBrains Mono',monospace}
+#bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(800px at 20% 10%,#141422 0%,transparent 60%),radial-gradient(600px at 90% 90%,#1e1e2f 0%,transparent 60%),#07070b}
+.nav{display:flex;justify-content:space-between;padding:22px 28px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(7,7,11,0.8);backdrop-filter:blur(20px);z-index:10}
+.hero{padding:60px 28px 30px;max-width:1100px;margin:0 auto}
+.hero h1{font-size:clamp(40px,9vw,110px);line-height:0.85;letter-spacing:-4px;font-weight:700}
+.hero h1 span{color:var(--gold);font-weight:300;font-style:italic}
+.subhero{display:flex;gap:20px;margin-top:24px;flex-wrap:wrap}
+.pill{border:1px solid var(--line);padding:8px 14px;border-radius:999px;font-size:11px;letter-spacing:2px}
+.grid-wrap{max-width:1100px;margin:0 auto;padding:20px 20px 120px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:18px}
+@media(max-width:900px){.grid-wrap{grid-template-columns:1fr}}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.01));border:1px solid var(--line);border-radius:24px;padding:22px;backdrop-filter:blur(10px);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.6}
+.progress-ring{width:180px;height:180px;border-radius:50%;background:conic-gradient(var(--gold) var(--p,0%),#1a1a26 0);display:grid;place-items:center;padding:8px;margin:0 auto}
+.progress-inner{width:100%;height:100%;background:var(--black);border-radius:50%;display:grid;place-items:center}
+.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:10px;margin-top:14px}
+.day{aspect-ratio:1;border:1px solid var(--line);border-radius:18px;background:#0e0e15;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:all.4s cubic-bezier(.16,1,.3,1)}
+.day:hover{transform:translateY(-3px) scale(1.02);border-color:#2a2a3a}
+.day.done{background:var(--gold);color:#000;border-color:var(--gold);box-shadow:0 10px 30px rgba(232,213,163,0.25)}
+.day.active{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.tick{width:36px;height:36px;border-radius:10px;border:1px solid #2a2a3a;display:grid;place-items:center;cursor:pointer;transition:.3s}
+.tick.on{background:var(--gold);color:#000;border-color:var(--gold)}
+input,textarea{width:100%;background:#0c0c12;border:1px solid #1f1f2b;border-radius:12px;padding:12px;color:#fff;outline:none;font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:8px}
+.btn{width:100%;padding:14px;border-radius:14px;border:none;background:var(--white);color:#000;font-weight:700;letter-spacing:2px;cursor:pointer}
+.white-room{position:relative;height:220px;border-radius:20px;background:linear-gradient(180deg,#f7f7f8,#cfcfd6);overflow:hidden;margin-bottom:18px;display:grid;place-items:center;color:#000}
+.white-room.door{position:absolute;inset:40px;border:1px solid rgba(0,0,0,0.15);border-radius:12px}
+.white-room.light{position:absolute;top:-50%;left:50%;width:1px;height:200%;background:linear-gradient(transparent,rgba(0,0,0,0.15),transparent);animation:scan 4s linear infinite}
+@keyframes scan{from{transform:translateX(-200px)}to{transform:translateX(200px)}}
+.bar{height:6px;background:#11111a;border-radius:999px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:var(--gold);width:0%;transition:width.8s ease}
+</style>
+</head>
+<body>
+<div id="bg"></div>
+<div class="nav mono"><div>WHITE ROOM // PROJECT KIYOTAKA</div><div id="clock">00:00</div></div>
+<div class="hero"><h1>DISCIPLINE IS <br><span>NOT A CHOICE.</span></h1><div class="subhero mono"><div class="pill">30 DAYS PROTOCOL</div><div class="pill">NO EMOTION / NO CHEATING</div><div class="pill" id="livePercent">0% COMPLETE</div></div></div>
+<div class="grid-wrap">
+<div>
+<div class="card">
+<div class="white-room"><div class="door"></div><div class="light"></div><div style="z-index:2;text-align:center"><div class="mono" style="font-size:10px;letter-spacing:4px;opacity:.5">SUBJECT 01</div><div style="font-size:32px;font-weight:700">AYANOKOJI</div><div class="mono" style="font-size:10px;opacity:.6">WHITE ROOM ACTIVE</div></div></div>
+<div style="display:flex;justify-content:space-between"><h3 class="mono" style="letter-spacing:3px;font-size:12px">PROGRESS MATRIX</h3><span class="mono" style="font-size:11px;color:#888">DAY <span id="cur">1</span>/30</span></div>
+<div class="days" id="days"></div><div class="bar"><i id="bar"></i></div>
+</div>
+<div class="card" style="margin-top:18px">
+<h3 class="mono" style="font-size:12px;letter-spacing:3px;margin-bottom:10px">TODAY'S PROTOCOL // <span id="dayLabel">DAY 01</span></h3>
+<div id="tasks"></div>
+<div style="margin-top:14px"><textarea id="win" rows="2" placeholder="1 CALM WIN..."></textarea><textarea id="obs" rows="2" placeholder="OBSERVATION LOG..."></textarea><button class="btn mono" style="margin-top:12px" onclick="save()">LOCK DAY → NEXT</button></div>
+</div>
+</div>
+<div>
+<div class="card" style="text-align:center"><div class="progress-ring" id="ring"><div class="progress-inner"><div style="font-size:42px;font-weight:700" id="pct">0%</div><div class="mono" style="font-size:9px;opacity:.5">COMPLETION</div><div class="mono" style="font-size:10px;margin-top:6px;color:#e8d5a3" id="rank">CLASS D</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px" class="mono"><div style="background:#0e0e15;border:1px solid #1c1c26;border-radius:12px;padding:10px"><div style="font-size:18px" id="doneN">0</div><div style="font-size:8px;opacity:.5">DAYS DONE</div></div><div style="background:#0e0e15;border:1px solid #1c1c26;border-radius:12px;padding:10px"><div style="font-size:18px" id="honestN">100%</div><div style="font-size:8px;opacity:.5">HONESTY</div></div></div></div>
+<div class="card" style="margin-top:18px"><h3 class="mono" style="font-size:12px;letter-spacing:3px;margin-bottom:14px">WHITE ROOM RULES</h3><div style="font-size:13px;line-height:1.6">01 - 10 Sec Reset mandatory<br>02 - No Emotion Reaction<br>03 - 1 Calm Win Daily<br>04 - Observe Don't Absorb<br>05 - No Cheating, Proof Required</div></div>
+<div class="card" style="margin-top:18px"><h3 class="mono" style="font-size:12px;letter-spacing:3px">EVIDENCE WALL</h3><div id="wall" style="margin-top:12px;display:flex;flex-direction:column;gap:10px"></div></div>
+</div>
+</div>
+<script>
+const TASK_LIST=["10 Sec Reset kiya","Bina gusse ke 1 question","1 observation note","30 min deep work no phone","Kisi se behes nahi ki"];
+let cur=parseInt(localStorage.getItem('wr_cur')||'1');let db=JSON.parse(localStorage.getItem('wr_db')||'{}');
+function renderDays(){let c=document.getElementById('days');c.innerHTML='';for(let i=1;i<=30;i++){let d=document.createElement('div');d.className='day';if(db[i])d.classList.add('done');if(i==cur)d.classList.add('active');d.innerHTML=`<b>${String(i).padStart(2,'0')}</b><i style="font-size:8px">${db[i]?'LOCKED':'PENDING'}</i>`;d.onclick=()=>{cur=i;localStorage.setItem('wr_cur',cur);renderAll();};c.appendChild(d);}}
+function renderTasks(){let box=document.getElementById('tasks');box.innerHTML='';let rec=db[cur]||{checks:[]};TASK_LIST.forEach((t,idx)=>{let row=document.createElement('div');row.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #15151f';row.innerHTML=`<div style="display:flex;gap:10px;align-items:center"><div class="tick ${rec.checks?.includes(idx)?'on':''}" data-i="${idx}">${rec.checks?.includes(idx)?'✓':''}</div><div style="font-size:13px">${t}</div></div>`;box.appendChild(row);});box.querySelectorAll('.tick').forEach(el=>{el.onclick=()=>{let i=parseInt(el.dataset.i);let r=db[cur]||{checks:[]};if(r.checks.includes(i))r.checks=r.checks.filter(x=>x!==i);else r.checks.push(i);db[cur]=r;localStorage.setItem('wr_db',JSON.stringify(db));renderAll();}});}
+function renderAll(){document.getElementById('cur').innerText=cur;document.getElementById('dayLabel').innerText='DAY '+String(cur).padStart(2,'0');let rec=db[cur]||{};document.getElementById('win').value=rec.win||'';document.getElementById('obs').value=rec.obs||'';let total=Object.keys(db).length;let totalChecks=0;Object.values(db).forEach(v=>{totalChecks+=(v.checks?.length||0)});let pct=Math.round((total/30)*100);let honest=total===0?100:Math.round((totalChecks/(total*5))*100);document.getElementById('pct').innerText=pct+'%';document.getElementById('doneN').innerText=total;document.getElementById('honestN').innerText=honest+'%';document.getElementById('bar').style.width=pct+'%';document.getElementById('livePercent').innerText=pct+'% COMPLETE';document.getElementById('ring').style.setProperty('--p',pct+'%');let rank='CLASS D';if(pct>=40)rank='CLASS C';if(pct>=60)rank='CLASS B';if(pct>=85)rank='CLASS A';if(pct>=100)rank='AYANOKOJI';document.getElementById('rank').innerText=rank;renderDays();renderTasks();renderWall();}
+function renderWall(){let w=document.getElementById('wall');w.innerHTML='';let keys=Object.keys(db).sort((a,b)=>b-a);if(!keys.length){w.innerHTML='<div class="mono" style="font-size:11px;opacity:.3">No evidence yet.</div>';return}keys.forEach(k=>{let r=db[k];let div=document.createElement('div');div.style.cssText='background:#0e0e15;border:1px solid #1f1f2b;border-left:2px solid #e8d5a3;padding:10px;border-radius:10px';div.innerHTML=`<div class="mono" style="font-size:10px;opacity:.6">DAY ${k} // ${r.checks?.length||0}/5</div><div style="font-size:12px"><b>WIN:</b> ${r.win||'-'}</div>`;w.appendChild(div);});}
+function save(){let win=document.getElementById('win').value.trim();let checks=db[cur]?.checks||[];if(checks.length<3){alert('Kam se kam 3 tick kar.');return}if(!win){alert('WIN likh.');return}db[cur]={...(db[cur]||{}),win,obs:document.getElementById('obs').value,date:new Date().toLocaleDateString(),checks};localStorage.setItem('wr_db',JSON.stringify(db));if(cur<30){cur++;localStorage.setItem('wr_cur',cur);}renderAll();}
+setInterval(()=>{document.getElementById('clock').innerText=new Date().toLocaleTimeString();},1000);renderAll();
+</script>
+</body>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       </html>
