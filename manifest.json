@@ -5,11 +5,17 @@
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
+  "description": "The Masterpiece of White Room",
   "icons": [
     {
-      "src": "IMG-20260901-WA2056.jpg",
-      "sizes": "1600x1600",
-      "type": "image/jpeg"
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ]
 }
