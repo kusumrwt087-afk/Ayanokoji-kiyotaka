@@ -61,28 +61,62 @@
      .glow-red { text-shadow: 0 0 15px rgba(255,60,60,0.8) }
     </style>
 </head>
+
 <body class="p-3 pb-12 max-w-[580px] mx-auto">
+
+    <!-- START SCREEN - PEHLE YAHI AYEGA -->
     <div id="startScreen" class="fixed inset-0 bg-[#07070a] z-[999] flex flex-col justify-center items-center p-6 text-center">
-        <p class="text-[10px] tracking-[0.5em] text-zinc-500">WHITE ROOM PROTOCOL // WR-001</p>
-        <h1 class="orbit text-[28px] tracking-[0.2em] mt-4">WHITE ROOM<br><span class="text-red-500">PROTOCOL</span></h1>
-        <p class="text-[11px] text-zinc-400 mt-6 max-w-[320px] leading-relaxed">30 Days. No Excuses. Discipline is Law.<br>Tu Class D hai. Class S tak jaana hai.</p>
+        <p class="text-[10px] tracking-[0.5em] text-zinc-500">
+            WHITE ROOM PROTOCOL // WR-001
+        </p>
+        <h1 class="orbit text-[28px] tracking-[0.2em] mt-4">
+            WHITE ROOM<br>
+            <span class="text-red-500">PROTOCOL</span>
+        </h1>
+        <p class="text-[11px] text-zinc-400 mt-6 max-w-[320px] leading-relaxed">
+            30 Days. No Excuses. Discipline is Law.<br>
+            Tu Class D hai. Class S tak jaana hai.
+        </p>
         <div class="mt-10 w-full max-w-[340px] space-y-3">
-            <button onclick="startProtocol()" class="w-full bg-[#f5e6b8] text-black rounded-[16px] py-5 font-black tracking-[0.2em] text-[14px] orbit">START PROTOCOL → DAY 01</button>
-            <button onclick="resetAll()" class="w-full bg-zinc-900 text-zinc-500 rounded-[14px] py-3 text-[10px]">RESET ALL PROGRESS</button>
+            <button onclick="startProtocol()" class="w-full bg-[#f5e6b8] text-black rounded-[16px] py-5 font-black tracking-[0.2em] text-[14px] orbit">
+                START PROTOCOL → DAY 01
+            </button>
+            <button onclick="resetAll()" class="w-full bg-zinc-900 text-zinc-500 rounded-[14px] py-3 text-[10px]">
+                RESET ALL PROGRESS
+            </button>
         </div>
+        <p class="text-[8px] text-zinc-600 mt-8">
+            SUBJECT: AYANOKOJI // EFFICIENCY: 0%
+        </p>
     </div>
+
+    <!-- HEADER -->
     <div class="flex justify-between items-start">
         <div>
-            <p class="text-[9px] tracking-[0.4em] text-zinc-500">CLASSROOM OF THE ELITE // EXPERIMENT 01</p>
-            <h1 class="orbit text-[16px] tracking-[0.18em] mt-1.5">WHITE ROOM <span class="text-red-500 glow-red">PROTOCOL</span></h1>
-            <p class="text-[8px] tracking-[0.22em] text-zinc-600 mt-2">STATUS: <span class="text-red-400">ACTIVE</span> | ID: WR-001 | MODE: <span class="text-white">INFINITE</span> | EFFICIENCY: <span id="eff" class="text-white">0%</span></p>
+            <p class="text-[9px] tracking-[0.4em] text-zinc-500">
+                CLASSROOM OF THE ELITE // EXPERIMENT 01
+            </p>
+            <h1 class="orbit text-[16px] tracking-[0.18em] mt-1.5">
+                WHITE ROOM <span class="text-red-500 glow-red">PROTOCOL</span>
+            </h1>
+            <p class="text-[8px] tracking-[0.22em] text-zinc-600 mt-2">
+                STATUS: <span class="text-red-400">ACTIVE</span> |
+                ID: WR-001 |
+                MODE: <span class="text-white">INFINITE</span> |
+                EFFICIENCY: <span id="eff" class="text-white">0%</span>
+            </p>
         </div>
         <div class="text-right shrink-0 ml-3">
             <p id="clock" class="text-[12px] font-bold tracking-widest"></p>
-            <p id="classTop" class="orbit text-[11px] text-red-400 mt-1.5 tracking-[0.2em]">CLASS D</p>
-            <p id="xpTop" class="text-[9px] text-zinc-500 mt-1">0 XP</p>
+            <p id="classTop" class="orbit text-[11px] text-red-400 mt-1.5 tracking-[0.2em]">
+                CLASS D
+            </p>
+            <p id="xpTop" class="text-[9px] text-zinc-500 mt-1">
+                0 XP
+            </p>
         </div>
     </div>
+    <!-- MAIN RING -->
     <div class="card card-red p-6 mt-5 text-center relative overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[75%] h-[1px] bg-gradient-to-r from-transparent via-red-500/60 to-transparent"></div>
         <div class="relative w-[220px] h-[220px] mx-auto">
@@ -105,31 +139,25 @@
             <div class="bg-[#1e1e2c] rounded-[15px] p-3 border border-red-500/30"><p class="orbit font-bold text-[19px] text-red-300" id="nofap">0D</p><p class="text-[7px] tracking-[0.2em] text-zinc-500 mt-1">NOFAP CLEAN</p></div>
         </div>
     </div>
+    <!-- TODAY LIVE PROGRESS -->
     <div class="card p-5 mt-4 border-red-500/30 bg-gradient-to-br from-[#1a1a27] to-[#13131d]">
-        <div class="flex justify-between items-center">
-            <p class="orbit text-[11px] tracking-[0.3em]">TODAY'S LIVE PROGRESS // <span id="dayNameTop" class="text-white">MONDAY</span></p>
-            <p class="text-[9px] text-zinc-500" id="liveDate"></p>
-        </div>
+        <div class="flex justify-between items-center"><p class="orbit text-[11px] tracking-[0.3em]">TODAY'S LIVE PROGRESS // <span id="dayNameTop" class="text-white">MONDAY</span></p><p class="text-[9px] text-zinc-500" id="liveDate"></p></div>
         <div class="day-track mt-4"><div id="dayProgressBar" class="day-fill" style="width:0%"></div></div>
         <div class="grid grid-cols-3 gap-2.5 mt-4">
-            <div class="bg-black/40 rounded-[14px] p-3.5 text-center border border-white/10"><p id="dayPercent" class="orbit text-[22px] font-black">0%</p><p class="text-[7px] tracking-[0.2em] text-zinc-500 mt-1">DAY COMPLETE</p><p class="text-[8px] text-zinc-600 mt-1" id="doneVsTotal">0/10</p></div>
+            <div class="bg-black/40 rounded-[14px] p-3.5 text-center border border-white/10"><p id="dayPercent" class="orbit text-[22px] font-black">0%</p><p class="text-[7px] tracking-[0.2em] text-zinc-500 mt-1">DAY COMPLETE</p><p class="text-[8px] text-zinc-600 mt-1" id="doneVsTotal">0/29</p></div>
             <div class="bg-black/40 rounded-[14px] p-3.5 text-center border border-white/10"><p id="todayXp" class="orbit text-[22px] font-black text-green-400">0</p><p class="text-[7px] tracking-[0.2em] text-zinc-500 mt-1">XP TODAY</p><p class="text-[8px] text-zinc-600 mt-1">HARD MODE</p></div>
             <div class="bg-black/40 rounded-[14px] p-3.5 text-center border border-white/10"><p id="perfection" class="orbit text-[11px] font-black tracking-widest">POOR</p><p class="text-[7px] tracking-[0.2em] text-zinc-500 mt-1">PERFECTION</p><p id="perfectionEmoji" class="text-[18px] mt-1">💀</p></div>
         </div>
-        <div class="mt-4 bg-black/30 rounded-xl p-3 border border-white/5">
-            <p id="liveStatus" class="text-[10px] leading-relaxed text-zinc-300">Aaj abhi tak kuch start nahi kiya...</p>
-            <div id="goodBad" class="mt-3 space-y-1.5 text-[9px] leading-relaxed"></div>
-        </div>
+        <div class="mt-4 bg-black/30 rounded-xl p-3 border border-white/5"><p id="liveStatus" class="text-[10px] leading-relaxed text-zinc-300">Aaj abhi tak kuch start nahi kiya...</p><div id="goodBad" class="mt-3 space-y-1.5 text-[9px] leading-relaxed"></div></div>
         <button id="holidayBtn" onclick="toggleHoliday()" class="w-full mt-4 border border-dashed border-yellow-500/50 py-3 rounded-[12px] text-[9px] font-bold tracking-[0.25em] text-yellow-500 hover:bg-yellow-500 hover:text-black transition-all">TODAY IS HOLIDAY : OFF</button>
     </div>
+    <!-- INFINITE LOCK SYSTEM -->
     <div class="card p-4 mt-4">
-        <div class="flex justify-between items-center">
-            <p class="text-[10px] tracking-[0.3em]">INFINITE LOCK SYSTEM // <span class="text-red-400">NO LIMIT</span></p>
-            <p class="text-[10px]">DAY <span id="dayNum" class="text-white font-bold">1</span> / <span class="text-red-400">∞</span></p>
-        </div>
+        <div class="flex justify-between items-center"><p class="text-[10px] tracking-[0.3em]">INFINITE LOCK SYSTEM // <span class="text-red-400">NO LIMIT</span></p><p class="text-[10px]">DAY <span id="dayNum" class="text-white font-bold">1</span> / <span class="text-red-400">∞</span></p></div>
         <p class="text-[8px] tracking-widest bg-[#f5e6b8] text-black inline-block px-3 py-1 rounded-full mt-3">SUBJECT: AYANOKOJI // WR-001 // INFINITE</p>
         <div id="matrix" class="grid grid-cols-5 gap-2 mt-4"></div>
     </div>
+    <!-- PROTOCOL LIST -->
     <div class="card p-5 mt-4">
         <p class="orbit text-center text-[13px] tracking-[0.3em]">WHITE ROOM PROTOCOL <span class="text-red-500">[ ELITE POSTER ]</span></p>
         <div class="mt-7"><p class="text-[11px] tracking-[0.3em] text-red-400">01 // 5 HABITS [+15 XP]</p><div id="habits" class="mt-3.5 grid gap-3"></div></div>
@@ -154,27 +182,10 @@
         </div>
     </div>
 <script>
-    const H = [
-        { no:"01", t:"NO SUGAR", d:"No refined sugar.", xp:15 },
-        { no:"02", t:"NO JUNK FOOD", d:"No processed foods.", xp:15 },
-        { no:"03", t:"NO BAD HABITS", d:"Cut procrastination.", xp:15 },
-        { no:"04", t:"DRINK MORE WATER", d:"2-3L daily.", xp:15 },
-        { no:"05", t:"DAILY 20 MIN READING", d:"Input > Output.", xp:15 }
-    ];
+    const H = [{ no:"01", t:"NO SUGAR", d:"No refined sugar.", xp:15 },{ no:"02", t:"NO JUNK FOOD", d:"No processed foods.", xp:15 },{ no:"03", t:"NO BAD HABITS", d:"Cut procrastination.", xp:15 },{ no:"04", t:"DRINK MORE WATER", d:"2-3L daily.", xp:15 },{ no:"05", t:"DAILY 20 MIN READING", d:"Input > Output.", xp:15 }];
     const R = ["01. No Phone","02. Always Calm","03. No Excuse","04. Schedule is Law","05. Detached but Respectful","06. Kam Bolna, Zyada Sunna","07. Everything Secret"];
     const T = ["T1 • 1-3-7-15 Revision","T2 • 25-5 Focus","T3 • Feynman","T4 • Workout Control","T5 • Code By Building","T6 • Mistake Log","T7 • Sleep Lock 10 PM"];
-    const daily = [
-        { ti:"05:20 AM", t:"UTHNA", s:320, e:320, q:"Winners don't wait." },
-        { ti:"05:20-06:30", t:"MORNING REVISION", s:320, e:390, q:"While they dream, you sharpen." },
-        { ti:"06:30-01:10", t:"SCHOOL", s:390, e:790, q:"Don't attend. Dominate." },
-        { ti:"01:10-02:00", t:"POWER NAP + LUNCH", s:790, e:840, q:"Rest is strategy." },
-        { ti:"02:00-04:50", t:"DEEP STUDY", s:840, e:1010, q:"Distraction is a choice." },
-        { ti:"04:50-06:15", t:"WORKOUT", s:1010, e:1095, q:"Pain is just data." },
-        { ti:"06:15-07:30", t:"CODING & CHESS", s:1095, e:1170, q:"World is chessboard." },
-        { ti:"07:30-08:00", t:"FRESH RESET", s:1170, e:1200, q:"Wash emotions away." },
-        { ti:"08:00-10:00", t:"HOMEWORK & DINNER", s:1200, e:1320, q:"Leave nothing for tomorrow." },
-        { ti:"10:00 PM", t:"SLEEP", s:1320, e:1439, q:"Preparation for war." }
-    ];
+    const daily = [{ ti:"05:20 AM", t:"UTHNA", s:320, e:320, q:"Winners don't wait." },{ ti:"05:20-06:30", t:"MORNING REVISION", s:320, e:390, q:"While they dream, you sharpen." },{ ti:"06:30-01:10", t:"SCHOOL", s:390, e:790, q:"Don't attend. Dominate." },{ ti:"01:10-02:00", t:"POWER NAP + LUNCH", s:790, e:840, q:"Rest is strategy." },{ ti:"02:00-04:50", t:"DEEP STUDY", s:840, e:1010, q:"Distraction is a choice." },{ ti:"04:50-06:15", t:"WORKOUT", s:1010, e:1095, q:"Pain is just data." },{ ti:"06:15-07:30", t:"CODING & CHESS", s:1095, e:1170, q:"World is chessboard." },{ ti:"07:30-08:00", t:"FRESH RESET", s:1170, e:1200, q:"Wash emotions away." },{ ti:"08:00-10:00", t:"HOMEWORK & DINNER", s:1200, e:1320, q:"Leave nothing for tomorrow." },{ ti:"10:00 PM", t:"SLEEP", s:1320, e:1439, q:"Preparation for war." }];
     const sunday = [
         { ti:"05:20 AM", t:"WAKE UP", s:320, e:320, q:"Discipline starts when others sleep." },
         { ti:"05:20-07:00", t:"REVISION", s:320, e:420, q:"First revision is real power." },
@@ -193,132 +204,47 @@
     let data = JSON.parse(localStorage.getItem('WR_FINAL_MASTER_FULL_V6') || '{"day":1,"done":[],"xp":0,"today":{"h":[],"r":[],"ta":[],"sc":[]},"holidays":[]}');
     if(!data.holidays) data.holidays = [];
     let nf = localStorage.getItem('WR_NF') || new Date().toISOString();
-    function save() {
-        localStorage.setItem('WR_FINAL_MASTER_FULL_V6', JSON.stringify(data));
-        localStorage.setItem('WR_NF', nf);
-        localStorage.setItem('WR_N1', document.getElementById('n1').value);
-        localStorage.setItem('WR_N2', document.getElementById('n2').value);
+    function save(){localStorage.setItem('WR_FINAL_MASTER_FULL_V6',JSON.stringify(data));localStorage.setItem('WR_NF',nf);localStorage.setItem('WR_N1',document.getElementById('n1').value);localStorage.setItem('WR_N2',document.getElementById('n2').value);}
+    function getCls(xp){let c=ths[0];for(let t of ths) if(xp>=t.xp) c=t;return c;}
+    function getNext(xp){for(let t of ths) if(xp<t.xp) return t;return{n:"MAXIMUM",xp:300000};}
+    function getTodayStr(){let d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+    function toggleHoliday(){let todayStr=getTodayStr();if(data.holidays.includes(todayStr)){data.holidays=data.holidays.filter(d=>d!=todayStr);}else{data.holidays.push(todayStr);}save();render();}
+    function startProtocol(){document.getElementById('startScreen').style.display='none';save();}
+    function penalty(){data.xp=Math.max(0,data.xp-200);save();render();}
+    function restartToday(){data.today={h:[],r:[],ta:[],sc:[]};save();render();}
+    function resetAll(){if(confirm('Pura zero karna hai?')){data={day:1,done:[],xp:0,today:{h:[],r:[],ta:[],sc:[]},holidays:[]};nf=new Date().toISOString();localStorage.clear();save();location.reload();}}
+    function lockDay(){data.done.push(data.day);data.day++;data.xp+=50;data.today={h:[],r:[],ta:[],sc:[]};save();render();}
+    function isActiveTime(sch,mins){let cur=sch.find(s=> mins>=s.s && mins<=s.e);if(cur) return 'NOW: '+cur.t+' — '+cur.q;if(mins<sch[0].s) return 'Day abhi start nahi hua. First task: '+sch[0].t;return 'Saare tasks ka time khatam. Jo bacha hai usse lock kar de.';}
+    function updatePerfectionAndFeedback(perc,completed,sch){
+        let perfEl=document.getElementById('perfection');let emojiEl=document.getElementById('perfectionEmoji');let gb=document.getElementById('goodBad');
+        if(perc<20){perfEl.innerText='POOR';perfEl.className='orbit text-[11px] font-black tracking-widest text-red-500';emojiEl.innerText='💀';}
+        else if(perc<50){perfEl.innerText='AVG';perfEl.className='orbit text-[11px] font-black tracking-widest text-yellow-500';emojiEl.innerText='😐';}
+        else if(perc<80){perfEl.innerText='GOOD';perfEl.className='orbit text-[11px] font-black tracking-widest text-blue-400';emojiEl.innerText='🔥';}
+        else if(perc<100){perfEl.innerText='ELITE';perfEl.className='orbit text-[11px] font-black tracking-widest text-green-400';emojiEl.innerText='⚡';}
+        else{perfEl.innerText='PERFECT';perfEl.className='orbit text-[11px] font-black tracking-widest text-[#f5e6b8]';emojiEl.innerText='👑';}
+        gb.innerHTML='';if(completed===0){gb.innerHTML='<p class="text-red-400">❌ Abhi tak 0 tasks complete. Ayanokoji aise nahi banta.</p>';}
+        else{sch.forEach((s,idx)=>{let done=data.today.sc.includes(idx);let p=document.createElement('p');p.className=done?'text-green-400':'text-zinc-500';p.innerText=(done?'✓ GOOD: ':'○ PENDING: ')+s.t+' ['+s.ti+']';gb.appendChild(p);});}
     }
-    function getCls(xp){ let c=ths[0]; for(let t of ths) if(xp>=t.xp) c=t; return c; }
-    function getNext(xp){ for(let t of ths) if(xp<t.xp) return t; return {n:"MAXIMUM", xp:300000}; }
-    function getTodayStr(){ let d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-    function toggleHoliday(){
-        let todayStr=getTodayStr();
-        if(data.holidays.includes(todayStr)) data.holidays=data.holidays.filter(d=>d!=todayStr);
-        else data.holidays.push(todayStr);
-        save(); render();
+    function render(){
+        let cls=getCls(data.xp);let nxt=getNext(data.xp);
+        document.getElementById('pct').innerText=data.done.length;document.getElementById('pctLabel').innerText="TOTAL DAYS SURVIVED";document.getElementById('rank').innerText=cls.n;document.getElementById('classTop').innerText=cls.n;document.getElementById('xpTop').innerText=data.xp+' XP';document.getElementById('xpNeed').innerText=data.xp+' / '+nxt.xp+' XP → '+nxt.n;document.getElementById('eff').innerText=data.done.length;document.getElementById('dDone').innerText=data.done.length;document.getElementById('xpTotal').innerText=data.xp;document.getElementById('streak').innerText=data.done.length;document.getElementById('dayNum').innerText=data.day;
+        let now=new Date();let mins=now.getHours()*60+now.getMinutes();let todayStr=getTodayStr();let isHoliday=data.holidays.includes(todayStr);let dayName=isHoliday?"SUNDAY (HOLIDAY)":now.toLocaleDateString('en-US',{weekday:'long'}).toUpperCase();
+        document.getElementById('dayName').innerText=dayName;document.getElementById('dayNameTop').innerText=dayName;document.getElementById('liveDate').innerText=now.toLocaleDateString()+(isHoliday?" [HOLIDAY MODE ON]":"");document.getElementById('liveMins').innerText=now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');document.getElementById('clock').innerText=now.toLocaleTimeString();
+        let btn=document.getElementById('holidayBtn');if(isHoliday){btn.innerText='HOLIDAY MODE: ON (CLICK TO OFF)';btn.className='w-full mt-4 bg-yellow-500 text-black py-3 rounded-[12px] text-[9px] font-bold tracking-[0.25em]';}else{btn.innerText='TODAY IS HOLIDAY : OFF';btn.className='w-full mt-4 border border-dashed border-yellow-500/50 py-3 rounded-[12px] text-[9px] font-bold tracking-[0.25em] text-yellow-500 hover:bg-yellow-500 hover:text-black transition-all';}
+        let sch=isHoliday?sunday:daily;if(now.getDay()===0) sch=sunday;
+        let days=Math.floor((now-new Date(nf))/86400000);document.getElementById('nofap').innerText=days+'D';
+        let pctTotal=Math.min(100,Math.floor((data.xp/nxt.xp)*100));document.getElementById('expBar').style.width=pctTotal+'%';let circ=590;let offset=circ-(circ*pctTotal/100);document.getElementById('ring').style.strokeDashoffset=offset;
+        let mat=document.getElementById('matrix');mat.innerHTML='';for(let i=1;i<=30;i++){let d=document.createElement('div');d.className='h-[36px] rounded-[10px] flex items-center justify-center text-[9px] font-bold border '+(data.done.includes(i)?'bg-red-500/20 border-red-500/40 text-red-300':(i===data.day?'active-day border-white/10':'bg-[#15151f] border-white/5 text-zinc-600'));d.innerText=i<10?'0'+i:i;mat.appendChild(d);}
+        let hC=document.getElementById('habits');hC.innerHTML='';H.forEach((h,idx)=>{let done=data.today.h.includes(idx);let div=document.createElement('div');div.className='flex justify-between items-center bg-[#161621] rounded-[14px] p-3.5 border border-white/10 cursor-pointer '+(done?'done':'');div.onclick=()=>{if(data.today.h.includes(idx)) data.today.h=data.today.h.filter(x=>x!=idx); else {data.today.h.push(idx); data.xp+=h.xp;} save(); render();};div.innerHTML=`<div><p class='text-[10px] font-bold'>${h.no} // ${h.t} <span class='text-[8px] text-zinc-500'>+${h.xp} XP</span></p><p class='text-[8px] text-zinc-500 mt-1'>${h.d}</p></div><div class='w-5 h-5 rounded-full border ${done?'bg-red-500 border-red-500':''}'></div>`;hC.appendChild(div);});
+        let rC=document.getElementById('rules');rC.innerHTML='';R.forEach((r,idx)=>{let done=data.today.r.includes(idx);let div=document.createElement('div');div.className='flex justify-between items-center bg-[#161621] rounded-[12px] p-3 border border-white/5 cursor-pointer '+(done?'done':'');div.onclick=()=>{if(data.today.r.includes(idx)) data.today.r=data.today.r.filter(x=>x!=idx); else {data.today.r.push(idx); data.xp+=10;} save(); render();};div.innerHTML=`<p class='text-[10px]'>${r}</p><div class='w-4 h-4 rounded-full border ${done?'bg-white':''}'></div>`;rC.appendChild(div);});
+        let tC=document.getElementById('tactics');tC.innerHTML='';T.forEach((t,idx)=>{let done=data.today.ta.includes(idx);let div=document.createElement('div');div.className='flex justify-between items-center bg-[#161621] rounded-[12px] p-3 border border-white/5 cursor-pointer '+(done?'done':'');div.onclick=()=>{if(data.today.ta.includes(idx)) data.today.ta=data.today.ta.filter(x=>x!=idx); else {data.today.ta.push(idx); data.xp+=10;} save(); render();};div.innerHTML=`<p class='text-[10px]'>${t}</p><div class='w-4 h-4 rounded-full border ${done?'bg-white':''}'></div>`;tC.appendChild(div);});
+        let sC=document.getElementById('sched');sC.innerHTML='';sch.forEach((s,idx)=>{let isDone=data.today.sc.includes(idx);let isActive=mins>=s.s&&mins<=s.e;let div=document.createElement('div');div.className='flex gap-3 bg-[#161621] rounded-[14px] p-3 border cursor-pointer '+(isDone?'done border-white/5':(isActive?'active-day border-red-500/40':'border-white/5'));div.onclick=()=>{if(data.today.sc.includes(idx)) data.today.sc=data.today.sc.filter(x=>x!=idx); else {data.today.sc.push(idx); data.xp+=12;} save(); render();};div.innerHTML=`<div class='text-[9px] text-zinc-500 w-[90px] shrink-0'>${s.ti}</div><div class='flex-1'><p class='text-[11px] font-bold'>${s.t}</p><p class='text-[8px] text-zinc-500 mt-1 italic'>"${s.q}"</p></div><div class='w-5 h-5 rounded-full border flex items-center justify-center text-[10px] ${isDone?'bg-green-500 border-green-500 text-black':''}'>${isDone?'✓':''}</div>`;sC.appendChild(div);});
+        let totalTasks=H.length+R.length+T.length+sch.length;let completed=data.today.h.length+data.today.r.length+data.today.ta.length+data.today.sc.length;let perc=totalTasks?Math.floor((completed/totalTasks)*100):0;
+        document.getElementById('dayPercent').innerText=perc+'%';document.getElementById('dayProgressBar').style.width=perc+'%';document.getElementById('doneVsTotal').innerText=completed+'/'+totalTasks;document.getElementById('todayXp').innerText=(data.today.h.length*15)+(data.today.r.length*10)+(data.today.ta.length*10)+(data.today.sc.length*12);
+        document.getElementById('liveStatus').innerText=isActiveTime(sch,mins);updatePerfectionAndFeedback(perc,completed,sch);
+        document.getElementById('n1').value=localStorage.getItem('WR_N1')||'';document.getElementById('n2').value=localStorage.getItem('WR_N2')||'';if(data.done.length>0||data.xp>0){document.getElementById('startScreen').style.display='none';}
     }
-    function startProtocol(){ document.getElementById('startScreen').style.display='none'; save(); }
-    function penalty(){ data.xp=Math.max(0,data.xp-200); save(); render(); }
-    function restartToday(){ data.today={h:[],r:[],ta:[],sc:[]}; save(); render(); }
-    function resetAll(){ if(confirm('Pura zero karna hai?')){ data={day:1,done:[],xp:0,today:{h:[],r:[],ta:[],sc:[]},holidays:[]}; nf=new Date().toISOString(); localStorage.clear(); save(); location.reload(); } }
-    function lockDay(){ data.done.push(data.day); data.day++; data.xp+=50; data.today={h:[],r:[],ta:[],sc:[]}; save(); render(); }
-    function render() {
-        let cls=getCls(data.xp); let nxt=getNext(data.xp);
-        document.getElementById('pct').innerText=data.done.length;
-        document.getElementById('rank').innerText=cls.n;
-        document.getElementById('classTop').innerText=cls.n;
-        document.getElementById('xpTop').innerText=data.xp+' XP';
-        document.getElementById('xpNeed').innerText=data.xp+' / '+nxt.xp+' XP → '+nxt.n;
-        document.getElementById('eff').innerText=data.done.length;
-        document.getElementById('dDone').innerText=data.done.length;
-        document.getElementById('xpTotal').innerText=data.xp;
-        document.getElementById('streak').innerText=data.done.length;
-        document.getElementById('dayNum').innerText=data.day;
-        let now=new Date(); let mins=now.getHours()*60+now.getMinutes();
-        let todayStr=getTodayStr(); let isHoliday=data.holidays.includes(todayStr);
-        let dayName=isHoliday? "SUNDAY (HOLIDAY)" : now.toLocaleDateString('en-US',{weekday:'long'}).toUpperCase();
-        document.getElementById('dayName').innerText=dayName;
-        document.getElementById('dayNameTop').innerText=dayName;
-        document.getElementById('liveDate').innerText=now.toLocaleDateString() + (isHoliday? " [HOLIDAY MODE ON]" : "");
-        document.getElementById('liveMins').innerText=now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
-        document.getElementById('clock').innerText=now.toLocaleTimeString();
-        let btn=document.getElementById('holidayBtn');
-        if(isHoliday){ btn.innerText='HOLIDAY MODE: ON (CLICK TO OFF)'; btn.className='w-full mt-4 bg-yellow-500 text-black py-3 rounded-[12px] text-[9px] font-bold tracking-[0.25em] transition-all'; }
-        else { btn.innerText='TODAY IS HOLIDAY : OFF'; btn.className='w-full mt-4 border border-dashed border-yellow-500/50 py-3 rounded-[12px] text-[9px] font-bold tracking-[0.25em] text-yellow-500 hover:bg-yellow-500 hover:text-black transition-all'; }
-        let sch = isHoliday? sunday : daily;
-        if(now.getDay()===0) sch=sunday;
-        let days=Math.floor((now-new Date(nf))/86400000);
-        document.getElementById('nofap').innerText=days+'D';
-        let pctTotal=Math.min(100, Math.floor((data.xp/nxt.xp)*100));
-        document.getElementById('expBar').style.width=pctTotal+'%';
-        let circ=590; let offset=circ-(circ*pctTotal/100);
-        document.getElementById('ring').style.strokeDashoffset=offset;
-        let mat=document.getElementById('matrix'); mat.innerHTML='';
-        for(let i=1;i<=30;i++){
-            let d=document.createElement('div');
-            d.className='h-[36px] rounded-[10px] flex items-center justify-center text-[9px] font-bold border '+(data.done.includes(i)?'bg-red-500/20 border-red-500/40 text-red-300':(i===data.day?'active-day border-white/10':'bg-[#15151f] border-white/5 text-zinc-600'));
-            d.innerText=i<10?'0'+i:i;
-            mat.appendChild(d);
-        }
-        let hC=document.getElementById('habits'); hC.innerHTML='';
-        H.forEach((h,idx)=>{
-            let done=data.today.h.includes(idx);
-            let div=document.createElement('div');
-            div.className='flex justify-between items-center bg-[#161621] rounded-[14px] p-3.5 border border-white/10 cursor-pointer '+(done?'done':'');
-            div.onclick=()=>{ if(data.today.h.includes(idx)) data.today.h=data.today.h.filter(x=>x!=idx); else {data.today.h.push(idx); data.xp+=h.xp;} save(); render(); };
-                        div.innerHTML=`<div><p class='text-[10px] font-bold'>${h.no} // ${h.t} <span class='text-[8px] text-zinc-500'>+${h.xp} XP</span></p><p class='text-[8px] text-zinc-500 mt-1'>${h.d}</p></div><div class='w-5 h-5 rounded-full border ${done?'bg-red-500 border-red-500':''}'></div>`;
-            hC.appendChild(div);
-        });
-
-        let rC=document.getElementById('rules'); rC.innerHTML='';
-        R.forEach((r,idx)=>{
-            let done=data.today.r.includes(idx);
-            let div=document.createElement('div');
-            div.className='flex justify-between items-center bg-[#161621] rounded-[12px] p-3 border border-white/5 cursor-pointer '+(done?'done':'');
-            div.onclick=()=>{ if(data.today.r.includes(idx)) data.today.r=data.today.r.filter(x=>x!=idx); else {data.today.r.push(idx); data.xp+=10;} save(); render(); };
-            div.innerHTML=`<p class='text-[10px]'>${r}</p><div class='w-4 h-4 rounded-full border ${done?'bg-white':''}'></div>`;
-            rC.appendChild(div);
-        });
-
-        let tC=document.getElementById('tactics'); tC.innerHTML='';
-        T.forEach((t,idx)=>{
-            let done=data.today.ta.includes(idx);
-            let div=document.createElement('div');
-            div.className='flex justify-between items-center bg-[#161621] rounded-[12px] p-3 border border-white/5 cursor-pointer '+(done?'done':'');
-            div.onclick=()=>{ if(data.today.ta.includes(idx)) data.today.ta=data.today.ta.filter(x=>x!=idx); else {data.today.ta.push(idx); data.xp+=10;} save(); render(); };
-            div.innerHTML=`<p class='text-[10px]'>${t}</p><div class='w-4 h-4 rounded-full border ${done?'bg-white':''}'></div>`;
-            tC.appendChild(div);
-        });
-
-        let sC=document.getElementById('sched'); sC.innerHTML='';
-        let doneCount=0;
-        sch.forEach((s,idx)=>{
-            let isDone=data.today.sc.includes(idx);
-            if(isDone) doneCount++;
-            let isActive=mins>=s.s && mins<=s.e;
-            let div=document.createElement('div');
-            div.className='flex gap-3 bg-[#161621] rounded-[14px] p-3 border cursor-pointer '+(isDone?'done border-white/5':(isActive?'active-day border-red-500/40':'border-white/5'));
-            div.onclick=()=>{ if(data.today.sc.includes(idx)) data.today.sc=data.today.sc.filter(x=>x!=idx); else {data.today.sc.push(idx); data.xp+=12;} save(); render(); };
-            div.innerHTML=`<div class='text-[9px] text-zinc-500 w-[90px] shrink-0'>${s.ti}</div><div class='flex-1'><p class='text-[11px] font-bold'>${s.t}</p><p class='text-[8px] text-zinc-500 mt-1 italic'>\"${s.q}\"</p></div><div class='w-5 h-5 rounded-full border flex items-center justify-center text-[10px] ${isDone?'bg-green-500 border-green-500 text-black':''}'>${isDone?'✓':''}</div>`;
-            sC.appendChild(div);
-        });
-
-        let totalTasks=H.length+R.length+T.length+sch.length;
-        let completed=data.today.h.length+data.today.r.length+data.today.ta.length+data.today.sc.length;
-        let perc=totalTasks? Math.floor((completed/totalTasks)*100):0;
-        document.getElementById('dayPercent').innerText=perc+'%';
-        document.getElementById('dayProgressBar').style.width=perc+'%';
-        document.getElementById('doneVsTotal').innerText=completed+'/'+totalTasks;
-        document.getElementById('todayXp').innerText=(data.today.h.length*15)+(data.today.r.length*10)+(data.today.ta.length*10)+(data.today.sc.length*12);
-        document.getElementById('liveStatus').innerText= isActiveTime(sch, mins);
-        document.getElementById('n1').value=localStorage.getItem('WR_N1')||'';
-        document.getElementById('n2').value=localStorage.getItem('WR_N2')||'';
-        if(data.done.length>0 || data.xp>0){ document.getElementById('startScreen').style.display='none'; }
-    }
-
-    function isActiveTime(sch, mins){
-        let cur=sch.find(s=> mins>=s.s && mins<=s.e);
-        if(cur) return 'NOW: '+cur.t+' — '+cur.q;
-        if(mins<sch[0].s) return 'Day abhi start nahi hua. First task: '+sch[0].t;
-        return 'Saare tasks ka time khatam. Jo bacha hai usse lock kar de.';
-    }
-
-    document.getElementById('n1').addEventListener('input', save);
-    document.getElementById('n2').addEventListener('input', save);
-    setInterval(render, 30000);
-    render();
-    setInterval(()=>{ document.getElementById('clock').innerText=new Date().toLocaleTimeString(); },1000);
+    document.getElementById('n1').addEventListener('input',save);document.getElementById('n2').addEventListener('input',save);setInterval(render,30000);render();setInterval(()=>{document.getElementById('clock').innerText=new Date().toLocaleTimeString();},1000);
 </script>
 </body>
-</html>
+</html>    
