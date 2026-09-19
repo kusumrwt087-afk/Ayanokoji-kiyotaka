@@ -1,11 +1,12 @@
 {
-  "name": "Ayanokoji Kiyotaka",
-  "short_name": "Ayanokoji",
-  "start_url": ".",
+  "name": "Ghost Leveling System",
+  "short_name": "Ghost Leveling",
+  "description": "A personal daily XP and leveling system.",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
-  "description": "The Masterpiece of White Room",
+  "background_color": "#050509",
+  "theme_color": "#050509",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "launchericon-192x192.png",
