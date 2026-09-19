@@ -144,6 +144,17 @@ function applyPhone(){
 setInterval(()=>{const d=state.daily.date;ensureDay();if(d!==state.daily.date&&state.pendingSleep&&state.pendingSleep.startsWith("READY:"))render();else render()},30000);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden){ensureDay();render()}});
 updateTimer();render();
+function resetAllProgress() {
+  const confirmReset = confirm(
+    "⚠️ WARNING!\n\nPura Ghost Leveling progress reset ho jayega.\nXP, daily progress, streak aur saare saved data delete ho jayenge.\n\nKya tum sure ho?"
+  );
+
+  if (!confirmReset) return;
+
+  localStorage.removeItem("ghost_leveling_v2");
+
+  location.reload();
+}
 </script>
 </body>
 </html>
