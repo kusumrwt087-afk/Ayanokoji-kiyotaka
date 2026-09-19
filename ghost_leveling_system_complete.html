@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#050509">
+<title>GHOST LEVELING SYSTEM</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#050509;--panel:#0c0c12;--panel2:#11111a;--line:#252532;--text:#f5f5f8;--muted:#8d8d9e;--cyan:#00e5ff;--purple:#9b5cff;--red:#ff3158;--green:#35e38a;--gold:#ffd34d}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 50% -10%,#1a102d 0,#08080d 38%,#050509 75%);color:var(--text);min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(to bottom,black,transparent 75%)}
+.container{width:min(1050px,94%);margin:auto;padding:22px 0 55px;position:relative}
+header{text-align:center;padding:10px 0 22px}.logo{font-size:clamp(27px,6vw,48px);font-weight:1000;letter-spacing:5px;text-shadow:0 0 22px #9b5cff99}.subtitle{font-size:10px;letter-spacing:4px;color:var(--muted);margin-top:6px}
+.level-card{position:relative;background:linear-gradient(145deg,#12111b,#08080d);border:1px solid #383148;border-radius:25px;padding:23px;box-shadow:0 20px 60px #0009,0 0 50px #772cff15;overflow:hidden}
+.level-card:after{content:"";position:absolute;width:250px;height:250px;right:-100px;top:-130px;border-radius:50%;background:#9b5cff1c;filter:blur(12px)}
+.level-top{display:flex;justify-content:space-between;gap:15px;align-items:end;position:relative;z-index:1}.level-label{font-size:10px;letter-spacing:3px;color:var(--muted)}.level{font-size:clamp(45px,10vw,76px);font-weight:1000;line-height:.92;text-shadow:0 0 28px #9b5cff}.title{font-size:clamp(17px,4vw,25px);font-weight:850;margin-top:9px}.xp-total{text-align:right}.xp-total b{font-size:25px}.xp-total span{display:block;color:var(--muted);font-size:10px;letter-spacing:1px}
+.bar{height:15px;background:#1a1a25;border:1px solid #30303e;border-radius:20px;margin-top:22px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--cyan));border-radius:20px;box-shadow:0 0 20px #00e5ff99;transition:width .8s cubic-bezier(.2,.8,.2,1)}.progress-row{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:8px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}.stat{background:#0b0b12dd;border:1px solid var(--line);border-radius:18px;padding:15px;text-align:center}.stat b{display:block;font-size:24px}.stat span{font-size:9px;color:var(--muted);letter-spacing:1px}
+.section-title{display:flex;align-items:center;gap:10px;margin:28px 0 12px;font-size:13px;letter-spacing:2px;color:#dedee8}.section-title:after{content:"";height:1px;flex:1;background:var(--line)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.quest{background:linear-gradient(145deg,#0f0f17,#09090e);border:1px solid var(--line);border-radius:19px;padding:16px;display:flex;gap:13px;align-items:center;transition:.25s;position:relative;overflow:hidden}.quest:hover{transform:translateY(-2px);border-color:#4d4263;box-shadow:0 10px 30px #0007}.icon{width:43px;height:43px;border-radius:13px;display:grid;place-items:center;background:#181521;font-size:21px;flex:none}.qinfo{min-width:0;flex:1}.qname{font-weight:800;font-size:14px}.qdesc{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.4}.xp{font-weight:900;color:var(--cyan);white-space:nowrap;font-size:13px}
+button{font:inherit;color:inherit;border:0;cursor:pointer}.add{width:39px;height:39px;border-radius:13px;background:#17151f;border:1px solid #393142;color:#fff;font-size:23px;transition:.2s;flex:none}.add:hover{background:#282132;transform:scale(1.06);box-shadow:0 0 18px #9b5cff55}.add:active{transform:scale(.9)}.add:disabled{opacity:.3;cursor:not-allowed;transform:none}
+.timer-wrap{margin-top:12px;background:linear-gradient(145deg,#101019,#08080d);border:1px solid #342c40;border-radius:22px;padding:20px;text-align:center}.timer-name{font-size:11px;color:var(--muted);letter-spacing:2px}.timer{font-size:clamp(55px,14vw,92px);font-weight:1000;letter-spacing:2px;margin:5px 0;text-shadow:0 0 28px #00e5ff66}.timer.active{animation:pulse 2s infinite}.timer-btns{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}.action{padding:11px 18px;border-radius:12px;background:#17151f;border:1px solid #3a3347;font-weight:750;font-size:12px}.action.primary{background:linear-gradient(100deg,#7d35df,#007f99);border-color:#00e5ff55}.timer-tabs{display:flex;justify-content:center;gap:8px;margin-bottom:12px}.tab{padding:8px 14px;border-radius:10px;background:#11111a;color:var(--muted);font-size:10px;border:1px solid var(--line)}.tab.on{color:#fff;border-color:#6b42a0;background:#1b1627}
+.input-row{display:flex;gap:9px;margin-top:10px}input{width:100%;background:#09090f;border:1px solid #30303d;border-radius:12px;padding:12px;color:#fff;outline:none;font-size:14px}input:focus{border-color:#6e45a0;box-shadow:0 0 0 3px #9b5cff12}
+.phone-card{margin-top:12px;border:1px solid #3b2029;background:linear-gradient(145deg,#120c11,#09090e);border-radius:19px;padding:16px}.negative{color:var(--red)}.pending{display:none;margin-top:10px;padding:10px;border-radius:12px;background:#211b0b;border:1px solid #584a1e;color:#ffe68a;font-size:11px}
+.footer{text-align:center;color:#555566;font-size:9px;letter-spacing:2px;margin-top:30px}.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,30px);opacity:0;background:#15131d;border:1px solid #40364f;border-radius:14px;padding:11px 16px;font-size:12px;z-index:50;box-shadow:0 15px 40px #000b;transition:.3s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}
+.float-xp{position:fixed;pointer-events:none;font-weight:1000;color:var(--cyan);z-index:60;animation:float 1s ease-out forwards;text-shadow:0 0 12px #00e5ff}.flash{position:fixed;inset:0;pointer-events:none;background:#fff;opacity:0;z-index:55}.flash.on{animation:flash .35s}.particle{position:fixed;width:4px;height:4px;border-radius:50%;background:#9b5cff;pointer-events:none;animation:particle .8s ease-out forwards;z-index:70}
+@keyframes pulse{50%{text-shadow:0 0 45px #00e5ff}}@keyframes float{to{transform:translateY(-70px) scale(1.2);opacity:0}}@keyframes flash{0%{opacity:.13}100%{opacity:0}}@keyframes particle{to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}}
+@media(max-width:680px){.grid{grid-template-columns:1fr}.level-card{padding:18px}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}.quest{padding:14px}.xp-total b{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="flash" id="flash"></div><div class="toast" id="toast"></div>
+<main class="container">
+<header><div class="logo">GHOST LEVELING</div><div class="subtitle">DAILY SYSTEM • DISCIPLINE OVER MOOD</div></header>
+
+<section class="level-card">
+<div class="level-top"><div><div class="level-label">CURRENT LEVEL</div><div class="level" id="level">1</div><div class="title" id="title">The Overthinker</div></div><div class="xp-total"><b id="allXp">0 XP</b><span>ALL TIME XP</span></div></div>
+<div class="bar"><div class="fill" id="bar"></div></div><div class="progress-row"><span id="progressText">0 / 1000 XP</span><span id="nextText">NEXT: LVL 2</span></div>
+</section>
+
+<div class="stats"><div class="stat"><b id="dailyXp">0</b><span>TODAY'S XP</span></div><div class="stat"><b id="streak">0</b><span>DAY STREAK</span></div><div class="stat"><b id="ticks">0</b><span>TODAY'S TICKS</span></div></div>
+
+<div class="section-title">CORE QUESTS</div>
+<div class="grid">
+<div class="quest"><div class="icon">💻</div><div class="qinfo"><div class="qname">Coding Focus</div><div class="qdesc">25 min = +50 XP • every completed block counts</div></div><div class="xp">+50</div><button class="add" onclick="chooseTimer('coding');timerControl()">▶</button></div>
+<div class="quest"><div class="icon">📚</div><div class="qinfo"><div class="qname">Study Focus</div><div class="qdesc">25 min = +40 XP • every completed block counts</div></div><div class="xp">+40</div><button class="add" onclick="chooseTimer('study');timerControl()">▶</button></div>
+<div class="quest"><div class="icon">🐛</div><div class="qinfo"><div class="qname">Bug / Feature Complete</div><div class="qdesc">Manual coding bonus • unlimited</div></div><div class="xp">+30</div><button class="add" onclick="gain(30,'Coding bonus')">+</button></div>
+<div class="quest"><div class="icon">🧠</div><div class="qinfo"><div class="qname">Concept Mastered</div><div class="qdesc">Understood / remembered • unlimited</div></div><div class="xp">+50</div><button class="add" onclick="gain(50,'Study bonus')">+</button></div>
+</div>
+
+<div class="section-title">25 MIN FOCUS TIMER</div>
+<div class="timer-wrap">
+<div class="timer-tabs"><button class="tab on" id="codingTab" onclick="chooseTimer('coding')">CODING +50</button><button class="tab" id="studyTab" onclick="chooseTimer('study')">STUDY +40</button></div>
+<div class="timer-name" id="timerName">CODING FOCUS</div><div class="timer" id="timer">25:00</div>
+<div class="timer-btns"><button class="action primary" id="timerStart" onclick="timerControl()">START 25 MIN</button><button class="action" onclick="resetTimer()">RESET</button></div>
+<div class="qdesc" style="margin-top:10px">Each full 25-minute block automatically gives XP. Finish 50 min = 2 ticks.</div>
+</div>
+
+<div class="section-title">DIRECT TICK QUESTS</div>
+<div class="grid">
+<div class="quest"><div class="icon">🏋️</div><div class="qinfo"><div class="qname">Workout</div><div class="qdesc">Each completion = +40 XP • unlimited</div></div><div class="xp">+40</div><button class="add" onclick="gain(40,'Workout')">+</button></div>
+<div class="quest"><div class="icon">⏰</div><div class="qinfo"><div class="qname">Wake at 5 AM</div><div class="qdesc">+50 once/day • active 04:30–05:30</div></div><div class="xp">+50</div><button class="add" id="wakeBtn" onclick="wakeQuest()">+</button></div>
+<div class="quest"><div class="icon">♟️</div><div class="qinfo"><div class="qname">Chess Win</div><div class="qdesc">Each win = +30 XP • unlimited</div></div><div class="xp">+30</div><button class="add" onclick="gain(30,'Chess win')">+</button></div>
+<div class="quest"><div class="icon">🎯</div><div class="qinfo"><div class="qname">Memory Game 10/10</div><div class="qdesc">Each perfect score = +40 XP • unlimited</div></div><div class="xp">+40</div><button class="add" onclick="gain(40,'Memory 10/10')">+</button></div>
+<div class="quest"><div class="icon">🌙</div><div class="qinfo"><div class="qname">Sleep at 10 PM</div><div class="qdesc">Record 21:30–22:30 • confirm next day</div></div><div class="xp">+50</div><button class="add" id="sleepBtn" onclick="sleepQuest()">+</button></div>
+</div>
+<div class="pending" id="sleepPending"></div>
+
+<div class="section-title">PAGE-WISE QUESTS</div>
+<div class="quest"><div class="icon">📝</div><div class="qinfo"><div class="qname">Homework</div><div class="qdesc">+10 XP per page • unlimited</div></div><div style="display:flex;gap:7px;align-items:center"><input id="pages" type="number" min="1" placeholder="Pages" style="width:80px"><button class="add" onclick="addPages()">+</button></div></div>
+
+<div class="section-title">NEGATIVE XP</div>
+<div class="phone-card"><div class="qname">📱 Phone Usage</div><div class="qdesc">Every 30 min = −20 XP. Enter total phone time for today.</div><div class="input-row"><input id="phone" type="number" min="0" step="1" placeholder="Phone Time Today in Minutes"><button class="action primary" onclick="applyPhone()">APPLY</button></div><div class="qdesc negative" id="phoneResult" style="margin-top:8px"></div></div>
+
+<div class="footer">LOCAL STORAGE • NO BACKEND • GHOST MODE</div>
+</main>
+
+<script>
+const KEY="ghost_leveling_v2";
+let state=JSON.parse(localStorage.getItem(KEY)||"null")||{totalXP:0,daily:{date:today(),xp:0,ticks:0,phone:0},streak:0,lastActive:null,wakeDone:null,pendingSleep:null};
+function today(){return new Date().toISOString().slice(0,10)}
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function ensureDay(){
+ const d=today();
+ if(state.daily.date!==d){
+   const yesterday=state.daily.date;
+   if(state.pendingSleep===yesterday){state.pendingSleep="READY:"+yesterday}
+   state.daily={date:d,xp:0,ticks:0,phone:0};
+ }
+ save();
+}
+function levelOf(xp){return xp<1000?1:Math.floor((xp-1000)/1500)+2}
+function threshold(l){return l===1?0:1000+(l-2)*1500}
+function nextThreshold(l){return l===1?1000:1000+(l-1)*1500}
+function titleOf(l){let t="The Overthinker";if(l>=5)t="The Focused Coder";if(l>=10)t="Ghost Mode ON";return t}
+function render(){
+ ensureDay();
+ const l=levelOf(state.totalXP),cur=threshold(l),next=nextThreshold(l),pct=Math.max(0,Math.min(100,(state.totalXP-cur)/(next-cur)*100));
+ document.getElementById("level").textContent=l;document.getElementById("title").textContent=titleOf(l);document.getElementById("allXp").textContent=state.totalXP+" XP";document.getElementById("dailyXp").textContent=state.daily.xp;document.getElementById("ticks").textContent=state.daily.ticks;document.getElementById("bar").style.width=pct+"%";document.getElementById("progressText").textContent=state.totalXP+" / "+next+" XP";document.getElementById("nextText").textContent="NEXT: LVL "+(l+1);document.getElementById("streak").textContent=state.streak||0;
+ const mins=new Date().getHours()*60+new Date().getMinutes();
+ document.getElementById("wakeBtn").disabled=!(mins>=270&&mins<=330)||state.wakeDone===today();
+ document.getElementById("sleepBtn").disabled=!(mins>=570&&mins<=630)||state.pendingSleep===today();
+ document.getElementById("phone").value=state.daily.phone||"";
+ document.getElementById("phoneResult").textContent=state.daily.phone?"−"+Math.floor(state.daily.phone/30)*20+" XP applied today":"";
+ const p=document.getElementById("sleepPending");
+ if(state.pendingSleep&&state.pendingSleep.startsWith("READY:")){p.style.display="block";p.innerHTML="🌙 Yesterday's 10 PM sleep tick is waiting. <button class='action' style='margin-left:8px;padding:7px 10px' onclick='confirmSleep()'>CONFIRM +50</button>"}else if(state.pendingSleep===today()){p.style.display="block";p.textContent="🌙 Sleep tick recorded. +50 XP will be confirmed tomorrow."}else p.style.display="none";
+}
+function addXP(amount,label){
+ ensureDay();const old=levelOf(state.totalXP);state.totalXP+=amount;state.daily.xp+=amount;state.daily.ticks++;state.lastActive=state.daily.date;
+ if(!state.streak)state.streak=1;
+ save();render();effect(amount);
+ const nl=levelOf(state.totalXP);toast((amount>=0?"+":"")+amount+" XP • "+label);if(nl>old){setTimeout(()=>toast("LEVEL UP • LEVEL "+nl),500)}
+}
+function gain(amount,label){addXP(amount,label)}
+function effect(amount){
+ const f=document.getElementById("flash");f.classList.remove("on");void f.offsetWidth;f.classList.add("on");
+ const e=document.createElement("div");e.className="float-xp";e.textContent=(amount>=0?"+":"")+amount+" XP";e.style.left=(35+Math.random()*30)+"%";e.style.top="45%";document.body.appendChild(e);setTimeout(()=>e.remove(),1000);
+ if(amount>0)for(let i=0;i<12;i++){const p=document.createElement("div");p.className="particle";p.style.left="50%";p.style.top="50%";p.style.setProperty("--x",(Math.random()*220-110)+"px");p.style.setProperty("--y",(Math.random()*180-90)+"px");document.body.appendChild(p);setTimeout(()=>p.remove(),850)}
+}
+function toast(s){const t=document.getElementById("toast");t.textContent=s;t.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove("show"),1900)}
+
+let timerMode="coding",seconds=1500,interval=null,running=false;
+function chooseTimer(mode){if(running&&mode!==timerMode)return toast("Pause/stop the current timer first");if(!running){timerMode=mode;seconds=1500}document.getElementById("codingTab").classList.toggle("on",timerMode==="coding");document.getElementById("studyTab").classList.toggle("on",timerMode==="study");document.getElementById("timerName").textContent=timerMode==="coding"?"CODING FOCUS":"STUDY FOCUS";updateTimer()}
+function updateTimer(){const m=Math.floor(seconds/60),s=seconds%60;document.getElementById("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
+function timerControl(){
+ if(running){clearInterval(interval);running=false;document.getElementById("timerStart").textContent="RESUME";document.getElementById("timer").classList.remove("active");return}
+ running=true;document.getElementById("timerStart").textContent="PAUSE";document.getElementById("timer").classList.add("active");
+ interval=setInterval(()=>{seconds--;updateTimer();if(seconds<=0){clearInterval(interval);running=false;document.getElementById("timer").classList.remove("active");document.getElementById("timerStart").textContent="START 25 MIN";addXP(timerMode==="coding"?50:40,timerMode==="coding"?"Coding 25 min":"Study 25 min");seconds=1500;updateTimer()}},1000)
+}
+function resetTimer(){clearInterval(interval);running=false;seconds=1500;document.getElementById("timerStart").textContent="START 25 MIN";document.getElementById("timer").classList.remove("active");updateTimer()}
+
+function wakeQuest(){const mins=new Date().getHours()*60+new Date().getMinutes();if(mins<270||mins>330)return toast("Wake tick active only 04:30–05:30");if(state.wakeDone===today())return;state.wakeDone=today();addXP(50,"5 AM wake")}
+function sleepQuest(){const mins=new Date().getHours()*60+new Date().getMinutes();if(mins<570||mins>630)return toast("Sleep tick active only 21:30–22:30");if(state.pendingSleep===today())return;state.pendingSleep=today();save();render();toast("Sleep tick recorded • confirm tomorrow")}
+function confirmSleep(){if(!state.pendingSleep||!state.pendingSleep.startsWith("READY:"))return;state.pendingSleep=null;addXP(50,"10 PM sleep confirmed")}
+
+function addPages(){const n=Math.floor(Number(document.getElementById("pages").value));if(!n||n<1)return toast("Enter number of pages");addXP(n*10,"Homework • "+n+" page"+(n>1?"s":""));document.getElementById("pages").value=""}
+function applyPhone(){
+ ensureDay();const n=Math.max(0,Math.floor(Number(document.getElementById("phone").value)||0)),oldPenalty=Math.floor(state.daily.phone/30)*20,newPenalty=Math.floor(n/30)*20;
+ const diff=oldPenalty-newPenalty;state.daily.phone=n;state.daily.xp-=diff;state.totalXP-=diff;save();render();if(diff>0)toast("+"+diff+" XP restored");else if(diff<0){effect(diff);toast(diff+" XP • phone usage")}else toast("Phone time updated")
+}
+setInterval(()=>{const d=state.daily.date;ensureDay();if(d!==state.daily.date&&state.pendingSleep&&state.pendingSleep.startsWith("READY:"))render();else render()},30000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden){ensureDay();render()}});
+updateTimer();render();
+</script>
+</body>
+</html>
