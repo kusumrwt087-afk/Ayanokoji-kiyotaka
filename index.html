@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#070b14" />
+<title>STUDY CORE // CLASS X</title>
+<style>
+:root{
+ --bg:#070b14;--panel:rgba(13,21,38,.82);--panel2:#101a2d;--line:rgba(91,219,255,.22);
+ --cyan:#62e8ff;--blue:#4987ff;--purple:#a78bfa;--pink:#ff5cc8;--green:#4df0b3;
+ --text:#edf5ff;--muted:#91a5c4;--danger:#ff7189;--shadow:0 20px 60px rgba(0,0,0,.36)
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 10% 0%,#12284a 0,transparent 34%),radial-gradient(ellipse at 100% 20%,#26143e 0,transparent 30%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(98,232,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(98,232,255,.035) 1px,transparent 1px);background-size:36px 36px;mask-image:linear-gradient(to bottom,black,transparent 85%);z-index:-1}
+button,select,input,textarea{font:inherit}
+button{cursor:pointer}
+.app{max-width:1200px;margin:auto;padding:20px 16px 56px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:24px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:46px;height:46px;display:grid;place-items:center;border:1px solid var(--cyan);color:var(--cyan);font-weight:900;transform:rotate(45deg);box-shadow:0 0 24px #62e8ff22}
+.logo span{transform:rotate(-45deg)}
+.eyebrow{font-size:10px;letter-spacing:.28em;color:var(--cyan);font-weight:800}
+.brand h1{font-size:clamp(18px,4vw,25px);margin:4px 0 0;letter-spacing:.09em}
+.status{font-size:11px;color:var(--green);border:1px solid #4df0b344;border-radius:999px;padding:8px 11px;white-space:nowrap}
+.status:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:7px;box-shadow:0 0 10px var(--green)}
+.hero{position:relative;border:1px solid var(--line);border-radius:26px;padding:clamp(22px,5vw,42px);background:linear-gradient(115deg,rgba(17,35,61,.95),rgba(12,15,33,.86) 60%,rgba(49,18,61,.62));box-shadow:var(--shadow);overflow:hidden;isolation:isolate}
+.hero:before{content:"";position:absolute;width:280px;height:280px;border:1px solid #62e8ff30;border-radius:50%;right:-60px;top:-100px;box-shadow:0 0 0 22px #62e8ff08,0 0 0 50px #a78bfa08;z-index:-1}
+.hero:after{content:"";position:absolute;right:40px;bottom:-100px;width:160px;height:260px;background:linear-gradient(180deg,#62e8ff16,#a78bfa05);transform:skew(-24deg);filter:blur(8px);z-index:-1}
+.heroGrid{display:grid;grid-template-columns:1.3fr .7fr;gap:24px;align-items:center}
+.hero h2{font-size:clamp(28px,5vw,52px);line-height:1.02;margin:13px 0 12px;letter-spacing:-.045em}
+.gradient{background:linear-gradient(90deg,var(--cyan),#b8c7ff 48%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:600px;color:#b6c7e1;line-height:1.7;margin:0}
+.orbWrap{display:grid;place-items:center;min-height:190px;perspective:700px}
+.orb{width:150px;height:150px;position:relative;border-radius:50%;background:radial-gradient(circle at 32% 28%,#ffffff 0,#62e8ff 2%,#2878b9 12%,#15264c 35%,#080d1c 67%);box-shadow:inset -15px -18px 34px #02040a,0 0 35px #62e8ff44,0 0 80px #9b5cff21;animation:float 5s ease-in-out infinite;transform-style:preserve-3d}
+.orb:before,.orb:after{content:"";position:absolute;inset:-17px;border:1px solid #62e8ff77;border-radius:50%;transform:rotateX(68deg) rotateZ(-22deg)}
+.orb:after{inset:-29px;border-color:#ff5cc866;transform:rotateX(68deg) rotateZ(45deg)}
+.orbCore{position:absolute;inset:40%;border-radius:50%;background:white;box-shadow:0 0 22px 8px var(--cyan)}
+@keyframes float{0%,100%{transform:translateY(0) rotateY(-12deg) rotateX(8deg)}50%{transform:translateY(-12px) rotateY(12deg) rotateX(-6deg)}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 28px}
+.stat{background:linear-gradient(140deg,#111d32d9,#0d1423e8);border:1px solid #9bb4db20;border-radius:16px;padding:16px}
+.stat small{display:block;color:var(--muted);font-size:10px;letter-spacing:.13em;text-transform:uppercase}
+.stat strong{display:block;font-size:25px;margin-top:8px}
+.stat em{font-style:normal;color:var(--cyan);font-size:11px}
+.layout{display:grid;grid-template-columns:340px 1fr;gap:18px;align-items:start}
+.panel{border:1px solid #9bb4db25;border-radius:22px;background:var(--panel);backdrop-filter:blur(16px);box-shadow:var(--shadow);overflow:hidden}
+.panelHead{padding:20px 20px 0}
+.panelHead h3{margin:0;font-size:17px;letter-spacing:.02em}
+.panelHead p{color:var(--muted);font-size:12px;line-height:1.5;margin:7px 0 0}
+.panelBody{padding:20px}
+.field{margin-bottom:17px}
+label{display:block;font-size:11px;font-weight:800;color:#b8c9e4;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+select,input[type=text]{width:100%;background:#080f1e;border:1px solid #3e587b;color:var(--text);border-radius:12px;padding:13px;outline:none}
+select:focus,input:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #62e8ff15}
+.segment{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.segBtn,.btn{border:1px solid #526987;background:#101a2c;color:#cbd8ec;border-radius:12px;padding:12px;font-weight:750;font-size:12px;transition:.2s}
+.segBtn.active{background:linear-gradient(135deg,#12475b,#25264e);border-color:var(--cyan);color:white;box-shadow:0 0 20px #62e8ff13}
+.btnPrimary{background:linear-gradient(105deg,#1c91b0,#5254c7 65%,#a7439d);border:0;color:white;box-shadow:0 8px 24px #3c6bd62b}
+.btn:hover,.segBtn:hover{transform:translateY(-1px);filter:brightness(1.15)}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.full{width:100%}
+.note{font-size:11px;line-height:1.6;color:var(--muted);margin-top:12px}
+.contentPanel{min-height:530px}
+.tabs{display:flex;gap:7px;padding:15px 20px;border-bottom:1px solid #9bb4db20;overflow-x:auto}
+.tab{border:0;background:transparent;color:var(--muted);padding:9px 12px;border-radius:9px;font-size:12px;font-weight:800;white-space:nowrap}
+.tab.active{color:var(--cyan);background:#62e8ff12}
+.content{padding:20px}
+.welcome{min-height:440px;display:grid;place-items:center;text-align:center;padding:26px}
+.welcomeIcon{width:86px;height:86px;border:1px solid #62e8ff55;border-radius:25px;display:grid;place-items:center;margin:0 auto 18px;font-size:34px;color:var(--cyan);transform:rotate(-7deg);box-shadow:0 0 35px #62e8ff15}
+.welcome h3{font-size:24px;margin:0 0 8px}
+.welcome p{max-width:440px;color:var(--muted);line-height:1.7;font-size:13px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid #62e8ff33;background:#62e8ff0d;color:var(--cyan);border-radius:99px;padding:7px 10px;font-size:10px;font-weight:800;letter-spacing:.1em}
+.question{border:1px solid #7d9ac526;background:linear-gradient(120deg,#111d30c9,#0b1221d9);border-radius:17px;padding:17px;margin-bottom:13px}
+.qTop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.qNum{color:var(--cyan);font-size:11px;font-weight:900;letter-spacing:.12em}
+.marks{color:var(--pink);font-size:11px;font-weight:900;border:1px solid #ff5cc83d;border-radius:8px;padding:5px 8px;white-space:nowrap}
+.qText{font-size:14px;line-height:1.7;margin:12px 0}
+textarea{width:100%;min-height:94px;resize:vertical;background:#080f1e;border:1px solid #344d70;border-radius:12px;padding:13px;color:var(--text);outline:none;line-height:1.6}
+.qMeta{font-size:10px;color:var(--muted);margin-top:8px}
+.answerBox{display:none;margin-top:12px;padding:12px;border-left:2px solid var(--green);background:#4df0b30c;border-radius:0 10px 10px 0;font-size:12px;line-height:1.7;color:#d4f6e9}
+.answerBox.show{display:block}
+.resultScore{font-size:34px;font-weight:900;color:var(--cyan)}
+.progress{height:6px;background:#1c2940;border-radius:99px;overflow:hidden;margin-top:12px}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));transition:width .4s}
+.empty{text-align:center;padding:45px 15px;color:var(--muted);line-height:1.7}
+.historyItem{display:flex;justify-content:space-between;gap:12px;padding:14px;border-bottom:1px solid #9bb4db19;font-size:12px}
+.historyItem:last-child{border-bottom:0}
+.historyItem strong{display:block;margin-bottom:5px}
+.historyItem span{color:var(--muted)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#14223a;border:1px solid #62e8ff66;border-radius:12px;padding:12px 16px;font-size:12px;z-index:20;transition:.25s;max-width:90vw}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.footer{color:#5f7597;text-align:center;font-size:10px;letter-spacing:.12em;margin-top:24px}
+@media(max-width:800px){.heroGrid{grid-template-columns:1fr}.orbWrap{display:none}.layout{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:21px}.app{padding:14px 12px 40px}}
+@media(max-width:420px){.status{font-size:9px;padding:7px}.logo{width:38px;height:38px}.stats{grid-template-columns:repeat(3,1fr)}.stat small{font-size:9px}.stat strong{font-size:19px}.content{padding:13px}.panelBody{padding:15px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="logo"><span>SC</span></div><div><div class="eyebrow">TACTICAL LEARNING SYSTEM</div><h1>STUDY CORE <span class="gradient">// X</span></h1></div></div>
+    <div class="status">SYSTEM ONLINE</div>
+  </header>
+
+  <section class="hero">
+    <div class="heroGrid">
+      <div>
+        <div class="eyebrow">DISCIPLINE · PRECISION · MASTERY</div>
+        <h2>Don't guess.<br><span class="gradient">Prove mastery.</span></h2>
+        <p>Chapter-wise high-value questions. Write your own answers, get them evaluated, track every score, and build complete command over your syllabus.</p>
+      </div>
+      <div class="orbWrap"><div class="orb"><div class="orbCore"></div></div></div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><small>Tests completed</small><strong id="testsCount">0</strong><em>Saved attempts</em></div>
+    <div class="stat"><small>Average score</small><strong id="avgScore">—</strong><em>Across saved tests</em></div>
+    <div class="stat"><small>Chapters tested</small><strong id="chapterCount">0</strong><em>Unique chapters</em></div>
+  </section>
+
+  <main class="layout">
+    <section class="panel">
+      <div class="panelHead"><h3>01 / Configure test</h3><p>Select the subject and chapter. No prompts needed.</p></div>
+      <div class="panelBody">
+        <div class="field"><label for="subject">Subject</label><select id="subject">
+          <option value="Math">Mathematics</option><option value="Science">Science</option><option value="SST">Social Science (SST)</option><option value="Hindi">Hindi</option><option value="English">English</option><option value="Sanskrit">Sanskrit</option>
+        </select></div>
+        <div class="field"><label for="chapter">Chapter</label><select id="chapter"></select></div>
+        <div class="field"><label>Have you studied this chapter before?</label><div class="segment"><button class="segBtn active" data-studied="yes">YES · Studied</button><button class="segBtn" data-studied="no">NO · New</button></div><div id="studyHint" class="note">Write answers from memory. The evaluator will review each response.</div></div>
+        <div class="field"><label for="setMode">Question set</label><select id="setMode"><option value="mixed">Complete important set</option><option value="fresh">Fresh variation (avoid repeats)</option><option value="board">Board-focused set</option></select></div>
+        <div class="field"><label for="language">Answer language</label><select id="language"><option value="Hindi">हिन्दी</option><option value="English">English</option></select><div class="note">English subject uses English by default. Other subjects use Hindi.</div></div>
+        <button id="generateBtn" class="btn btnPrimary full">GENERATE QUESTION SET ↗</button>
+        <div class="note">This single-file version saves progress on this device. Real AI marking needs a secure backend connection; no API key is embedded in this file.</div>
+      </div>
+    </section>
+
+    <section class="panel contentPanel">
+      <div class="tabs"><button class="tab active" data-tab="practice">PRACTICE</button><button class="tab" data-tab="history">SCORE HISTORY</button><button class="tab" data-tab="plan">SYSTEM</button></div>
+      <div id="mainContent" class="content">
+        <div class="welcome"><div><div class="welcomeIcon">⌁</div><h3>Awaiting your selection</h3><p>Choose a subject and chapter, then generate a question set. Questions are grouped by marks and include short, long, concept and application-style prompts.</p><span class="chip">LOCAL SAVE ENABLED</span></div></div>
+      </div>
+    </section>
+  </main>
+  <div class="footer">STUDY CORE // BUILD YOUR EDGE ONE CHAPTER AT A TIME</div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+const chapters={
+ Math:["वास्तविक संख्याएँ","बहुपद","दो चरों वाले रैखिक समीकरण युग्म","द्विघात समीकरण","समांतर श्रेढ़ियाँ (AP)","त्रिभुज","निर्देशांक ज्यामिति","त्रिकोणमिति","त्रिकोणमिति के अनुप्रयोग","वृत्त","रचनाएँ","वृत्तों से संबंधित क्षेत्रफल","पृष्ठीय क्षेत्रफल और आयतन","सांख्यिकी","प्रायिकता"],
+ Science:["रासायनिक अभिक्रियाएँ एवं समीकरण","अम्ल, क्षारक एवं लवण","धातु एवं अधातु","कार्बन एवं उसके यौगिक","तत्वों का आवर्त वर्गीकरण","जैव प्रक्रम","नियंत्रण एवं समन्वय","जीव जनन कैसे करते हैं?","आनुवंशिकता","प्रकाश—परावर्तन तथा अपवर्तन","मानव नेत्र तथा रंग-बिरंगा संसार","विद्युत","विद्युत धारा के चुंबकीय प्रभाव","हमारा पर्यावरण"],
+ SST:["यूरोप में राष्ट्रवाद का उदय","भारत में राष्ट्रवाद","भूमंडलीकृत विश्व का बनना","औद्योगीकरण का युग","मुद्रण संस्कृति और आधुनिक दुनिया","संसाधन एवं विकास","वन एवं वन्य जीव संसाधन","जल संसाधन","कृषि","खनिज तथा ऊर्जा संसाधन","विनिर्माण उद्योग","राष्ट्रीय अर्थव्यवस्था की जीवन रेखाएँ","सत्ता की साझेदारी","संघवाद","जाति, धर्म और लैंगिक मसले","राजनीतिक दल","लोकतंत्र के परिणाम","विकास","भारतीय अर्थव्यवस्था के क्षेत्रक","मुद्रा और साख","वैश्वीकरण और भारतीय अर्थव्यवस्था","उपभोक्ता अधिकार","आपदा प्रबंधन"],
+ Hindi:["क्षितिज / गद्य खंड","क्षितिज / काव्य खंड","कृतिका","व्याकरण","लेखन कौशल"],
+ English:["A Letter to God","Nelson Mandela: Long Walk to Freedom","Two Stories about Flying","From the Diary of Anne Frank","The Hundred Dresses I","The Hundred Dresses II","Glimpses of India","Mijbil the Otter","Madam Rides the Bus","The Sermon at Benares","The Proposal","Dust of Snow","Fire and Ice","A Tiger in the Zoo","How to Tell Wild Animals","The Ball Poem","Amanda!","The Trees","Fog","The Tale of Custard the Dragon","For Anne Gregory"],
+ Sanskrit:["शुचिपर्यावरणम्","बुद्धिर्बलवती सदा","व्यायामः सर्वदा पथ्यः","शिशुलालनम्","जननी तुल्यवत्सला","सुभाषितानि","सौहार्दं प्रकृतेः शोभा","विचित्रः साक्षी","सूक्तयः","भूकम्पविभीषिका","प्रत्ययाः एवं सन्धि","समास एवं वाच्य","पत्रलेखनम्"]
+};
+const banks={
+ "Science|धातु एवं अधातु":[
+ {m:1,q:"धातुओं की तन्यता से क्या तात्पर्य है?",a:"धातुओं को खींचकर तार बनाने की क्षमता तन्यता कहलाती है।"},
+ {m:1,q:"एक द्रव धातु का नाम लिखिए।",a:"पारा (मरकरी)।"},
+ {m:2,q:"आयनिक यौगिकों के गलनांक सामान्यतः अधिक क्यों होते हैं?",a:"आयनिक यौगिकों में विपरीत आवेश वाले आयनों के बीच प्रबल वैद्युत आकर्षण होता है। इसे तोड़ने के लिए अधिक ऊर्जा चाहिए।"},
+ {m:2,q:"सोडियम को मिट्टी के तेल में क्यों रखा जाता है?",a:"सोडियम वायु और नमी से बहुत तेजी से अभिक्रिया करता है और आग लग सकती है। मिट्टी का तेल उसे वायु/नमी से अलग रखता है।"},
+ {m:3,q:"धातु और अधातु के भौतिक गुणों में तीन अंतर लिखिए।",a:"धातुएँ सामान्यतः चमकीली, आघातवर्धनीय और विद्युत की सुचालक होती हैं। अधातुएँ सामान्यतः चमकहीन, भंगुर (ठोस अवस्था में) और कुचालक होती हैं; ग्रेफाइट अपवाद है।"},
+ {m:4,q:"अभिक्रियाशीलता श्रेणी क्या है? इससे विस्थापन अभिक्रिया का अनुमान कैसे लगाया जाता है?",a:"धातुओं को घटती अभिक्रियाशीलता के क्रम में रखने पर अभिक्रियाशीलता श्रेणी बनती है। अधिक अभिक्रियाशील धातु, कम अभिक्रियाशील धातु को उसके लवण के विलयन से विस्थापित कर सकती है।"}
+ ],
+ "Math|त्रिकोणमिति":[
+ {m:1,q:"sin²A + cos²A का मान क्या है?",a:"1"},
+ {m:2,q:"यदि tan A = 3/4 और A न्यूनकोण है, तो sin A ज्ञात कीजिए।",a:"समकोण त्रिभुज में लंब:आधार = 3:4, कर्ण = 5; अतः sin A = 3/5।"},
+ {m:3,q:"सिद्ध कीजिए: (1 − cos²A)/sin²A = 1, जहाँ sin A ≠ 0।",a:"पहचान sin²A + cos²A = 1 से 1 − cos²A = sin²A। इसलिए अनुपात sin²A/sin²A = 1।"},
+ {m:4,q:"यदि sec A + tan A = p, तो सिद्ध कीजिए sec A − tan A = 1/p (जहाँ व्यंजक परिभाषित हैं)।",a:"(sec A + tan A)(sec A − tan A)=sec²A−tan²A=1। पहला गुणनखंड p है, इसलिए दूसरा 1/p होगा।"}
+ ],
+ "SST|जल संसाधन":[
+ {m:1,q:"बहुउद्देशीय नदी परियोजना का एक उद्देश्य लिखिए।",a:"सिंचाई, जलविद्युत उत्पादन, बाढ़ नियंत्रण या पेयजल उपलब्ध कराना।"},
+ {m:2,q:"वर्षा जल संचयन क्या है?",a:"वर्षा के जल को एकत्र करके भविष्य में उपयोग के लिए सुरक्षित रखना वर्षा जल संचयन है।"},
+ {m:3,q:"भारत में जल संरक्षण की आवश्यकता के तीन कारण लिखिए।",a:"वर्षा का असमान वितरण, बढ़ती जनसंख्या/शहरीकरण और कृषि-उद्योग में बढ़ती मांग जल संरक्षण को आवश्यक बनाते हैं।"},
+ {m:4,q:"बड़े बाँधों के लाभ और समस्याएँ समझाइए।",a:"लाभ: सिंचाई, बिजली, पेयजल और बाढ़ नियंत्रण। समस्याएँ: लोगों का विस्थापन, पारिस्थितिकी को नुकसान, गाद जमना तथा नदी के प्राकृतिक प्रवाह में बदलाव।"}
+ ],
+ "English|A Letter to God":[
+ {m:1,q:"What was Lencho's profession?",a:"Lencho was a farmer."},
+ {m:2,q:"Why did Lencho compare the raindrops to new coins?",a:"He hoped the rain would bring a good harvest and money for his family."},
+ {m:3,q:"Why was Lencho angry after counting the money?",a:"He received only seventy pesos instead of the hundred pesos he had requested, so he believed the post-office employees had taken the rest."},
+ {m:4,q:"What does the story suggest about faith and human nature?",a:"Lencho's faith is powerful but unquestioning. The post-office employees show kindness by helping him, while Lencho wrongly suspects them because he cannot imagine his request was not fully met."}
+ ]
+};
+const $=id=>document.getElementById(id);
+let studied=true,activeTab="practice",current=null;
+function getHistory(){try{return JSON.parse(localStorage.getItem("studycore_history")||"[]")}catch{return []}}
+function saveHistory(h){localStorage.setItem("studycore_history",JSON.stringify(h))}
+function toast(s){const t=$("toast");t.textContent=s;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2400)}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function updateChapters(){const s=$("subject").value;$("chapter").innerHTML=chapters[s].map(c=>`<option>${escapeHtml(c)}</option>`).join("");$("language").value=s==="English"?"English":"Hindi"}
+$("subject").addEventListener("change",updateChapters);
+document.querySelectorAll("[data-studied]").forEach(b=>b.addEventListener("click",()=>{studied=b.dataset.studied==="yes";document.querySelectorAll("[data-studied]").forEach(x=>x.classList.toggle("active",x===b));$("studyHint").textContent=studied?"Write answers from memory. The evaluator will review each response.":"New chapter: read the chapter first, then return to practice when ready."}));
+$("language").addEventListener("change",()=>{if($("subject").value==="English"&&$("language").value!=="English")toast("English subject is best practiced in English.")});
+document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{activeTab=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("active",x===b));renderTab()}));
+function questionsFor(subject,chapter,mode){
+ const known=banks[subject+"|"+chapter];
+ if(known){let arr=[...known];if(mode==="fresh")arr=arr.slice().reverse();return arr}
+ const lang=$("language").value==="English"||subject==="English";
+ const general=lang?[
+  {m:1,q:`Define the central idea or key term from "${chapter}".`,a:`Give the textbook definition of the key term and use it in the context of ${chapter}.`},
+  {m:2,q:`State two important facts or features related to "${chapter}".`,a:`Mention two accurate textbook facts and briefly explain each.`},
+  {m:2,q:`Why is the main idea of "${chapter}" important?`,a:`Explain its importance using a clear reason and a relevant textbook point.`},
+  {m:3,q:`Explain the main concept of "${chapter}" with an example.`,a:`Define the concept, explain its working or meaning, and add a correct example from the chapter.`},
+  {m:4,q:`Write a structured answer explaining the key ideas, causes or applications in "${chapter}".`,a:`Organize the answer with a short introduction, 3–4 accurate points, and a concise conclusion.`}
+ ]:[
+  {m:1,q:`“${chapter}” से संबंधित एक प्रमुख परिभाषा या तथ्य लिखिए।`,a:`पाठ्यपुस्तक में दी गई मुख्य परिभाषा/तथ्य को स्पष्ट और सटीक रूप में लिखें।`},
+  {m:2,q:`“${chapter}” की दो प्रमुख विशेषताएँ/तथ्य लिखिए।`,a:`दो सही बिंदु लिखकर प्रत्येक को संक्षेप में समझाएँ।`},
+  {m:2,q:`“${chapter}” का महत्व या कारण दो बिंदुओं में समझाइए।`,a:`मुख्य कारण/महत्व के दो स्पष्ट बिंदु और उनका संक्षिप्त स्पष्टीकरण दें।`},
+  {m:3,q:`“${chapter}” की मुख्य अवधारणा को उदाहरण सहित समझाइए।`,a:`अवधारणा की परिभाषा, उसका स्पष्टीकरण और पाठ से उपयुक्त उदाहरण दें।`},
+  {m:4,q:`“${chapter}” के प्रमुख विचारों, कारणों या उपयोगों का व्यवस्थित वर्णन कीजिए।`,a:`संक्षिप्त भूमिका, 3–4 सही बिंदु और छोटा निष्कर्ष लिखें।`}
+ ];
+ return mode==="fresh"?general.reverse():general;
+}
+function generate(){
+ const subject=$("subject").value,chapter=$("chapter").value,mode=$("setMode").value,lang=$("language").value;
+ current={subject,chapter,mode,lang,studied,questions:questionsFor(subject,chapter,mode),date:new Date().toISOString()};
+ renderPractice();
+ if(!studied)toast("Chapter pehle padh lo; questions preview ke liye ready hain.");
+ else toast("Question set ready. Write answers below.");
+}
+function renderPractice(){
+ const c=$("mainContent");
+ if(!current){c.innerHTML=`<div class="empty">Choose a chapter and generate a set.</div>`;return}
+ const total=current.questions.reduce((s,q)=>s+q.m,0);
+ c.innerHTML=`<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:18px"><div><span class="chip">${escapeHtml(current.subject.toUpperCase())} / ${current.studied?"REVISION":"NEW CHAPTER"}</span><h3 style="margin:12px 0 4px;font-size:21px">${escapeHtml(current.chapter)}</h3><div class="note">${current.questions.length} questions · ${total} maximum marks · ${escapeHtml(current.lang)}</div></div><button class="btn" id="showAnswers">KEY</button></div>
+ ${!current.studied?`<div class="question"><strong>Chapter not studied yet</strong><p class="qText">Pehle chapter padh le. Questions aur answer key dekh sakta hai; jab ready ho, answers likhkar submit kar.</p><button class="btn btnPrimary" id="markStudied">I HAVE STUDIED IT</button></div>`:""}
+ <div id="questions">${current.questions.map((q,i)=>`<article class="question"><div class="qTop"><div class="qNum">QUESTION ${String(i+1).padStart(2,"0")} <span style="color:#8ba0bf">/ ${q.m} MARK${q.m>1?"S":""}</span></div><span class="marks">${q.m} ${q.m===1?"MARK":"MARKS"}</span></div><div class="qText">${escapeHtml(q.q)}</div><textarea id="ans${i}" placeholder="${current.lang==="English"?"Write your answer here...":"यहाँ अपना उत्तर लिखो..."}"></textarea><div class="qMeta">Answer in your own words · Saved locally while this page remains open</div><div class="answerBox" id="key${i}"><strong>Answer guide:</strong><br>${escapeHtml(q.a)}</div></article>`).join("")}</div>
+ <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btnPrimary" id="submitTest">SUBMIT & SCORE ↗</button><button class="btn" id="saveDraft">SAVE DRAFT</button></div>
+ <div id="result"></div>
+ <p class="note">Note: this standalone file has sample/offline question templates. Genuine AI question generation and semantic answer grading require a secure backend. The local scoring below is a transparent practice estimate, not official marking.</p>`;
+ $("showAnswers").onclick=()=>document.querySelectorAll(".answerBox").forEach(x=>x.classList.toggle("show"));
+ const mark=$("markStudied");if(mark)mark.onclick=()=>{current.studied=true;studied=true;renderPractice();toast("Marked as studied. Now answer from memory.")};
+ $("submitTest").onclick=submitTest;
+ $("saveDraft").onclick=()=>{const draft=current.questions.map((q,i)=>$("ans"+i)?.value||"");localStorage.setItem("studycore_draft_"+current.subject+"_"+current.chapter,JSON.stringify(draft));toast("Draft saved on this device.")};
+}
+function estimateScore(answer,q){
+ if(!answer.trim())return 0;
+ const words=answer.trim().split(/\s+/).length;
+ if(words<3)return Math.min(1,q.m);
+ if(words<8)return Math.min(1,q.m);
+ if(words<18)return Math.min(2,q.m);
+ return Math.max(1,q.m-1); // Honest heuristic; real AI grading needs backend.
+}
+function submitTest(){
+ let score=0,max=0,answers=[];
+ current.questions.forEach((q,i)=>{const answer=$("ans"+i).value;const got=estimateScore(answer,q);score+=got;max+=q.m;answers.push({question:q.q,marks:q.m,score:got,answer,guide:q.a})});
+ const record={id:Date.now(),date:new Date().toISOString(),subject:current.subject,chapter:current.chapter,score,max,answers,mode:current.mode};
+ const h=getHistory();h.unshift(record);saveHistory(h);
+ $("result").innerHTML=`<div class="question" style="margin-top:18px;border-color:#62e8ff66"><div class="eyebrow">TEST RECORDED · ${new Date().toLocaleDateString()}</div><div class="resultScore">${score} / ${max}</div><div class="note">Offline estimate only—not AI-graded. Review the answer guides and use a secure AI backend for reliable semantic marking.</div><div class="progress"><span style="width:${Math.round(score/max*100)}%"></span></div><p><strong>${Math.round(score/max*100)}%</strong> <span style="color:var(--muted)">practice estimate</span></p><button class="btn" onclick="showHistory()">OPEN SCORE HISTORY</button></div>`;
+ updateStats();toast("Result saved date-wise.");
+}
+function showHistory(){
+ activeTab="history";document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("active",x.dataset.tab==="history"));renderTab()
+}
+function renderTab(){
+ const c=$("mainContent");
+ if(activeTab==="practice"){renderPractice();return}
+ if(activeTab==="history"){
+  const h=getHistory();
+  c.innerHTML=`<h3 style="margin:0 0 6px">Score history</h3><p class="note" style="margin-bottom:14px">Saved on this device · newest first</p>`+(h.length?h.map(r=>`<div class="historyItem"><div><strong>${escapeHtml(r.subject)} / ${escapeHtml(r.chapter)}</strong><span>${new Date(r.date).toLocaleString()}</span></div><div style="text-align:right"><strong style="color:var(--cyan)">${r.score}/${r.max}</strong><span>${Math.round(r.score/r.max*100)}%</span><br><button class="btn" style="padding:6px 8px;margin-top:7px" onclick="viewRecord(${r.id})">DETAILS</button></div></div>`).join(""):`<div class="empty">No saved tests yet.<br>Complete a question set to record your first result.</div>`);
+ }else{
+  c.innerHTML=`<h3 style="margin:0 0 14px">System notes</h3><div class="question"><div class="qNum">01 / SUBJECT-WISE TRACK</div><p class="qText">Complete one subject's chapters in sequence. Move to the next subject when ready.</p></div><div class="question"><div class="qNum">02 / QUESTION VARIATION</div><p class="qText">Use “Fresh variation” to rearrange the offline sample set. A real AI backend should also compare saved questions to reduce repetition.</p></div><div class="question"><div class="qNum">03 / SCORING</div><p class="qText">This file's offline score is only a rough length-based estimate. It does not understand correctness. Connect a secure AI backend before treating scores as real evaluation.</p></div><div class="question"><div class="qNum">04 / PRIVACY</div><p class="qText">History and drafts stay in this browser's local storage. Clearing browser data may erase them. Export/backup should be added before relying on this for long-term records.</p></div><button class="btn" onclick="exportHistory()">EXPORT HISTORY JSON</button> <button class="btn" onclick="clearHistory()">CLEAR HISTORY</button>`;
+ }
+}
+function viewRecord(id){const r=getHistory().find(x=>x.id===id);if(!r)return;const c=$("mainContent");c.innerHTML=`<button class="btn" onclick="showHistory()">← BACK</button><h3 style="margin:18px 0 6px">${escapeHtml(r.chapter)}</h3><div class="resultScore">${r.score}/${r.max}</div><p class="note">${new Date(r.date).toLocaleString()} · Offline estimate</p>`+r.answers.map((a,i)=>`<div class="question"><div class="qTop"><span class="qNum">QUESTION ${i+1}</span><span class="marks">${a.score}/${a.marks}</span></div><p class="qText">${escapeHtml(a.question)}</p><div class="note">Your answer</div><p>${escapeHtml(a.answer||"No answer")}</p><div class="answerBox show"><strong>Answer guide:</strong><br>${escapeHtml(a.guide)}</div></div>`).join("")}
+function exportHistory(){const blob=new Blob([JSON.stringify(getHistory(),null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="study-core-history.json";a.click();URL.revokeObjectURL(url);toast("History export started.")}
+function clearHistory(){if(confirm("Delete all saved score history from this device? This cannot be undone.")){saveHistory([]);updateStats();renderTab();toast("History cleared.")}}
+function updateStats(){const h=getHistory();$("testsCount").textContent=h.length;$("avgScore").textContent=h.length?Math.round(h.reduce((s,r)=>s+r.score/r.max*100,0)/h.length)+"%":"—";$("chapterCount").textContent=new Set(h.map(r=>r.subject+"|"+r.chapter)).size}
+updateChapters();updateStats();
+</script>
+</body>
+</html>
